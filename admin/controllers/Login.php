@@ -72,7 +72,7 @@ class Login extends CI_Controller {
             $userData['userfirstname'] = $userProfile['given_name'];
             $userData['userlastname'] = $userProfile['family_name'];
             $userData['email'] = $userProfile['email'];
-			$userData['gender'] = $userProfile['gender'];
+			//$userData['gender'] = $userProfile['gender'];
 			$userData['locale'] = $userProfile['locale'];
             $userData['profile_url'] = $userProfile['link'];
             $userData['picture_url'] = $userProfile['picture'];
