@@ -97,7 +97,6 @@ switch (ENVIRONMENT)
  * This variable must contain the name of your "system" directory.
  * Set the path if it is not in the same directory as this file.
  */
-	//$system_path = 'system';
 	$system_path = 'system';
 
 /*
@@ -115,8 +114,7 @@ switch (ENVIRONMENT)
  *
  * NO TRAILING SLASH!
  */
-	//$application_folder = 'application';
-	$application_folder = 'admin';
+	$application_folder = 'ifms';
 
 /*
  *---------------------------------------------------------------
@@ -231,7 +229,7 @@ switch (ENVIRONMENT)
 	// Path to the system directory
 	define('BASEPATH', $system_path);
 	
-	// Path to the Shared Resources directory
+		// Path to the Shared Resources directory
 	define('SHAREDPATH', $system_path.'/shared/');
 
 	// Path to the front controller (this file) directory
