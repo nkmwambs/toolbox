@@ -1737,7 +1737,8 @@ function expense_accounts_grouped_by_income(){
 		$this -> db -> group_by(array('voucher_type', 'fcp_id'));
 
 		$condition_array = array();
-
+		
+		//Query string conditions
 		$where_string = "(";
 		//transactions_raised_in_month_not_cleared
 		$where_string .= "(voucher_raised_date BETWEEN '" . $first_day_of_month . "' AND '" . $last_day_of_month . "' AND clearance_state = 0 AND clearance_date = '0000-00-00')";
