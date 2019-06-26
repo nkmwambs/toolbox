@@ -14,7 +14,7 @@ class Crons extends CI_Controller {
 	private function clear_cached_data(){
 		//$this->db->cache_delete_all();
 		//$this->db->cache_delete('accountant', 'dasboard');
-		unlink("accountant+dashboard");
+		unlink(base_url()."accountant+dashboard");
 	}
 	
 	
