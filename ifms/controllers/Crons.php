@@ -10,11 +10,31 @@ class Crons extends CI_Controller {
 		$this -> load -> library('session');
 	}
 	
+	function emptyDir($dir) {
+    if (is_dir($dir)) {
+        $scn = scandir($dir);
+        foreach ($scn as $files) {
+            if ($files !== '.') {
+                if ($files !== '..') {
+                    if (!is_dir($dir . '/' . $files)) {
+                        unlink($dir . '/' . $files);
+                    } else {
+                        emptyDir($dir . '/' . $files);
+                        rmdir($dir . '/' . $files);
+                    }
+                }
+            }
+        }
+    }
+}
+
 	
 	private function clear_cached_data(){
 		//$this->db->cache_delete_all();
 		//$this->db->cache_delete('accountant', 'dasboard');
-		unlink(base_url()."accountant+dashboard");
+		$dir = "accountant+dashboard";
+		$this->emptyDir($dir);
+		rmdir($dir);
 	}
 	
 	
