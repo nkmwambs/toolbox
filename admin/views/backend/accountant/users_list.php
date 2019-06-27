@@ -3,7 +3,7 @@
 	<div class="col-sm-12">
 		<?php
 		
-		$users = $this->db->get_where('users',array('auth'=>'1',"cname"=>$this->session->cluster))->result_object();
+		$users = $this->db->get_where('users',array('auth'=>'1'))->result_object();
 		
 		$cond = " pstID ='1' OR pstID='2'";
 		
