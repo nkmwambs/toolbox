@@ -10,7 +10,7 @@
 		        
 		<div class="panel-body"  style="max-width:50; overflow: auto;">
 				<?php 
-						echo form_open(base_url() . 'resources.php/admin/external_links/add/' , array('role'=>'form' ,'class' => 'form-horizontal form-groups-bordered validate form-groups-bordered','enctype' => 'multipart/form-data'));
+						echo form_open(base_url() . 'resources.php/protection/external_links/add/' , array('role'=>'form' ,'class' => 'form-horizontal form-groups-bordered validate form-groups-bordered','enctype' => 'multipart/form-data'));
 					?>
 					
 						<div class="form-group">
@@ -55,9 +55,8 @@
 								</select>
 							</div>
 						</div>
-
+						
 						<input type="hidden" class="" name="owner" id="owner" value="<?=$this->session->login_user_id;?>" />
-
 						
 						<div class="form-group">
 							<label class="control-label col-sm-4"><?=get_phrase('group_access');?></label>
@@ -69,13 +68,14 @@
 											
 											foreach($userlevels as $row):
 										?>
-											<option value="<?=$row->pstID;?>" <?php if($this->session->logged_user_level == $row->pstID) echo "selected";?>><?=$row->dsgn;?></option>
+											<option value="<?=$row->pstID;?>"><?=$row->dsgn;?></option>
 										<?php
 											endforeach;
 										?>
 									</select>
 								</div>
 						</div>
+						
 						
 						
 						<div class="form-group">

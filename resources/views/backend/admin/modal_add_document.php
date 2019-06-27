@@ -4,13 +4,13 @@
 	   <div class="panel-heading">
 	    	<div class="panel-title">
 		        <i class="fa fa-plus-circle"></i>
-		            <?php echo get_phrase('add_links');?>
+		            <?php echo get_phrase('add_documents');?>
 		    </div>
 		</div>
 		        
 		<div class="panel-body"  style="max-width:50; overflow: auto;">
 				<?php 
-						echo form_open(base_url() . 'resources.php/admin/documents/add/' , array('role'=>'form' ,'class' => 'form-horizontal form-groups-bordered validate form-groups-bordered','enctype' => 'multipart/form-data'));
+						echo form_open(base_url() . 'resources.php/protection/documents/add/' , array('role'=>'form' ,'class' => 'form-horizontal form-groups-bordered validate form-groups-bordered','enctype' => 'multipart/form-data'));
 					?>
 					
 						<div class="form-group">
@@ -19,8 +19,6 @@
 								<input type="text" class="form-control" name="title" id="title" value="" />
 							</div>
 						</div>
-						
-						<input type="hidden" class="" name="owner" id="owner" value="<?=$this->session->login_user_id;?>" />
 						
 						<div class="form-group">
 							<label class="control-label col-sm-4"><?=get_phrase('choose_file');?></label>
@@ -35,6 +33,8 @@
 								<textarea class="form-control" name="description" id="description" placeholder="<?=get_phrase('enter_description_here');?>"></textarea>
 							</div>
 						</div>
+						
+						<input type="hidden" class="" name="owner" id="owner" value="<?=$this->session->login_user_id;?>" />
 						
 						<div class="form-group">
 							<label class="control-label col-sm-4"><?=get_phrase('status');?></label>

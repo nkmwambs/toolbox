@@ -499,16 +499,17 @@ class Sdsa extends CI_Controller
 			
 			
 		
+		$files_array = array();
 		
 		foreach($files as $rows):
 			
 			$name = $rows->file_name;
 			
 			$path = 'uploads/photos/'.$group.'/'.$rows->file_name;
+			$files_array[] = $path;
+			//$data = file_get_contents($path);
 			
-			$data = file_get_contents($path);
-			
-			$this->zip->add_data($name, $data);
+			//$this->zip->add_data($name, $data);
 			
 			$dt['downloaded'] = '1';
 		
@@ -517,16 +518,33 @@ class Sdsa extends CI_Controller
 			
 		endforeach;
 		
-		// Write the zip file to a folder on your server. Name it "my_backup.zip"
-		$this->zip->archive('downloads/my_backup.zip');
-
-		// Download the file to your desktop. Name it "my_backup.zip"
+		$backup_file = 'downloads/my_photo_archive_'.date("Y_m_d_H_i_s").'.zip'; 
 		
-		$backup_file = 'my_photo_archive_'.date("Y_m_d_H_i_s").'.zip'; 
+		create_zip($files_array,$backup_file);
 		
-		$this->zip->download($backup_file);
+		  if (file_exists($backup_file)) {
+		     header('Content-Type: application/zip');
+		     header('Content-Disposition: attachment; filename="'.basename($backup_file).'"');
+		     header('Content-Length: ' . filesize($backup_file));
 		
-		unlink('downloads/'.$backup_file);
+		     flush();
+		     readfile($backup_file);
+		     // delete file
+		     unlink($backup_file);
+		 
+		   }
+				
+		
+		// // Write the zip file to a folder on your server. Name it "my_backup.zip"
+		// $this->zip->archive('downloads/my_backup.zip');
+// 
+		// // Download the file to your desktop. Name it "my_backup.zip"
+// 		
+		// $backup_file = 'my_photo_archive_'.date("Y_m_d_H_i_s").'.zip'; 
+// 		
+		// $this->zip->download($backup_file);
+// 		
+		// unlink('downloads/'.$backup_file);
 		
 		if($mail_check > 0) $this->email_downloaded($group,$query->result_object());
 				

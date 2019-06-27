@@ -11,7 +11,7 @@
 		<div class="panel-body"  style="max-width:50; overflow: auto;">
 				<?php 
 						$link = $this->db->get_where('external_links',array('external_links_id'=>$param2))->row();
-						echo form_open(base_url() . 'resources.php/admin/external_links/edit/'.$param2 , array('class' => 'form-horizontal form-groups-bordered validate','enctype' => 'multipart/form-data'));
+						echo form_open(base_url() . 'resources.php/protection/external_links/edit/'.$param2 , array('class' => 'form-horizontal form-groups-bordered validate','enctype' => 'multipart/form-data'));
 					?>
 					
 						<div class="form-group">

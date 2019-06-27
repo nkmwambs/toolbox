@@ -37,13 +37,6 @@ class CSVReader {
             }
         }
         fclose($file);
-		
-		// $arr_final = array();
-// 		
-		// foreach($keys as $column){
-			// $arr_final[] = array_column($content, $column);
-		// }
-		
         return $content;
     }
 

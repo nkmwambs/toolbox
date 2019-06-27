@@ -1,8 +1,3 @@
-<?php
-// $file_name = 'KE24400450.JPG';
-//echo strpos($file_name, '0');
-// echo beneficiary_id_format($file_name);
-?>
 <div class="row">
 	<div class="col-md-8">
     	<div class="row">
@@ -103,7 +98,7 @@
             
                 <div class="tile-stats tile-orange">
                     <div class="icon"><i class="fa fa-group"></i></div>
-                    <div class="num" data-start="0" data-end="<?php echo $this->db->get_where('users',array('userlevel'=>1))->num_rows();?>" 
+                    <div class="num" data-start="0" data-end="<?php echo $this->admin_model->online_user_count();?>" 
                     		data-postfix="" data-duration="1500" data-delay="0">0</div>
                     
                     <h3><?php echo get_phrase('total_projects');?></h3>

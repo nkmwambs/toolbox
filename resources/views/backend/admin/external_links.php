@@ -45,8 +45,14 @@
 		       						?>
 		       						<td><?=$status_arr[$row->status];?></td>
 		       						<td>
+		       							<?php	
+			       							$action = "";
+			       							if($row->owner !== $this->session->login_user_id){
+			       								$action = "disabled";
+			       							}
+			       						?>	
 		       							<div class="btn-group">
-						                    <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+						                    <button <?=$action;?> type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
 						                        <?php echo get_phrase('action');?> <span class="caret"></span>
 						                    </button>
 						                    <ul class="dropdown-menu dropdown-default pull-right" role="menu">
@@ -54,15 +60,6 @@
 						                        	<a href="#" onclick="showAjaxModal('<?=base_url();?>resources.php/modal/popup/modal_edit_link/<?=$row->external_links_id;?>');">
 						                            	<i class="fa fa-edit"></i>
 															<?php echo get_phrase('edit');?>
-						                               	</a>
-						                        </li>
-						                        
-						                        <li class="divider"></li>
-						                        
-						                        <li>
-						                        	<a href="#" onclick="confirm_action('<?=base_url();?>resources.php/admin/external_links/delete/<?=$row->external_links_id;?>');">
-						                            	<i class="fa fa-eraser"></i>
-															<?php echo get_phrase('delete');?>
 						                               	</a>
 						                        </li>
 						                        
