@@ -599,7 +599,7 @@ class Finance_model extends CI_Model {
 		if($as_object){
 			return $query->result_object();
 		}else{
-			return $query->result_array();
+			return $query->result_object();
 		}
 	}
 
