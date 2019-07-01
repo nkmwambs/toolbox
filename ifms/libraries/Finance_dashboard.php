@@ -1,18 +1,49 @@
 <?php
-class Finance_dashboard{
 
-	private $testModels;
+/**	
+ * This file is part of the version 2.0 finance enhancements in Compassion Kenya Toolkit
+ */
+ 
+ /**
+  * This is a class used to render the finance dashboard array intended to populate the finance dashboard grid.
+  * 
+  * @author 	: Nicodemus Karisa and Livingstone Onduso
+  *	@since		: June, 2019
+  *	@package	: Compassion Kenya Toolkit
+  *	@copyright	: Copyright (c) 2019
+  *	@version    : Version 1.0.0
+  * 
+  */
+
+class Finance_dashboard{
+	
+	/**
+	 * A private property to hold a reference to the CI controller 
+	 * 
+	 * @property object $CI
+	 */
+	
 	private $CI;
+	
+	/**
+	 * Holds the config item related to the finance dashboard feature
+	 * 
+	 * @property string $table_prefix
+	 */
+	 
 	private $table_prefix = '';
-		
+	
+	/**
+	 * This is a class contruct instatiating class properties and loading the finance model  
+	 * 
+	 * @return void
+	 */
+	 	
 	function __construct() {
 
 		$this->CI =& get_instance();
-		// $this -> load -> config('dev_config');
-		// $this -> get_table_prefix();
+
 		$this -> CI-> load -> model('finance_model');
-// 
-		// $this -> testModels = new Finance_testData();
 		
 	}
 
@@ -58,6 +89,24 @@ class Finance_dashboard{
 
 		}
 		return $yes_no_flag;
+	}
+	
+	private function callback_mfr_submitted_date($fcp, $month_submitted) {
+
+		$mfr_submitted_data = $this -> CI ->finance_model-> switch_environment($month_submitted, 'test_mfr_submission_data_model', 'prod_mfr_submission_data_model');
+
+		$group = $this -> group_data_by_fcp_id($mfr_submitted_data);
+
+		$submission_date = '';
+
+		//Check if the fcp has an Mfr submitted in the $month_submitted
+		if (isset($group[$fcp])) {
+			if ($group[$fcp]['closure_date'] == $month_submitted && $group[$fcp]['submitted'] == 1) {
+				$submission_date = $group[$fcp]['submission_date'];
+			}
+
+		}
+		return $submission_date;
 	}
 
 	private function callback_bank_statement_uploaded($fcp, $month_uploaded) {

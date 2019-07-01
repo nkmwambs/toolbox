@@ -1,0 +1,1560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>API Documentation</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+    <link href="../css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/prism.css" rel="stylesheet" media="all"/>
+    <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+    <!--[if lt IE 9]>
+    <script src="../js/html5.js"></script>
+    <![endif]-->
+    <script src="../js/jquery-1.11.0.min.js"></script>
+    <script src="../js/ui/1.10.4/jquery-ui.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.smooth-scroll.js"></script>
+    <script src="../js/prism.min.js"></script>
+    <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
+    <script type="text/javascript">
+    function loadExternalCodeSnippets() {
+        Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+            var src = pre.getAttribute('data-src');
+            var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+            var language = 'php';
+
+            var code = document.createElement('code');
+            code.className = 'language-' + language;
+
+            pre.textContent = '';
+
+            code.textContent = 'Loading…';
+
+            pre.appendChild(code);
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', src, true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+
+                    if (xhr.status < 400 && xhr.responseText) {
+                        code.textContent = xhr.responseText;
+
+                        Prism.highlightElement(code);
+                    }
+                    else if (xhr.status >= 400) {
+                        code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                    }
+                    else {
+                        code.textContent = '✖ Error: File does not exist or is empty';
+                    }
+                }
+            };
+
+            xhr.send(null);
+        });
+    }
+
+    $(document).ready(function(){
+        loadExternalCodeSnippets();
+    });
+    $('#source-view').on('shown', function () {
+        loadExternalCodeSnippets();
+    })
+</script>
+
+    <link rel="shortcut icon" href="../images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/apple-touch-icon-114x114.png"/>
+</head>
+<body>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-ellipsis-vertical"></i>
+            </a>
+            <a class="brand" href="../index.html">API Documentation</a>
+
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+                                        <li class="dropdown" id="charts-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Charts <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../graphs/class.html">
+                                    <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" id="reports-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Reports <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../reports/errors.html">
+                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">26</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/markers.html">
+                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/deprecated.html">
+                                                                                                            <i class="icon-list-alt"></i>&#160;Deprecated <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--<div class="go_to_top">-->
+    <!--<a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>-->
+    <!--</div>-->
+</div>
+
+<div id="___" class="container-fluid">
+        <section class="row-fluid">
+        <div class="span2 sidebar">
+                                <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-701011956"></a>
+                                <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
+            </div>
+            <div id="namespace-701011956" class="accordion-body collapse in">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Finance_dashboard.html">Finance_dashboard</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </div>
+    </section>
+    <section class="row-fluid">
+        <div class="span10 offset2">
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <nav>
+                                                <a href="../namespaces/default.html">\</a> <i class="icon-level-up"></i>
+                                            </nav>
+                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+
+                    <h1><small>\</small>Finance_dashboard</h1>
+                    <p><em>This is a class used to render the finance dashboard array intended to populate the finance dashboard grid.</em></p>
+                    
+                    
+                                        
+                    <section id="summary">
+                        <h2>Summary</h2>
+                        <section class="row-fluid heading">
+                            <section class="span4">
+                                <a href="#methods">Methods</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#properties">Properties</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#constants">Constants</a>
+                            </section>
+                        </section>
+                        <section class="row-fluid public">
+                            <section class="span4">
+                                                                    <a href="../classes/Finance_dashboard.html#method___construct" class="">__construct()</a><br />
+                                                                    <a href="../classes/Finance_dashboard.html#method_build_dashboard_array" class="">build_dashboard_array()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No public properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No constants found</em>
+                                                            </section>
+                        </section>
+                        <section class="row-fluid protected">
+                            <section class="span4">
+                                                                    <em>No protected methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No protected properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                        <section class="row-fluid private">
+                            <section class="span4">
+                                                                    <a href="../classes/Finance_dashboard.html#method_get_table_prefix" class="">get_table_prefix()</a><br />
+                                                                    <a href="../classes/Finance_dashboard.html#method_group_data_by_fcp_id" class="">group_data_by_fcp_id()</a><br />
+                                                                    <a href="../classes/Finance_dashboard.html#method_callback_mfr_submitted" class="">callback_mfr_submitted()</a><br />
+                                                                    <a href="../classes/Finance_dashboard.html#method_callback_bank_statement_uploaded" class="">callback_bank_statement_uploaded()</a><br />
+                                                                    <a href="../classes/Finance_dashboard.html#method_callback_book_bank_balance" class="">callback_book_bank_balance()</a><br />
+                                                                    <a href="../classes/Finance_dashboard.html#method_callback_statement_bank_balance" class="">callback_statement_bank_balance()</a><br />
+                                                                    <a href="../classes/Finance_dashboard.html#method_callback_outstanding_cheques" class="">callback_outstanding_cheques()</a><br />
+                                                                    <a href="../classes/Finance_dashboard.html#method_callback_deposit_in_transit" class="">callback_deposit_in_transit()</a><br />
+                                                                    <a href="../classes/Finance_dashboard.html#method_callback_bank_reconcile_correct" class="">callback_bank_reconcile_correct()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/Finance_dashboard.html#property_CI" class="">$CI</a><br />
+                                                                    <a href="../classes/Finance_dashboard.html#property_table_prefix" class="">$table_prefix</a><br />
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                    </section>
+                </div>
+                <aside class="span4 detailsbar">
+                                        
+                    
+                    <dl>
+                        <dt>File</dt>
+                            <dd><a href="../files/Finance_dashboard.html"><div class="path-wrapper">Finance_dashboard.php</div></a></dd>
+                                                <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">: Compassion Kenya Toolkit</div></dd>
+                                                <dt>Class hierarchy</dt>
+                            <dd class="hierarchy">
+                                                                                                                                                                    <div class="namespace-wrapper">\Finance_dashboard</div>
+                            </dd>
+
+                        
+                        
+                        
+                        
+                                                                        </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                                            <tr>
+                            <th>
+                                author
+                            </th>
+                            <td>
+                                                                    <p>: Nicodemus Karisa and Livingstone Onduso</p>
+                                                            </td>
+                        </tr>
+                                            <tr>
+                            <th>
+                                since
+                            </th>
+                            <td>
+                                                                    <p>: June, 2019</p>
+                                                            </td>
+                        </tr>
+                                            <tr>
+                            <th>
+                                copyright
+                            </th>
+                            <td>
+                                                                    <p>: Copyright (c) 2019</p>
+                                                            </td>
+                        </tr>
+                                            <tr>
+                            <th>
+                                version
+                            </th>
+                            <td>
+                                                                    <p>: Version 1.0.0</p>
+                                                            </td>
+                        </tr>
+                                        </table>
+                </aside>
+            </div>
+
+                        
+                                    <a id="properties" name="properties"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Properties</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_CI" name="property_CI" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$CI</h3>
+                <pre class="signature">$CI : </pre>
+                <p><em>A private property to hold a reference to the CI controller</em></p>
+                
+
+                                <h4>Type</h4>
+                
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            property
+                        </th>
+                        <td>
+                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_table_prefix" name="property_table_prefix" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$table_prefix</h3>
+                <pre class="signature">$table_prefix : </pre>
+                <p><em>Holds the config item related to the finance dashboard feature</em></p>
+                
+
+                                <h4>Type</h4>
+                
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            property
+                        </th>
+                        <td>
+                                                            
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                            
+                                    <a id="methods" name="methods"></a>
+            <div class="row-fluid">
+                <div class="span8 content class"><h2>Methods</h2></div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___construct" name="method___construct" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">__construct()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__construct() : void</pre>
+                <p><em>This is a class contruct instatiating class properties and loading the finance model</em></p>
+                
+
+                
+                
+Warning: count(): Parameter must be an array or an object that implements Countable in phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Extension/Core.php on line 1293
+
+Call Stack:
+    0.0898    1847752   1. {main}() D:\xampp\htdocs\tools\phpDocumentor.phar:0
+    0.0901    1842504   2. require('phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc') D:\xampp\htdocs\tools\phpDocumentor.phar:10
+    0.3272    9717272   3. phpDocumentor\Application->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc:23
+    0.3327    9837912   4. Cilex\Provider\Console\ContainerAwareApplication->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Application.php:183
+    0.3331    9837912   5. Cilex\Provider\Console\ContainerAwareApplication->doRun() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:126
+    0.3334    9837912   6. Cilex\Provider\Console\ContainerAwareApplication->doRunCommand() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:195
+    0.3334    9837912   7. phpDocumentor\Command\Project\RunCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:874
+    0.3344    9839856   8. phpDocumentor\Command\Project\RunCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4102   11659800   9. phpDocumentor\Transformer\Command\Project\TransformCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Command/Project/RunCommand.php:275
+    0.4107   11661344  10. phpDocumentor\Transformer\Command\Project\TransformCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4517   11925360  11. phpDocumentor\Console\Output\Output->writeTimedLog() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Command/Project/TransformCommand.php:206
+    0.4519   11925360  12. call_user_func_array:{phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59}() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4519   11925648  13. phpDocumentor\Transformer\Transformer->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4547   11931872  14. phpDocumentor\Transformer\Transformer->transformProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:141
+    1.1309   15284280  15. phpDocumentor\Transformer\Transformer->applyTransformationToProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:275
+    1.1313   15284408  16. phpDocumentor\Plugin\Twig\Writer\Twig->transform() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:312
+    1.1322   15288560  17. Twig_Environment->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Plugin/Twig/Writer/Twig.php:116
+    1.3554   16417208  18. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php:334
+    1.3554   16433680  19. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:366
+    1.3555   16434496  20. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16434496  21. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3555   16434768  22. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:26
+    1.3555   16435264  23. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16435264  24. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3567   16435808  25. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:312
+    1.3567   16435808  26. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->block_content() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    1.3662   16465816  27. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:869
+    1.3662   16465816  28. __TwigTemplate_6cc71dbd4969463af5c647a9710b8d7ee3ee446499d36398f3a986442302d7b1->block_method() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    1.3671   16467072  29. twig_length_filter() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:140
+
+
+Warning: count(): Parameter must be an array or an object that implements Countable in phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Extension/Core.php on line 1293
+
+Call Stack:
+    0.0898    1847752   1. {main}() D:\xampp\htdocs\tools\phpDocumentor.phar:0
+    0.0901    1842504   2. require('phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc') D:\xampp\htdocs\tools\phpDocumentor.phar:10
+    0.3272    9717272   3. phpDocumentor\Application->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc:23
+    0.3327    9837912   4. Cilex\Provider\Console\ContainerAwareApplication->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Application.php:183
+    0.3331    9837912   5. Cilex\Provider\Console\ContainerAwareApplication->doRun() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:126
+    0.3334    9837912   6. Cilex\Provider\Console\ContainerAwareApplication->doRunCommand() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:195
+    0.3334    9837912   7. phpDocumentor\Command\Project\RunCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:874
+    0.3344    9839856   8. phpDocumentor\Command\Project\RunCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4102   11659800   9. phpDocumentor\Transformer\Command\Project\TransformCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Command/Project/RunCommand.php:275
+    0.4107   11661344  10. phpDocumentor\Transformer\Command\Project\TransformCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4517   11925360  11. phpDocumentor\Console\Output\Output->writeTimedLog() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Command/Project/TransformCommand.php:206
+    0.4519   11925360  12. call_user_func_array:{phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59}() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4519   11925648  13. phpDocumentor\Transformer\Transformer->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4547   11931872  14. phpDocumentor\Transformer\Transformer->transformProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:141
+    1.1309   15284280  15. phpDocumentor\Transformer\Transformer->applyTransformationToProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:275
+    1.1313   15284408  16. phpDocumentor\Plugin\Twig\Writer\Twig->transform() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:312
+    1.1322   15288560  17. Twig_Environment->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Plugin/Twig/Writer/Twig.php:116
+    1.3554   16417208  18. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php:334
+    1.3554   16433680  19. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:366
+    1.3555   16434496  20. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16434496  21. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3555   16434768  22. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:26
+    1.3555   16435264  23. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16435264  24. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3567   16435808  25. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:312
+    1.3567   16435808  26. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->block_content() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    1.3662   16465816  27. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:869
+    1.3662   16465816  28. __TwigTemplate_6cc71dbd4969463af5c647a9710b8d7ee3ee446499d36398f3a986442302d7b1->block_method() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    1.6047   16467072  29. twig_length_filter() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:140
+
+
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_build_dashboard_array" name="method_build_dashboard_array" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">build_dashboard_array()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">build_dashboard_array(  <span class="argument">$dashboard_month</span>) </pre>
+                <p><em></em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$dashboard_month </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+Warning: count(): Parameter must be an array or an object that implements Countable in phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Extension/Core.php on line 1293
+
+Call Stack:
+    0.0898    1847752   1. {main}() D:\xampp\htdocs\tools\phpDocumentor.phar:0
+    0.0901    1842504   2. require('phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc') D:\xampp\htdocs\tools\phpDocumentor.phar:10
+    0.3272    9717272   3. phpDocumentor\Application->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc:23
+    0.3327    9837912   4. Cilex\Provider\Console\ContainerAwareApplication->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Application.php:183
+    0.3331    9837912   5. Cilex\Provider\Console\ContainerAwareApplication->doRun() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:126
+    0.3334    9837912   6. Cilex\Provider\Console\ContainerAwareApplication->doRunCommand() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:195
+    0.3334    9837912   7. phpDocumentor\Command\Project\RunCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:874
+    0.3344    9839856   8. phpDocumentor\Command\Project\RunCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4102   11659800   9. phpDocumentor\Transformer\Command\Project\TransformCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Command/Project/RunCommand.php:275
+    0.4107   11661344  10. phpDocumentor\Transformer\Command\Project\TransformCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4517   11925360  11. phpDocumentor\Console\Output\Output->writeTimedLog() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Command/Project/TransformCommand.php:206
+    0.4519   11925360  12. call_user_func_array:{phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59}() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4519   11925648  13. phpDocumentor\Transformer\Transformer->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4547   11931872  14. phpDocumentor\Transformer\Transformer->transformProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:141
+    1.1309   15284280  15. phpDocumentor\Transformer\Transformer->applyTransformationToProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:275
+    1.1313   15284408  16. phpDocumentor\Plugin\Twig\Writer\Twig->transform() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:312
+    1.1322   15288560  17. Twig_Environment->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Plugin/Twig/Writer/Twig.php:116
+    1.3554   16417208  18. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php:334
+    1.3554   16433680  19. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:366
+    1.3555   16434496  20. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16434496  21. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3555   16434768  22. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:26
+    1.3555   16435264  23. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16435264  24. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3567   16435808  25. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:312
+    1.3567   16435808  26. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->block_content() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    1.8313   16466576  27. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:869
+    1.8313   16466576  28. __TwigTemplate_6cc71dbd4969463af5c647a9710b8d7ee3ee446499d36398f3a986442302d7b1->block_method() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    1.8325   16470848  29. twig_length_filter() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:140
+
+
+Warning: count(): Parameter must be an array or an object that implements Countable in phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Extension/Core.php on line 1293
+
+Call Stack:
+    0.0898    1847752   1. {main}() D:\xampp\htdocs\tools\phpDocumentor.phar:0
+    0.0901    1842504   2. require('phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc') D:\xampp\htdocs\tools\phpDocumentor.phar:10
+    0.3272    9717272   3. phpDocumentor\Application->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc:23
+    0.3327    9837912   4. Cilex\Provider\Console\ContainerAwareApplication->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Application.php:183
+    0.3331    9837912   5. Cilex\Provider\Console\ContainerAwareApplication->doRun() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:126
+    0.3334    9837912   6. Cilex\Provider\Console\ContainerAwareApplication->doRunCommand() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:195
+    0.3334    9837912   7. phpDocumentor\Command\Project\RunCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:874
+    0.3344    9839856   8. phpDocumentor\Command\Project\RunCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4102   11659800   9. phpDocumentor\Transformer\Command\Project\TransformCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Command/Project/RunCommand.php:275
+    0.4107   11661344  10. phpDocumentor\Transformer\Command\Project\TransformCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4517   11925360  11. phpDocumentor\Console\Output\Output->writeTimedLog() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Command/Project/TransformCommand.php:206
+    0.4519   11925360  12. call_user_func_array:{phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59}() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4519   11925648  13. phpDocumentor\Transformer\Transformer->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4547   11931872  14. phpDocumentor\Transformer\Transformer->transformProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:141
+    1.1309   15284280  15. phpDocumentor\Transformer\Transformer->applyTransformationToProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:275
+    1.1313   15284408  16. phpDocumentor\Plugin\Twig\Writer\Twig->transform() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:312
+    1.1322   15288560  17. Twig_Environment->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Plugin/Twig/Writer/Twig.php:116
+    1.3554   16417208  18. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php:334
+    1.3554   16433680  19. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:366
+    1.3555   16434496  20. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16434496  21. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3555   16434768  22. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:26
+    1.3555   16435264  23. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16435264  24. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3567   16435808  25. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:312
+    1.3567   16435808  26. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->block_content() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    1.8313   16466576  27. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:869
+    1.8313   16466576  28. __TwigTemplate_6cc71dbd4969463af5c647a9710b8d7ee3ee446499d36398f3a986442302d7b1->block_method() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    2.0680   16487232  29. twig_length_filter() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:140
+
+
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_get_table_prefix" name="method_get_table_prefix" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">get_table_prefix()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">get_table_prefix() </pre>
+                <p><em></em></p>
+                
+
+                
+                
+Warning: count(): Parameter must be an array or an object that implements Countable in phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Extension/Core.php on line 1293
+
+Call Stack:
+    0.0898    1847752   1. {main}() D:\xampp\htdocs\tools\phpDocumentor.phar:0
+    0.0901    1842504   2. require('phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc') D:\xampp\htdocs\tools\phpDocumentor.phar:10
+    0.3272    9717272   3. phpDocumentor\Application->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc:23
+    0.3327    9837912   4. Cilex\Provider\Console\ContainerAwareApplication->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Application.php:183
+    0.3331    9837912   5. Cilex\Provider\Console\ContainerAwareApplication->doRun() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:126
+    0.3334    9837912   6. Cilex\Provider\Console\ContainerAwareApplication->doRunCommand() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:195
+    0.3334    9837912   7. phpDocumentor\Command\Project\RunCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:874
+    0.3344    9839856   8. phpDocumentor\Command\Project\RunCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4102   11659800   9. phpDocumentor\Transformer\Command\Project\TransformCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Command/Project/RunCommand.php:275
+    0.4107   11661344  10. phpDocumentor\Transformer\Command\Project\TransformCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4517   11925360  11. phpDocumentor\Console\Output\Output->writeTimedLog() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Command/Project/TransformCommand.php:206
+    0.4519   11925360  12. call_user_func_array:{phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59}() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4519   11925648  13. phpDocumentor\Transformer\Transformer->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4547   11931872  14. phpDocumentor\Transformer\Transformer->transformProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:141
+    1.1309   15284280  15. phpDocumentor\Transformer\Transformer->applyTransformationToProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:275
+    1.1313   15284408  16. phpDocumentor\Plugin\Twig\Writer\Twig->transform() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:312
+    1.1322   15288560  17. Twig_Environment->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Plugin/Twig/Writer/Twig.php:116
+    1.3554   16417208  18. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php:334
+    1.3554   16433680  19. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:366
+    1.3555   16434496  20. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16434496  21. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3555   16434768  22. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:26
+    1.3555   16435264  23. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16435264  24. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3567   16435808  25. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:312
+    1.3567   16435808  26. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->block_content() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    2.3076   16486240  27. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:919
+    2.3076   16486240  28. __TwigTemplate_6cc71dbd4969463af5c647a9710b8d7ee3ee446499d36398f3a986442302d7b1->block_method() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    2.3083   16486736  29. twig_length_filter() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:140
+
+
+Warning: count(): Parameter must be an array or an object that implements Countable in phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Extension/Core.php on line 1293
+
+Call Stack:
+    0.0898    1847752   1. {main}() D:\xampp\htdocs\tools\phpDocumentor.phar:0
+    0.0901    1842504   2. require('phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc') D:\xampp\htdocs\tools\phpDocumentor.phar:10
+    0.3272    9717272   3. phpDocumentor\Application->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc:23
+    0.3327    9837912   4. Cilex\Provider\Console\ContainerAwareApplication->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Application.php:183
+    0.3331    9837912   5. Cilex\Provider\Console\ContainerAwareApplication->doRun() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:126
+    0.3334    9837912   6. Cilex\Provider\Console\ContainerAwareApplication->doRunCommand() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:195
+    0.3334    9837912   7. phpDocumentor\Command\Project\RunCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:874
+    0.3344    9839856   8. phpDocumentor\Command\Project\RunCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4102   11659800   9. phpDocumentor\Transformer\Command\Project\TransformCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Command/Project/RunCommand.php:275
+    0.4107   11661344  10. phpDocumentor\Transformer\Command\Project\TransformCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4517   11925360  11. phpDocumentor\Console\Output\Output->writeTimedLog() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Command/Project/TransformCommand.php:206
+    0.4519   11925360  12. call_user_func_array:{phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59}() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4519   11925648  13. phpDocumentor\Transformer\Transformer->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4547   11931872  14. phpDocumentor\Transformer\Transformer->transformProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:141
+    1.1309   15284280  15. phpDocumentor\Transformer\Transformer->applyTransformationToProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:275
+    1.1313   15284408  16. phpDocumentor\Plugin\Twig\Writer\Twig->transform() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:312
+    1.1322   15288560  17. Twig_Environment->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Plugin/Twig/Writer/Twig.php:116
+    1.3554   16417208  18. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php:334
+    1.3554   16433680  19. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:366
+    1.3555   16434496  20. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16434496  21. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3555   16434768  22. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:26
+    1.3555   16435264  23. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16435264  24. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3567   16435808  25. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:312
+    1.3567   16435808  26. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->block_content() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    2.3076   16486240  27. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:919
+    2.3076   16486240  28. __TwigTemplate_6cc71dbd4969463af5c647a9710b8d7ee3ee446499d36398f3a986442302d7b1->block_method() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    2.5730   16503120  29. twig_length_filter() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:140
+
+
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_group_data_by_fcp_id" name="method_group_data_by_fcp_id" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">group_data_by_fcp_id()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">group_data_by_fcp_id(  <span class="argument">$database_results</span>) </pre>
+                <p><em></em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$database_results </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+Warning: count(): Parameter must be an array or an object that implements Countable in phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Extension/Core.php on line 1293
+
+Call Stack:
+    0.0898    1847752   1. {main}() D:\xampp\htdocs\tools\phpDocumentor.phar:0
+    0.0901    1842504   2. require('phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc') D:\xampp\htdocs\tools\phpDocumentor.phar:10
+    0.3272    9717272   3. phpDocumentor\Application->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc:23
+    0.3327    9837912   4. Cilex\Provider\Console\ContainerAwareApplication->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Application.php:183
+    0.3331    9837912   5. Cilex\Provider\Console\ContainerAwareApplication->doRun() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:126
+    0.3334    9837912   6. Cilex\Provider\Console\ContainerAwareApplication->doRunCommand() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:195
+    0.3334    9837912   7. phpDocumentor\Command\Project\RunCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:874
+    0.3344    9839856   8. phpDocumentor\Command\Project\RunCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4102   11659800   9. phpDocumentor\Transformer\Command\Project\TransformCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Command/Project/RunCommand.php:275
+    0.4107   11661344  10. phpDocumentor\Transformer\Command\Project\TransformCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4517   11925360  11. phpDocumentor\Console\Output\Output->writeTimedLog() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Command/Project/TransformCommand.php:206
+    0.4519   11925360  12. call_user_func_array:{phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59}() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4519   11925648  13. phpDocumentor\Transformer\Transformer->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4547   11931872  14. phpDocumentor\Transformer\Transformer->transformProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:141
+    1.1309   15284280  15. phpDocumentor\Transformer\Transformer->applyTransformationToProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:275
+    1.1313   15284408  16. phpDocumentor\Plugin\Twig\Writer\Twig->transform() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:312
+    1.1322   15288560  17. Twig_Environment->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Plugin/Twig/Writer/Twig.php:116
+    1.3554   16417208  18. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php:334
+    1.3554   16433680  19. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:366
+    1.3555   16434496  20. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16434496  21. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3555   16434768  22. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:26
+    1.3555   16435264  23. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16435264  24. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3567   16435808  25. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:312
+    1.3567   16435808  26. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->block_content() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    2.8753   16502624  27. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:919
+    2.8753   16502624  28. __TwigTemplate_6cc71dbd4969463af5c647a9710b8d7ee3ee446499d36398f3a986442302d7b1->block_method() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    2.8765   16503616  29. twig_length_filter() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:140
+
+
+Warning: count(): Parameter must be an array or an object that implements Countable in phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Extension/Core.php on line 1293
+
+Call Stack:
+    0.0898    1847752   1. {main}() D:\xampp\htdocs\tools\phpDocumentor.phar:0
+    0.0901    1842504   2. require('phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc') D:\xampp\htdocs\tools\phpDocumentor.phar:10
+    0.3272    9717272   3. phpDocumentor\Application->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc:23
+    0.3327    9837912   4. Cilex\Provider\Console\ContainerAwareApplication->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Application.php:183
+    0.3331    9837912   5. Cilex\Provider\Console\ContainerAwareApplication->doRun() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:126
+    0.3334    9837912   6. Cilex\Provider\Console\ContainerAwareApplication->doRunCommand() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:195
+    0.3334    9837912   7. phpDocumentor\Command\Project\RunCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:874
+    0.3344    9839856   8. phpDocumentor\Command\Project\RunCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4102   11659800   9. phpDocumentor\Transformer\Command\Project\TransformCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Command/Project/RunCommand.php:275
+    0.4107   11661344  10. phpDocumentor\Transformer\Command\Project\TransformCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4517   11925360  11. phpDocumentor\Console\Output\Output->writeTimedLog() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Command/Project/TransformCommand.php:206
+    0.4519   11925360  12. call_user_func_array:{phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59}() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4519   11925648  13. phpDocumentor\Transformer\Transformer->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4547   11931872  14. phpDocumentor\Transformer\Transformer->transformProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:141
+    1.1309   15284280  15. phpDocumentor\Transformer\Transformer->applyTransformationToProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:275
+    1.1313   15284408  16. phpDocumentor\Plugin\Twig\Writer\Twig->transform() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:312
+    1.1322   15288560  17. Twig_Environment->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Plugin/Twig/Writer/Twig.php:116
+    1.3554   16417208  18. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php:334
+    1.3554   16433680  19. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:366
+    1.3555   16434496  20. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16434496  21. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3555   16434768  22. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:26
+    1.3555   16435264  23. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16435264  24. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3567   16435808  25. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:312
+    1.3567   16435808  26. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->block_content() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    2.8753   16502624  27. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:919
+    2.8753   16502624  28. __TwigTemplate_6cc71dbd4969463af5c647a9710b8d7ee3ee446499d36398f3a986442302d7b1->block_method() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    3.1310   16503616  29. twig_length_filter() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:140
+
+
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_callback_mfr_submitted" name="method_callback_mfr_submitted" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">callback_mfr_submitted()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">callback_mfr_submitted(  <span class="argument">$fcp</span>,   <span class="argument">$month_submitted</span>) </pre>
+                <p><em></em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$fcp </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$month_submitted </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+Warning: count(): Parameter must be an array or an object that implements Countable in phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Extension/Core.php on line 1293
+
+Call Stack:
+    0.0898    1847752   1. {main}() D:\xampp\htdocs\tools\phpDocumentor.phar:0
+    0.0901    1842504   2. require('phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc') D:\xampp\htdocs\tools\phpDocumentor.phar:10
+    0.3272    9717272   3. phpDocumentor\Application->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc:23
+    0.3327    9837912   4. Cilex\Provider\Console\ContainerAwareApplication->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Application.php:183
+    0.3331    9837912   5. Cilex\Provider\Console\ContainerAwareApplication->doRun() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:126
+    0.3334    9837912   6. Cilex\Provider\Console\ContainerAwareApplication->doRunCommand() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:195
+    0.3334    9837912   7. phpDocumentor\Command\Project\RunCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:874
+    0.3344    9839856   8. phpDocumentor\Command\Project\RunCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4102   11659800   9. phpDocumentor\Transformer\Command\Project\TransformCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Command/Project/RunCommand.php:275
+    0.4107   11661344  10. phpDocumentor\Transformer\Command\Project\TransformCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4517   11925360  11. phpDocumentor\Console\Output\Output->writeTimedLog() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Command/Project/TransformCommand.php:206
+    0.4519   11925360  12. call_user_func_array:{phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59}() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4519   11925648  13. phpDocumentor\Transformer\Transformer->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4547   11931872  14. phpDocumentor\Transformer\Transformer->transformProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:141
+    1.1309   15284280  15. phpDocumentor\Transformer\Transformer->applyTransformationToProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:275
+    1.1313   15284408  16. phpDocumentor\Plugin\Twig\Writer\Twig->transform() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:312
+    1.1322   15288560  17. Twig_Environment->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Plugin/Twig/Writer/Twig.php:116
+    1.3554   16417208  18. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php:334
+    1.3554   16433680  19. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:366
+    1.3555   16434496  20. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16434496  21. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3555   16434768  22. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:26
+    1.3555   16435264  23. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16435264  24. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3567   16435808  25. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:312
+    1.3567   16435808  26. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->block_content() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    3.3549   16519008  27. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:919
+    3.3549   16519008  28. __TwigTemplate_6cc71dbd4969463af5c647a9710b8d7ee3ee446499d36398f3a986442302d7b1->block_method() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    3.3559   16520000  29. twig_length_filter() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:140
+
+
+Warning: count(): Parameter must be an array or an object that implements Countable in phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Extension/Core.php on line 1293
+
+Call Stack:
+    0.0898    1847752   1. {main}() D:\xampp\htdocs\tools\phpDocumentor.phar:0
+    0.0901    1842504   2. require('phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc') D:\xampp\htdocs\tools\phpDocumentor.phar:10
+    0.3272    9717272   3. phpDocumentor\Application->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc:23
+    0.3327    9837912   4. Cilex\Provider\Console\ContainerAwareApplication->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Application.php:183
+    0.3331    9837912   5. Cilex\Provider\Console\ContainerAwareApplication->doRun() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:126
+    0.3334    9837912   6. Cilex\Provider\Console\ContainerAwareApplication->doRunCommand() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:195
+    0.3334    9837912   7. phpDocumentor\Command\Project\RunCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:874
+    0.3344    9839856   8. phpDocumentor\Command\Project\RunCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4102   11659800   9. phpDocumentor\Transformer\Command\Project\TransformCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Command/Project/RunCommand.php:275
+    0.4107   11661344  10. phpDocumentor\Transformer\Command\Project\TransformCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4517   11925360  11. phpDocumentor\Console\Output\Output->writeTimedLog() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Command/Project/TransformCommand.php:206
+    0.4519   11925360  12. call_user_func_array:{phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59}() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4519   11925648  13. phpDocumentor\Transformer\Transformer->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4547   11931872  14. phpDocumentor\Transformer\Transformer->transformProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:141
+    1.1309   15284280  15. phpDocumentor\Transformer\Transformer->applyTransformationToProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:275
+    1.1313   15284408  16. phpDocumentor\Plugin\Twig\Writer\Twig->transform() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:312
+    1.1322   15288560  17. Twig_Environment->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Plugin/Twig/Writer/Twig.php:116
+    1.3554   16417208  18. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php:334
+    1.3554   16433680  19. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:366
+    1.3555   16434496  20. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16434496  21. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3555   16434768  22. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:26
+    1.3555   16435264  23. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16435264  24. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3567   16435808  25. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:312
+    1.3567   16435808  26. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->block_content() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    3.3549   16519008  27. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:919
+    3.3549   16519008  28. __TwigTemplate_6cc71dbd4969463af5c647a9710b8d7ee3ee446499d36398f3a986442302d7b1->block_method() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    3.5798   16520000  29. twig_length_filter() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:140
+
+
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_callback_bank_statement_uploaded" name="method_callback_bank_statement_uploaded" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">callback_bank_statement_uploaded()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">callback_bank_statement_uploaded(  <span class="argument">$fcp</span>,   <span class="argument">$month_uploaded</span>) </pre>
+                <p><em></em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$fcp </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$month_uploaded </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+Warning: count(): Parameter must be an array or an object that implements Countable in phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Extension/Core.php on line 1293
+
+Call Stack:
+    0.0898    1847752   1. {main}() D:\xampp\htdocs\tools\phpDocumentor.phar:0
+    0.0901    1842504   2. require('phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc') D:\xampp\htdocs\tools\phpDocumentor.phar:10
+    0.3272    9717272   3. phpDocumentor\Application->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc:23
+    0.3327    9837912   4. Cilex\Provider\Console\ContainerAwareApplication->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Application.php:183
+    0.3331    9837912   5. Cilex\Provider\Console\ContainerAwareApplication->doRun() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:126
+    0.3334    9837912   6. Cilex\Provider\Console\ContainerAwareApplication->doRunCommand() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:195
+    0.3334    9837912   7. phpDocumentor\Command\Project\RunCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:874
+    0.3344    9839856   8. phpDocumentor\Command\Project\RunCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4102   11659800   9. phpDocumentor\Transformer\Command\Project\TransformCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Command/Project/RunCommand.php:275
+    0.4107   11661344  10. phpDocumentor\Transformer\Command\Project\TransformCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4517   11925360  11. phpDocumentor\Console\Output\Output->writeTimedLog() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Command/Project/TransformCommand.php:206
+    0.4519   11925360  12. call_user_func_array:{phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59}() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4519   11925648  13. phpDocumentor\Transformer\Transformer->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4547   11931872  14. phpDocumentor\Transformer\Transformer->transformProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:141
+    1.1309   15284280  15. phpDocumentor\Transformer\Transformer->applyTransformationToProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:275
+    1.1313   15284408  16. phpDocumentor\Plugin\Twig\Writer\Twig->transform() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:312
+    1.1322   15288560  17. Twig_Environment->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Plugin/Twig/Writer/Twig.php:116
+    1.3554   16417208  18. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php:334
+    1.3554   16433680  19. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:366
+    1.3555   16434496  20. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16434496  21. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3555   16434768  22. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:26
+    1.3555   16435264  23. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16435264  24. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3567   16435808  25. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:312
+    1.3567   16435808  26. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->block_content() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    3.8142   16535392  27. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:919
+    3.8142   16535392  28. __TwigTemplate_6cc71dbd4969463af5c647a9710b8d7ee3ee446499d36398f3a986442302d7b1->block_method() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    3.8158   16536384  29. twig_length_filter() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:140
+
+
+Warning: count(): Parameter must be an array or an object that implements Countable in phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Extension/Core.php on line 1293
+
+Call Stack:
+    0.0898    1847752   1. {main}() D:\xampp\htdocs\tools\phpDocumentor.phar:0
+    0.0901    1842504   2. require('phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc') D:\xampp\htdocs\tools\phpDocumentor.phar:10
+    0.3272    9717272   3. phpDocumentor\Application->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc:23
+    0.3327    9837912   4. Cilex\Provider\Console\ContainerAwareApplication->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Application.php:183
+    0.3331    9837912   5. Cilex\Provider\Console\ContainerAwareApplication->doRun() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:126
+    0.3334    9837912   6. Cilex\Provider\Console\ContainerAwareApplication->doRunCommand() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:195
+    0.3334    9837912   7. phpDocumentor\Command\Project\RunCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:874
+    0.3344    9839856   8. phpDocumentor\Command\Project\RunCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4102   11659800   9. phpDocumentor\Transformer\Command\Project\TransformCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Command/Project/RunCommand.php:275
+    0.4107   11661344  10. phpDocumentor\Transformer\Command\Project\TransformCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4517   11925360  11. phpDocumentor\Console\Output\Output->writeTimedLog() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Command/Project/TransformCommand.php:206
+    0.4519   11925360  12. call_user_func_array:{phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59}() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4519   11925648  13. phpDocumentor\Transformer\Transformer->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4547   11931872  14. phpDocumentor\Transformer\Transformer->transformProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:141
+    1.1309   15284280  15. phpDocumentor\Transformer\Transformer->applyTransformationToProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:275
+    1.1313   15284408  16. phpDocumentor\Plugin\Twig\Writer\Twig->transform() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:312
+    1.1322   15288560  17. Twig_Environment->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Plugin/Twig/Writer/Twig.php:116
+    1.3554   16417208  18. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php:334
+    1.3554   16433680  19. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:366
+    1.3555   16434496  20. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16434496  21. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3555   16434768  22. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:26
+    1.3555   16435264  23. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16435264  24. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3567   16435808  25. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:312
+    1.3567   16435808  26. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->block_content() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    3.8142   16535392  27. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:919
+    3.8142   16535392  28. __TwigTemplate_6cc71dbd4969463af5c647a9710b8d7ee3ee446499d36398f3a986442302d7b1->block_method() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    4.0361   16536384  29. twig_length_filter() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:140
+
+
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_callback_book_bank_balance" name="method_callback_book_bank_balance" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">callback_book_bank_balance()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">callback_book_bank_balance(  <span class="argument">$fcp</span>,   <span class="argument">$month_computed</span>) </pre>
+                <p><em></em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$fcp </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$month_computed </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+Warning: count(): Parameter must be an array or an object that implements Countable in phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Extension/Core.php on line 1293
+
+Call Stack:
+    0.0898    1847752   1. {main}() D:\xampp\htdocs\tools\phpDocumentor.phar:0
+    0.0901    1842504   2. require('phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc') D:\xampp\htdocs\tools\phpDocumentor.phar:10
+    0.3272    9717272   3. phpDocumentor\Application->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc:23
+    0.3327    9837912   4. Cilex\Provider\Console\ContainerAwareApplication->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Application.php:183
+    0.3331    9837912   5. Cilex\Provider\Console\ContainerAwareApplication->doRun() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:126
+    0.3334    9837912   6. Cilex\Provider\Console\ContainerAwareApplication->doRunCommand() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:195
+    0.3334    9837912   7. phpDocumentor\Command\Project\RunCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:874
+    0.3344    9839856   8. phpDocumentor\Command\Project\RunCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4102   11659800   9. phpDocumentor\Transformer\Command\Project\TransformCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Command/Project/RunCommand.php:275
+    0.4107   11661344  10. phpDocumentor\Transformer\Command\Project\TransformCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4517   11925360  11. phpDocumentor\Console\Output\Output->writeTimedLog() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Command/Project/TransformCommand.php:206
+    0.4519   11925360  12. call_user_func_array:{phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59}() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4519   11925648  13. phpDocumentor\Transformer\Transformer->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4547   11931872  14. phpDocumentor\Transformer\Transformer->transformProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:141
+    1.1309   15284280  15. phpDocumentor\Transformer\Transformer->applyTransformationToProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:275
+    1.1313   15284408  16. phpDocumentor\Plugin\Twig\Writer\Twig->transform() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:312
+    1.1322   15288560  17. Twig_Environment->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Plugin/Twig/Writer/Twig.php:116
+    1.3554   16417208  18. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php:334
+    1.3554   16433680  19. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:366
+    1.3555   16434496  20. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16434496  21. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3555   16434768  22. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:26
+    1.3555   16435264  23. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16435264  24. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3567   16435808  25. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:312
+    1.3567   16435808  26. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->block_content() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    4.2673   16535392  27. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:919
+    4.2673   16535392  28. __TwigTemplate_6cc71dbd4969463af5c647a9710b8d7ee3ee446499d36398f3a986442302d7b1->block_method() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    4.2689   16552768  29. twig_length_filter() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:140
+
+
+Warning: count(): Parameter must be an array or an object that implements Countable in phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Extension/Core.php on line 1293
+
+Call Stack:
+    0.0898    1847752   1. {main}() D:\xampp\htdocs\tools\phpDocumentor.phar:0
+    0.0901    1842504   2. require('phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc') D:\xampp\htdocs\tools\phpDocumentor.phar:10
+    0.3272    9717272   3. phpDocumentor\Application->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc:23
+    0.3327    9837912   4. Cilex\Provider\Console\ContainerAwareApplication->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Application.php:183
+    0.3331    9837912   5. Cilex\Provider\Console\ContainerAwareApplication->doRun() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:126
+    0.3334    9837912   6. Cilex\Provider\Console\ContainerAwareApplication->doRunCommand() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:195
+    0.3334    9837912   7. phpDocumentor\Command\Project\RunCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:874
+    0.3344    9839856   8. phpDocumentor\Command\Project\RunCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4102   11659800   9. phpDocumentor\Transformer\Command\Project\TransformCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Command/Project/RunCommand.php:275
+    0.4107   11661344  10. phpDocumentor\Transformer\Command\Project\TransformCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4517   11925360  11. phpDocumentor\Console\Output\Output->writeTimedLog() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Command/Project/TransformCommand.php:206
+    0.4519   11925360  12. call_user_func_array:{phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59}() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4519   11925648  13. phpDocumentor\Transformer\Transformer->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4547   11931872  14. phpDocumentor\Transformer\Transformer->transformProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:141
+    1.1309   15284280  15. phpDocumentor\Transformer\Transformer->applyTransformationToProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:275
+    1.1313   15284408  16. phpDocumentor\Plugin\Twig\Writer\Twig->transform() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:312
+    1.1322   15288560  17. Twig_Environment->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Plugin/Twig/Writer/Twig.php:116
+    1.3554   16417208  18. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php:334
+    1.3554   16433680  19. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:366
+    1.3555   16434496  20. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16434496  21. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3555   16434768  22. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:26
+    1.3555   16435264  23. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16435264  24. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3567   16435808  25. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:312
+    1.3567   16435808  26. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->block_content() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    4.2673   16535392  27. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:919
+    4.2673   16535392  28. __TwigTemplate_6cc71dbd4969463af5c647a9710b8d7ee3ee446499d36398f3a986442302d7b1->block_method() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    4.4883   16552768  29. twig_length_filter() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:140
+
+
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_callback_statement_bank_balance" name="method_callback_statement_bank_balance" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">callback_statement_bank_balance()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">callback_statement_bank_balance(  <span class="argument">$fcp</span>,   <span class="argument">$month_computed</span>) </pre>
+                <p><em></em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$fcp </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$month_computed </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+Warning: count(): Parameter must be an array or an object that implements Countable in phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Extension/Core.php on line 1293
+
+Call Stack:
+    0.0898    1847752   1. {main}() D:\xampp\htdocs\tools\phpDocumentor.phar:0
+    0.0901    1842504   2. require('phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc') D:\xampp\htdocs\tools\phpDocumentor.phar:10
+    0.3272    9717272   3. phpDocumentor\Application->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc:23
+    0.3327    9837912   4. Cilex\Provider\Console\ContainerAwareApplication->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Application.php:183
+    0.3331    9837912   5. Cilex\Provider\Console\ContainerAwareApplication->doRun() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:126
+    0.3334    9837912   6. Cilex\Provider\Console\ContainerAwareApplication->doRunCommand() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:195
+    0.3334    9837912   7. phpDocumentor\Command\Project\RunCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:874
+    0.3344    9839856   8. phpDocumentor\Command\Project\RunCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4102   11659800   9. phpDocumentor\Transformer\Command\Project\TransformCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Command/Project/RunCommand.php:275
+    0.4107   11661344  10. phpDocumentor\Transformer\Command\Project\TransformCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4517   11925360  11. phpDocumentor\Console\Output\Output->writeTimedLog() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Command/Project/TransformCommand.php:206
+    0.4519   11925360  12. call_user_func_array:{phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59}() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4519   11925648  13. phpDocumentor\Transformer\Transformer->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4547   11931872  14. phpDocumentor\Transformer\Transformer->transformProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:141
+    1.1309   15284280  15. phpDocumentor\Transformer\Transformer->applyTransformationToProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:275
+    1.1313   15284408  16. phpDocumentor\Plugin\Twig\Writer\Twig->transform() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:312
+    1.1322   15288560  17. Twig_Environment->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Plugin/Twig/Writer/Twig.php:116
+    1.3554   16417208  18. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php:334
+    1.3554   16433680  19. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:366
+    1.3555   16434496  20. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16434496  21. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3555   16434768  22. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:26
+    1.3555   16435264  23. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16435264  24. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3567   16435808  25. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:312
+    1.3567   16435808  26. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->block_content() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    4.7045   16551776  27. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:919
+    4.7045   16551776  28. __TwigTemplate_6cc71dbd4969463af5c647a9710b8d7ee3ee446499d36398f3a986442302d7b1->block_method() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    4.7054   16552768  29. twig_length_filter() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:140
+
+
+Warning: count(): Parameter must be an array or an object that implements Countable in phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Extension/Core.php on line 1293
+
+Call Stack:
+    0.0898    1847752   1. {main}() D:\xampp\htdocs\tools\phpDocumentor.phar:0
+    0.0901    1842504   2. require('phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc') D:\xampp\htdocs\tools\phpDocumentor.phar:10
+    0.3272    9717272   3. phpDocumentor\Application->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc:23
+    0.3327    9837912   4. Cilex\Provider\Console\ContainerAwareApplication->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Application.php:183
+    0.3331    9837912   5. Cilex\Provider\Console\ContainerAwareApplication->doRun() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:126
+    0.3334    9837912   6. Cilex\Provider\Console\ContainerAwareApplication->doRunCommand() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:195
+    0.3334    9837912   7. phpDocumentor\Command\Project\RunCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:874
+    0.3344    9839856   8. phpDocumentor\Command\Project\RunCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4102   11659800   9. phpDocumentor\Transformer\Command\Project\TransformCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Command/Project/RunCommand.php:275
+    0.4107   11661344  10. phpDocumentor\Transformer\Command\Project\TransformCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4517   11925360  11. phpDocumentor\Console\Output\Output->writeTimedLog() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Command/Project/TransformCommand.php:206
+    0.4519   11925360  12. call_user_func_array:{phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59}() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4519   11925648  13. phpDocumentor\Transformer\Transformer->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4547   11931872  14. phpDocumentor\Transformer\Transformer->transformProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:141
+    1.1309   15284280  15. phpDocumentor\Transformer\Transformer->applyTransformationToProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:275
+    1.1313   15284408  16. phpDocumentor\Plugin\Twig\Writer\Twig->transform() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:312
+    1.1322   15288560  17. Twig_Environment->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Plugin/Twig/Writer/Twig.php:116
+    1.3554   16417208  18. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php:334
+    1.3554   16433680  19. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:366
+    1.3555   16434496  20. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16434496  21. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3555   16434768  22. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:26
+    1.3555   16435264  23. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16435264  24. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3567   16435808  25. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:312
+    1.3567   16435808  26. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->block_content() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    4.7045   16551776  27. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:919
+    4.7045   16551776  28. __TwigTemplate_6cc71dbd4969463af5c647a9710b8d7ee3ee446499d36398f3a986442302d7b1->block_method() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    4.9708   16569152  29. twig_length_filter() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:140
+
+
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_callback_outstanding_cheques" name="method_callback_outstanding_cheques" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">callback_outstanding_cheques()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">callback_outstanding_cheques(  <span class="argument">$fcp</span>,   <span class="argument">$month</span>) </pre>
+                <p><em></em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$fcp </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$month </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+Warning: count(): Parameter must be an array or an object that implements Countable in phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Extension/Core.php on line 1293
+
+Call Stack:
+    0.0898    1847752   1. {main}() D:\xampp\htdocs\tools\phpDocumentor.phar:0
+    0.0901    1842504   2. require('phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc') D:\xampp\htdocs\tools\phpDocumentor.phar:10
+    0.3272    9717272   3. phpDocumentor\Application->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc:23
+    0.3327    9837912   4. Cilex\Provider\Console\ContainerAwareApplication->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Application.php:183
+    0.3331    9837912   5. Cilex\Provider\Console\ContainerAwareApplication->doRun() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:126
+    0.3334    9837912   6. Cilex\Provider\Console\ContainerAwareApplication->doRunCommand() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:195
+    0.3334    9837912   7. phpDocumentor\Command\Project\RunCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:874
+    0.3344    9839856   8. phpDocumentor\Command\Project\RunCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4102   11659800   9. phpDocumentor\Transformer\Command\Project\TransformCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Command/Project/RunCommand.php:275
+    0.4107   11661344  10. phpDocumentor\Transformer\Command\Project\TransformCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4517   11925360  11. phpDocumentor\Console\Output\Output->writeTimedLog() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Command/Project/TransformCommand.php:206
+    0.4519   11925360  12. call_user_func_array:{phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59}() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4519   11925648  13. phpDocumentor\Transformer\Transformer->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4547   11931872  14. phpDocumentor\Transformer\Transformer->transformProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:141
+    1.1309   15284280  15. phpDocumentor\Transformer\Transformer->applyTransformationToProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:275
+    1.1313   15284408  16. phpDocumentor\Plugin\Twig\Writer\Twig->transform() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:312
+    1.1322   15288560  17. Twig_Environment->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Plugin/Twig/Writer/Twig.php:116
+    1.3554   16417208  18. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php:334
+    1.3554   16433680  19. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:366
+    1.3555   16434496  20. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16434496  21. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3555   16434768  22. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:26
+    1.3555   16435264  23. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16435264  24. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3567   16435808  25. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:312
+    1.3567   16435808  26. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->block_content() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    5.2574   16568160  27. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:919
+    5.2574   16568160  28. __TwigTemplate_6cc71dbd4969463af5c647a9710b8d7ee3ee446499d36398f3a986442302d7b1->block_method() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    5.2591   16569152  29. twig_length_filter() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:140
+
+
+Warning: count(): Parameter must be an array or an object that implements Countable in phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Extension/Core.php on line 1293
+
+Call Stack:
+    0.0898    1847752   1. {main}() D:\xampp\htdocs\tools\phpDocumentor.phar:0
+    0.0901    1842504   2. require('phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc') D:\xampp\htdocs\tools\phpDocumentor.phar:10
+    0.3272    9717272   3. phpDocumentor\Application->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc:23
+    0.3327    9837912   4. Cilex\Provider\Console\ContainerAwareApplication->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Application.php:183
+    0.3331    9837912   5. Cilex\Provider\Console\ContainerAwareApplication->doRun() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:126
+    0.3334    9837912   6. Cilex\Provider\Console\ContainerAwareApplication->doRunCommand() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:195
+    0.3334    9837912   7. phpDocumentor\Command\Project\RunCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:874
+    0.3344    9839856   8. phpDocumentor\Command\Project\RunCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4102   11659800   9. phpDocumentor\Transformer\Command\Project\TransformCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Command/Project/RunCommand.php:275
+    0.4107   11661344  10. phpDocumentor\Transformer\Command\Project\TransformCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4517   11925360  11. phpDocumentor\Console\Output\Output->writeTimedLog() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Command/Project/TransformCommand.php:206
+    0.4519   11925360  12. call_user_func_array:{phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59}() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4519   11925648  13. phpDocumentor\Transformer\Transformer->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4547   11931872  14. phpDocumentor\Transformer\Transformer->transformProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:141
+    1.1309   15284280  15. phpDocumentor\Transformer\Transformer->applyTransformationToProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:275
+    1.1313   15284408  16. phpDocumentor\Plugin\Twig\Writer\Twig->transform() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:312
+    1.1322   15288560  17. Twig_Environment->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Plugin/Twig/Writer/Twig.php:116
+    1.3554   16417208  18. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php:334
+    1.3554   16433680  19. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:366
+    1.3555   16434496  20. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16434496  21. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3555   16434768  22. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:26
+    1.3555   16435264  23. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16435264  24. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3567   16435808  25. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:312
+    1.3567   16435808  26. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->block_content() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    5.2574   16568160  27. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:919
+    5.2574   16568160  28. __TwigTemplate_6cc71dbd4969463af5c647a9710b8d7ee3ee446499d36398f3a986442302d7b1->block_method() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    5.4807   16585536  29. twig_length_filter() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:140
+
+
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_callback_deposit_in_transit" name="method_callback_deposit_in_transit" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">callback_deposit_in_transit()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">callback_deposit_in_transit(  <span class="argument">$fcp</span>,   <span class="argument">$month</span>) </pre>
+                <p><em></em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$fcp </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$month </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+Warning: count(): Parameter must be an array or an object that implements Countable in phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Extension/Core.php on line 1293
+
+Call Stack:
+    0.0898    1847752   1. {main}() D:\xampp\htdocs\tools\phpDocumentor.phar:0
+    0.0901    1842504   2. require('phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc') D:\xampp\htdocs\tools\phpDocumentor.phar:10
+    0.3272    9717272   3. phpDocumentor\Application->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc:23
+    0.3327    9837912   4. Cilex\Provider\Console\ContainerAwareApplication->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Application.php:183
+    0.3331    9837912   5. Cilex\Provider\Console\ContainerAwareApplication->doRun() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:126
+    0.3334    9837912   6. Cilex\Provider\Console\ContainerAwareApplication->doRunCommand() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:195
+    0.3334    9837912   7. phpDocumentor\Command\Project\RunCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:874
+    0.3344    9839856   8. phpDocumentor\Command\Project\RunCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4102   11659800   9. phpDocumentor\Transformer\Command\Project\TransformCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Command/Project/RunCommand.php:275
+    0.4107   11661344  10. phpDocumentor\Transformer\Command\Project\TransformCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4517   11925360  11. phpDocumentor\Console\Output\Output->writeTimedLog() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Command/Project/TransformCommand.php:206
+    0.4519   11925360  12. call_user_func_array:{phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59}() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4519   11925648  13. phpDocumentor\Transformer\Transformer->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4547   11931872  14. phpDocumentor\Transformer\Transformer->transformProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:141
+    1.1309   15284280  15. phpDocumentor\Transformer\Transformer->applyTransformationToProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:275
+    1.1313   15284408  16. phpDocumentor\Plugin\Twig\Writer\Twig->transform() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:312
+    1.1322   15288560  17. Twig_Environment->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Plugin/Twig/Writer/Twig.php:116
+    1.3554   16417208  18. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php:334
+    1.3554   16433680  19. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:366
+    1.3555   16434496  20. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16434496  21. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3555   16434768  22. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:26
+    1.3555   16435264  23. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16435264  24. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3567   16435808  25. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:312
+    1.3567   16435808  26. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->block_content() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    5.7162   16584544  27. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:919
+    5.7162   16584544  28. __TwigTemplate_6cc71dbd4969463af5c647a9710b8d7ee3ee446499d36398f3a986442302d7b1->block_method() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    5.7192   16585536  29. twig_length_filter() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:140
+
+
+Warning: count(): Parameter must be an array or an object that implements Countable in phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Extension/Core.php on line 1293
+
+Call Stack:
+    0.0898    1847752   1. {main}() D:\xampp\htdocs\tools\phpDocumentor.phar:0
+    0.0901    1842504   2. require('phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc') D:\xampp\htdocs\tools\phpDocumentor.phar:10
+    0.3272    9717272   3. phpDocumentor\Application->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc:23
+    0.3327    9837912   4. Cilex\Provider\Console\ContainerAwareApplication->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Application.php:183
+    0.3331    9837912   5. Cilex\Provider\Console\ContainerAwareApplication->doRun() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:126
+    0.3334    9837912   6. Cilex\Provider\Console\ContainerAwareApplication->doRunCommand() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:195
+    0.3334    9837912   7. phpDocumentor\Command\Project\RunCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:874
+    0.3344    9839856   8. phpDocumentor\Command\Project\RunCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4102   11659800   9. phpDocumentor\Transformer\Command\Project\TransformCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Command/Project/RunCommand.php:275
+    0.4107   11661344  10. phpDocumentor\Transformer\Command\Project\TransformCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4517   11925360  11. phpDocumentor\Console\Output\Output->writeTimedLog() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Command/Project/TransformCommand.php:206
+    0.4519   11925360  12. call_user_func_array:{phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59}() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4519   11925648  13. phpDocumentor\Transformer\Transformer->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4547   11931872  14. phpDocumentor\Transformer\Transformer->transformProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:141
+    1.1309   15284280  15. phpDocumentor\Transformer\Transformer->applyTransformationToProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:275
+    1.1313   15284408  16. phpDocumentor\Plugin\Twig\Writer\Twig->transform() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:312
+    1.1322   15288560  17. Twig_Environment->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Plugin/Twig/Writer/Twig.php:116
+    1.3554   16417208  18. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php:334
+    1.3554   16433680  19. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:366
+    1.3555   16434496  20. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16434496  21. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3555   16434768  22. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:26
+    1.3555   16435264  23. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16435264  24. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3567   16435808  25. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:312
+    1.3567   16435808  26. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->block_content() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    5.7162   16584544  27. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:919
+    5.7162   16584544  28. __TwigTemplate_6cc71dbd4969463af5c647a9710b8d7ee3ee446499d36398f3a986442302d7b1->block_method() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    5.9533   16585536  29. twig_length_filter() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:140
+
+
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_callback_bank_reconcile_correct" name="method_callback_bank_reconcile_correct" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">callback_bank_reconcile_correct()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">callback_bank_reconcile_correct(  <span class="argument">$fcp</span>,   <span class="argument">$month</span>) </pre>
+                <p><em></em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td></td>
+                                <td>$fcp </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$month </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+Warning: count(): Parameter must be an array or an object that implements Countable in phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Extension/Core.php on line 1293
+
+Call Stack:
+    0.0898    1847752   1. {main}() D:\xampp\htdocs\tools\phpDocumentor.phar:0
+    0.0901    1842504   2. require('phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc') D:\xampp\htdocs\tools\phpDocumentor.phar:10
+    0.3272    9717272   3. phpDocumentor\Application->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc:23
+    0.3327    9837912   4. Cilex\Provider\Console\ContainerAwareApplication->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Application.php:183
+    0.3331    9837912   5. Cilex\Provider\Console\ContainerAwareApplication->doRun() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:126
+    0.3334    9837912   6. Cilex\Provider\Console\ContainerAwareApplication->doRunCommand() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:195
+    0.3334    9837912   7. phpDocumentor\Command\Project\RunCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:874
+    0.3344    9839856   8. phpDocumentor\Command\Project\RunCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4102   11659800   9. phpDocumentor\Transformer\Command\Project\TransformCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Command/Project/RunCommand.php:275
+    0.4107   11661344  10. phpDocumentor\Transformer\Command\Project\TransformCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4517   11925360  11. phpDocumentor\Console\Output\Output->writeTimedLog() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Command/Project/TransformCommand.php:206
+    0.4519   11925360  12. call_user_func_array:{phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59}() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4519   11925648  13. phpDocumentor\Transformer\Transformer->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4547   11931872  14. phpDocumentor\Transformer\Transformer->transformProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:141
+    1.1309   15284280  15. phpDocumentor\Transformer\Transformer->applyTransformationToProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:275
+    1.1313   15284408  16. phpDocumentor\Plugin\Twig\Writer\Twig->transform() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:312
+    1.1322   15288560  17. Twig_Environment->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Plugin/Twig/Writer/Twig.php:116
+    1.3554   16417208  18. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php:334
+    1.3554   16433680  19. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:366
+    1.3555   16434496  20. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16434496  21. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3555   16434768  22. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:26
+    1.3555   16435264  23. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16435264  24. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3567   16435808  25. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:312
+    1.3567   16435808  26. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->block_content() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    6.1946   16600928  27. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:919
+    6.1946   16600928  28. __TwigTemplate_6cc71dbd4969463af5c647a9710b8d7ee3ee446499d36398f3a986442302d7b1->block_method() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    6.1956   16601920  29. twig_length_filter() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:140
+
+
+Warning: count(): Parameter must be an array or an object that implements Countable in phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Extension/Core.php on line 1293
+
+Call Stack:
+    0.0898    1847752   1. {main}() D:\xampp\htdocs\tools\phpDocumentor.phar:0
+    0.0901    1842504   2. require('phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc') D:\xampp\htdocs\tools\phpDocumentor.phar:10
+    0.3272    9717272   3. phpDocumentor\Application->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/bin/phpdoc:23
+    0.3327    9837912   4. Cilex\Provider\Console\ContainerAwareApplication->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Application.php:183
+    0.3331    9837912   5. Cilex\Provider\Console\ContainerAwareApplication->doRun() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:126
+    0.3334    9837912   6. Cilex\Provider\Console\ContainerAwareApplication->doRunCommand() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:195
+    0.3334    9837912   7. phpDocumentor\Command\Project\RunCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Application.php:874
+    0.3344    9839856   8. phpDocumentor\Command\Project\RunCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4102   11659800   9. phpDocumentor\Transformer\Command\Project\TransformCommand->run() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Command/Project/RunCommand.php:275
+    0.4107   11661344  10. phpDocumentor\Transformer\Command\Project\TransformCommand->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/symfony/console/Symfony/Component/Console/Command/Command.php:257
+    0.4517   11925360  11. phpDocumentor\Console\Output\Output->writeTimedLog() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Command/Project/TransformCommand.php:206
+    0.4519   11925360  12. call_user_func_array:{phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59}() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4519   11925648  13. phpDocumentor\Transformer\Transformer->execute() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Console/Output/Output.php:59
+    0.4547   11931872  14. phpDocumentor\Transformer\Transformer->transformProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:141
+    1.1309   15284280  15. phpDocumentor\Transformer\Transformer->applyTransformationToProject() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:275
+    1.1313   15284408  16. phpDocumentor\Plugin\Twig\Writer\Twig->transform() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Transformer/Transformer.php:312
+    1.1322   15288560  17. Twig_Environment->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/src/phpDocumentor/Plugin/Twig/Writer/Twig.php:116
+    1.3554   16417208  18. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->render() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php:334
+    1.3554   16433680  19. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:366
+    1.3555   16434496  20. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16434496  21. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3555   16434768  22. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->display() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:26
+    1.3555   16435264  23. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayWithErrorHandling() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:355
+    1.3555   16435264  24. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->doDisplay() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:381
+    1.3567   16435808  25. __TwigTemplate_1956510c58d2472b6ce9c42e5fd33b09b518e6d27a0a190e25e9c3f172b30a51->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:312
+    1.3567   16435808  26. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->block_content() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    6.1946   16600928  27. __TwigTemplate_643290709295a75f326f311f24daadd1f4cdbfca8a12b190f472256f5e73407f->displayBlock() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:919
+    6.1946   16600928  28. __TwigTemplate_6cc71dbd4969463af5c647a9710b8d7ee3ee446499d36398f3a986442302d7b1->block_method() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Template.php:167
+    6.4307   16601920  29. twig_length_filter() phar://D:/xampp/htdocs/tools/phpDocumentor.phar/vendor/twig/twig/lib/Twig/Environment.php(390) : eval()'d code:140
+
+
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    </div>
+    </section>
+
+    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="source-view-label">Finance_dashboard.php</h3>
+        </div>
+        <div class="modal-body">
+            <pre data-src="../files/Finance_dashboard.php.txt" class="language-php line-numbers"></pre>
+        </div>
+    </div>
+
+    <footer class="row-fluid">
+        <section class="span10 offset2">
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <section class="row-fluid footer-sections">
+                        <section class="span4">
+                                                        <h1><i class="icon-code"></i></h1>
+                            <div>
+                                <ul>
+                                                                    </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-bar-chart"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../graphs/class.html">Class Hierarchy Diagram</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-pushpin"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../reports/errors.html">Errors</a></li>
+                                    <li><a href="../reports/markers.html">Markers</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <hr />
+                    Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
+                    on June 28th, 2019 at 00:23.
+                </section>
+            </section>
+        </section>
+    </footer>
+</div>
+
+</body>
+</html>
