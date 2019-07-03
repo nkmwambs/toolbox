@@ -1,5 +1,5 @@
 <?php
-//print_r($grid);
+print_r($grid);
 
 $points = range(0, 10);
 
@@ -24,7 +24,7 @@ foreach($grid as $group_key=>$group){
 					<h4 class="panel-title">
 						<a class="btn btn-icon btn-block" data-toggle="collapse" data-parent="#accordion" href="#category_<?=$group_key;?>">
 							<i class="fa fa-folder"></i> 
-								 <?=$group['group_name'];?>
+								 <h4><?=$group['group_name'];?></h4>
 						</a>
 					</h4>
 				</div>
@@ -89,7 +89,7 @@ foreach($grid as $group_key=>$group){
 													<?php
 														foreach($points as $point){
 													?>
-														<option value="<?=$point?>"><?=$point?></option>
+														<option value="<?=$point?>" <?php if($point == $group['score']) echo 'selected';?>><?=$point?></option>
 													<?php
 														}
 													?>
@@ -122,13 +122,15 @@ foreach($grid as $group_key=>$group){
 			data:data_to_post,
 			type:"POST",
 			beforeSend:function(){
-				
+				$("#overlay").css('display','block');
 			},
 			success:function(resp){
-				alert(resp);
+				$("#profile").html(resp);
+				$("#overlay").css('display','none');
 			},
 			error:function(rhx,msgErr){
 				alert(msgErr);
+				$("#overlay").css('display','none');
 			}
 		});
 		

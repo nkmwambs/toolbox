@@ -37,6 +37,17 @@ class Login extends CI_Controller {
 					$this->session->set_userdata('center_id', $row->fname);
 
 					$this->session->set_userdata('cluster', $row->cname);
+					
+					$cluster_obj = $this->db->select(array('clusters_id'))->get_where('clusters',
+					array('clusterName'=>$row->cname));
+					
+					$cluster_id = 0;
+					
+					if($cluster_obj->num_rows()>0){
+						$cluster_id = $cluster_obj->row()->clusters_id;
+					}
+					
+					$this->session->set_userdata('cluster_id',$cluster_id);
 			
 					//$access_level = "admin";
 					

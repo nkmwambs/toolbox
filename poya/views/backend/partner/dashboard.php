@@ -80,8 +80,9 @@
 				$("#profile").html(resp);
 				$("#overlay").css('display','none');
 			},
-			error:function(){
-				
+			error:function(rhx,msgErr){
+				alert(msgErr);
+				$("#overlay").css('display','none');
 			}
 		});
 	});

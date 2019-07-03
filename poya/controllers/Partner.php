@@ -36,15 +36,17 @@ class Partner extends CI_Controller {
 
 	private function nomination_viable_projects($nomination_level) {
 		
-		$cluster_id = '19';
+		$cluster_id = $this->session->cluster_id;
 		
 		$participants = $this->reorder_json_participants_from_data_file();
 		
 		$this -> db -> select(array('icpNo','email'));
 		$this->db->where(array('email<>'=>""));
-
+		
+		//Make a method to control what to see depending on the level - Replace this code this that method call
 		if ($nomination_level == 1) {
 			$this -> db -> where(array('cluster_id' => $cluster_id));
+			$this -> db -> where(array('icpNo<>'=>$this->session->center_id));
 		}
 
 		$projects = $this -> db -> get('projectsdetails') -> result_array();
@@ -146,11 +148,32 @@ class Partner extends CI_Controller {
 		
 		return $participants_array;
 	}
+
+	private function get_vote_score($survey_id,$token,$nomination_level){
+		
+		$poya_vote_obj = $this->db->select(array('question_group_id','score'))->get_where('poya_vote',
+		array('token'=>$token,'limesurvey_id'=>$survey_id,'nomination_level'=>$nomination_level));
+		
+		$group_by_group_id = array();
+		
+		if($poya_vote_obj->num_rows()>0){
+			
+			$poya_votes = $poya_vote_obj->result_object();
+			
+			foreach($poya_votes as $poya_vote){
+				$group_by_group_id[$poya_vote->question_group_id] = $poya_vote->score;
+			}
+			
+		}
+		
+		return $group_by_group_id;
+	}
 	
-	private function survey_groups_with_questions($token){
+	private function survey_groups_with_questions($token, $nomination_level = 1){
 		
 		$grid_array = array();
 		$survey_id = $this->active_for_voting_survey_id();
+		$votes = $this->get_vote_score($survey_id, $token, $nomination_level);
 		
 		$groups = $this->reorder_json_groups_from_data_file();
 		$questions = $this->reorder_json_questions_from_data_file();
@@ -180,7 +203,7 @@ class Partner extends CI_Controller {
 					$grid_array[$group_key]['questions'][$question['title']]['question_text'] = $question['question'];
 					$grid_array[$group_key]['questions'][$question['title']]['question_type'] = $question['type'];
 					$grid_array[$group_key]['questions'][$question['title']]['question_id'] = $question['qid'];
-					
+					$grid_array[$group_key]['score'] = isset($votes[$group_key])?$votes[$group_key]:0;
 				}
 			
 			}
@@ -333,11 +356,12 @@ class Partner extends CI_Controller {
 			$msg = "Update";
 		}
 		
-		if($this->db->affected_rows()>0){
-			echo "Successful ".$msg;
-		}else{
-			echo "Failed ".$msg;
-		}
+		// if($this->db->affected_rows()>0){
+			// echo "Successful ".$msg;
+		// }else{
+			// echo "Failed ".$msg;
+		// }
+		echo $this->retrieve_profiles($post_data['token']);
 	}
 
 	function retrieve_profiles($token) {
