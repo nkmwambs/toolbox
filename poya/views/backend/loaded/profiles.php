@@ -51,7 +51,7 @@ foreach($grid as $group_key=>$group){
 <div class="form-group">
 	<div class="col-xs-12">
 		<div class="panel-group" id="accordion">
-			<div class="panel panel-default">
+			<div class="panel panel-danger">
 				<div class="panel-heading">
 					<h4 class="panel-title">
 						<a class="btn btn-icon btn-block" data-toggle="collapse" data-parent="#accordion" href="#category_<?=$group_key;?>">
