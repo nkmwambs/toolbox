@@ -1,3 +1,7 @@
+<?php
+print_r($funds_balance_grid);
+//print_r($this->finance_model->project_income_at_given_month('KE345',strtotime('2019-04-30')));
+?>
 <style>
 	td.details-control {
     background: url('<?php echo base_url();?>uploads/details_open.png') no-repeat center center;

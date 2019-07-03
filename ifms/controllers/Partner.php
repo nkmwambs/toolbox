@@ -19,6 +19,7 @@ class Partner extends CI_Controller
 		parent::__construct();
 		$this->load->database();
         $this->load->library('session');
+		$this->load->library('finance');
 		
        /*cache control*/
 		$this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
@@ -52,10 +53,13 @@ class Partner extends CI_Controller
 		 if ($this->session->userdata('admin_login') != 1)
             redirect(base_url().'admin.php', 'refresh');
 		
+		$current_financial_month = $this->finance_model->current_financial_month($this->session->center_id);
 		
 		$max_mfr_id = $this->db->select_max('balHdID')->get_where('opfundsbalheader',array('icpNo'=>$this->session->center_id))->row()->balHdID;
+		
+		$page_data['funds_balance_grid'] = $this->finance->fund_balance_grid_array($this->session->center_id,strtotime($current_financial_month));
 		 	
-		$page_data['tym']  = strtotime($this->finance_model->current_financial_month($this->session->center_id));//strtotime('+1 month',strtotime($last_mfr->closureDate));		
+		$page_data['tym']  = strtotime($current_financial_month);//strtotime('+1 month',strtotime($last_mfr->closureDate));		
         $page_data['month'] = date("Y-m-t",strtotime($this->finance_model->current_financial_month($this->session->center_id)));
         $page_data['page_name']  = 'cash_journal';
         $page_data['page_title'] = get_phrase('cash_journal');
@@ -68,8 +72,10 @@ class Partner extends CI_Controller
              redirect(base_url().'admin.php', 'refresh');
 		
 		
-		 $max_mfr_id = $this->db->select_max('balHdID')->get_where('opfundsbalheader',array('icpNo'=>$this->session->center_id))->row()->balHdID;
+		$max_mfr_id = $this->db->select_max('balHdID')->get_where('opfundsbalheader',array('icpNo'=>$this->session->center_id))->row()->balHdID;
 // 		
+		$month = "";
+		
 		 if($flag!==""){
 // 		
 			 $sign = '+';
@@ -77,14 +83,21 @@ class Partner extends CI_Controller
 			 if($flag==='prev'){
 				 $sign = '-';
 			}
-// 			 	
+// 			 
+			$month = date("Y-m-t",strtotime($sign.$cnt.' months',$date));		
 			 $page_data['tym']  = strtotime($sign.$cnt.' months',$date);
-			 $page_data['month']  = date("Y-m-t",strtotime($sign.$cnt.' months',$date));				
+			 $page_data['month']  = date("Y-m-t",strtotime($sign.$cnt.' months',$date));	
+			 $page_data['funds_balance_grid'] = $this->finance->fund_balance_grid_array($this->session->center_id,strtotime($month));
+		 			
 		}else{
+			$month = date("Y-m-t",$date);
 			 $page_data['tym']  = $date;	
 			 $page_data['month']  = date("Y-m-t",$date);	
+			 $page_data['funds_balance_grid'] = $this->finance->fund_balance_grid_array($this->session->center_id,strtotime($month));
+		 
 		 }
 // 	
+		
         $page_data['page_name']  = 'cash_journal';
         $page_data['page_title'] = get_phrase('cash_journal');
 		$this->load->view('backend/index', $page_data);
