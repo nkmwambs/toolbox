@@ -50,7 +50,7 @@
 									<table class="table table-striped datatable">
 										<thead>
 											<tr>
-												<th colspan="4" style="text-align: center;">Your Vote Cast Summary</th>
+												<th colspan="4" style="text-align: center;">Your Cast Votes Summary</th>
 											</tr>
 											<tr>
 												<th>Voted FCP</th><th>Category</th><th>Nomination Level</th><th>Score</th>

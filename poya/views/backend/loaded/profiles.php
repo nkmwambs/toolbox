@@ -1,7 +1,7 @@
 <?php
 //print_r($grid);
 
-$points = range(0, 10);
+$points = range(0, $this->config->item('voting_score_range_max'));
 
 ?>
 
@@ -10,7 +10,7 @@ $points = range(0, 10);
 		<table class="table table-striped datatable">
 			<thead>
 				<tr>
-					<th colspan="4" style="text-align: center;">Your Vote Cast Summary</th>
+					<th colspan="4" style="text-align: center;">Your Cast Votes Summary</th>
 				</tr>
 				<tr>
 					<th>Voted FCP</th><th>Category</th><th>Nomination Level</th><th>Score</th>
@@ -63,7 +63,7 @@ foreach($grid as $group_key=>$group){
 				
 				<div id="category_<?=$group_key;?>" class="panel-collapse collapse">
 					<div class="panel-body">
-						<table class="table table-bordered">
+						<table class="table table-bordered table-striped">
 							<tbody>
 								<?php foreach($group['questions'] as $question){
 									
@@ -111,7 +111,7 @@ foreach($grid as $group_key=>$group){
 									
 									<tr>
 										<td>
-											<select class="form-control score" id="score_<?=$group_key;?>"
+											<select style="border:2px solid red;" class="form-control score" id="score_<?=$group_key;?>"
 											 data-survey-id = "<?=$survey_id;?>" 
 											  data-nomination-level = "<?=$nomination_level;?>" 
 											   data-question-group-id = "<?=$group_key;?>"	

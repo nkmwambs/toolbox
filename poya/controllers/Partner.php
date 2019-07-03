@@ -25,8 +25,8 @@ class Partner extends CI_Controller {
 		parent::__construct();
 		$this -> load -> database();
 		$this -> load -> library('session');
-		$this -> load -> library('finance');
 		$this->load->model('poya_model');
+		$this->load->config('poya');
 
 		/*cache control*/
 		$this -> output -> set_header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
@@ -205,7 +205,7 @@ class Partner extends CI_Controller {
 			foreach($questions[$group_key] as $question){
 				if(
 					($responses[$token][$question['title']] !== "" && $question['type'] !== "U") || 
-					(strlen($responses[$token][$question['title']]) > 250 && $question['type'] == "U")
+					(strlen($responses[$token][$question['title']]) > $this->config->item('long_text_size') && $question['type'] == "U")
 				){
 					$grid_array[$group_key]['group_name'] = $group_name;
 					
