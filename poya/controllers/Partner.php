@@ -337,6 +337,7 @@ class Partner extends CI_Controller {
 		$data['question_group_id'] = $post_data['questionGroupId'];
 		$data['token'] = $post_data['token'];
 		$data['fcp_id'] = $post_data['fcp'];
+		$data['voting_user_id'] = $this->session->login_user_id;
 		
 		//Check if vote exists
 		$this->db->where($data);
@@ -363,6 +364,19 @@ class Partner extends CI_Controller {
 		// }
 		echo $this->retrieve_profiles($post_data['token']);
 	}
+	
+	private function get_vote_cast($voting_user,$nomination_level,$fcp_id){
+		
+		$user_votes = $this->db->get_where('poya_vote',
+		array('voting_user_id'=>$voting_user,'nomination_level'=>$nomination_level));
+		
+		if($user_votes->num_rows()>0){
+			return $user_votes->result_object();
+		}else{
+			return array();
+		}
+	}
+	
 
 	function retrieve_profiles($token) {
 		$data['grid'] = $this->survey_groups_with_questions($token);
@@ -370,6 +384,14 @@ class Partner extends CI_Controller {
 		$data['nomination_level'] = 1;
 		$data['token'] = $token;
 		$data['fcp'] = $this->input->post('fcp');
+		$data['question_groups'] = $this->reorder_json_groups_from_data_file();
+		$data['nomination_level'] = array('1'=>'Cluster Level','2'=>'Regional Level','3'=>'National Level');
+		
+		$voting_user = $this->session->login_user_id;
+		$nomination_level = 1;
+		
+		$data['votes_cast'] = $this->get_vote_cast($voting_user,$nomination_level,$this->input->post('fcp'));
+		
 		echo $this -> load -> view('backend/loaded/profiles.php', $data, true);
 	}
 

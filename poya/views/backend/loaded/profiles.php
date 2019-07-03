@@ -5,6 +5,38 @@ $points = range(0, 10);
 
 ?>
 
+<div class="row">
+	<div class="col-xs-12">
+		<table class="table table-striped datatable">
+			<thead>
+				<tr>
+					<th colspan="4" style="text-align: center;">Your Vote Cast Summary</th>
+				</tr>
+				<tr>
+					<th>Voted FCP</th><th>Category</th><th>Nomination Level</th><th>Score</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php
+				
+				foreach($votes_cast as $vote){
+				?>
+					<tr>
+						<td><?=$vote->fcp_id;?></td>
+						<td><?=$question_groups[$vote->question_group_id];?></td>
+						<td><?=$nomination_level[$vote->nomination_level];?></td>
+						<td><?=$vote->score;?></td>
+					</tr>
+				<?php
+				}
+				?>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<hr />
+
 <div class="form-group">
 	<div class="col-xs-12" style="text-align: center;">
 		<h3>Check on the Profile Per Category to Nominate</h3>
@@ -135,4 +167,6 @@ foreach($grid as $group_key=>$group){
 		});
 		
 	});
+	
+	$('.datatable').DataTable();
 </script>
