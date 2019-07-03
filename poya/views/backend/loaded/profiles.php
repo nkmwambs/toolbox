@@ -1,5 +1,5 @@
 <?php
-//print_r($files);
+//print_r($grid);
 
 $points = range(0, 10);
 
@@ -108,6 +108,7 @@ foreach($grid as $group_key=>$group){
 											<h4>Nominate</h4>
 										</td>
 									</tr>
+									
 									<tr>
 										<td>
 											<select class="form-control score" id="score_<?=$group_key;?>"
