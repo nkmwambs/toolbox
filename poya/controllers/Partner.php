@@ -44,7 +44,7 @@ class Partner extends CI_Controller {
 		$this->db->where(array('email<>'=>""));
 
 		if ($nomination_level == 1) {
-			$this -> db -> where(array('clusters_id' => $cluster_id));
+			$this -> db -> where(array('cluster_id' => $cluster_id));
 		}
 
 		$projects = $this -> db -> get('projectsdetails') -> result_array();
