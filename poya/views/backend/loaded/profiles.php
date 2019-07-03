@@ -1,5 +1,5 @@
 <?php
-//print_r($grid);
+//print_r($files);
 
 $points = range(0, 10);
 

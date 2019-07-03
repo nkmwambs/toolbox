@@ -26,6 +26,7 @@ class Partner extends CI_Controller {
 		$this -> load -> database();
 		$this -> load -> library('session');
 		$this -> load -> library('finance');
+		$this->load->model('poya_model');
 
 		/*cache control*/
 		$this -> output -> set_header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
@@ -172,7 +173,7 @@ class Partner extends CI_Controller {
 	private function survey_groups_with_questions($token, $nomination_level = 1){
 		
 		$grid_array = array();
-		$survey_id = $this->active_for_voting_survey_id();
+		$survey_id = $this->poya_model->active_for_voting_survey_id();
 		$votes = $this->get_vote_score($survey_id, $token, $nomination_level);
 		
 		$groups = $this->reorder_json_groups_from_data_file();
@@ -212,24 +213,14 @@ class Partner extends CI_Controller {
 		return $grid_array;
 	}
 
-	function active_for_voting_survey_id(){
-		$survey_id = 0;
-		
-		$surveys = $this->db->get_where('poya_survey',array('status'=>1));
-		
-		if($surveys->num_rows()>0){
-			$survey_id = $surveys->row()->limesurvey_id;
-		}
-		
-		return $survey_id;
-	}
+	
 
 	function dashboard() {
 		if ($this -> session -> userdata('admin_login') != 1)
 			redirect(base_url(), 'refresh');
 		
 		//Set the survey_id
-		$survey_id = $this->active_for_voting_survey_id();
+		$survey_id = $this->poya_model->active_for_voting_survey_id();
 		
 		//Write data json		
 		$data_files['survey_id'] = $survey_id;
@@ -237,6 +228,7 @@ class Partner extends CI_Controller {
 		$data_files['data']['groups']='list_groups';
 		$data_files['data']['questions']='list_questions';
 		$data_files['data']['participants']='list_participants';
+		$data_files['data']['files']='list_participants';
 		
 		$this->create_write_data_file($data_files);
 
@@ -327,6 +319,18 @@ class Partner extends CI_Controller {
 		return json_encode($aResult);
 	}
 	
+	private function get_all_response_uploaded_files($survey_id,$token){
+		
+		$this->rpc_client_session_instantiate();
+				
+		$aResult = $this->rpcClient->get_uploaded_files($this->sessionKey,$survey_id, $token);
+		
+		// release the session key
+		$this->rpcClient -> release_session_key($this->sessionKey);
+		
+		return json_encode($aResult);
+	}
+	
 	/**Ajax call methods**/
 	
 	function post_a_score(){
@@ -363,8 +367,6 @@ class Partner extends CI_Controller {
 			// echo "Failed ".$msg;
 		// }
 		echo $this->retrieve_profiles($post_data['token']);
-		
-		echo json_encode($this->input->post());
 	}
 	
 	private function get_vote_cast($voting_user,$nomination_level,$fcp_id){
@@ -381,8 +383,11 @@ class Partner extends CI_Controller {
 	
 
 	function retrieve_profiles($token) {
+		
+		$survey_id = $this->poya_model->active_for_voting_survey_id();
+		
 		$data['grid'] = $this->survey_groups_with_questions($token);
-		$data['survey_id'] = $this->active_for_voting_survey_id();
+		$data['survey_id'] = $survey_id;
 		$data['nomination_level'] = 1;
 		$data['token'] = $token;
 		$data['fcp'] = $this->input->post('fcp');
