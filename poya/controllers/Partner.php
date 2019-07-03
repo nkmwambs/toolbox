@@ -363,6 +363,8 @@ class Partner extends CI_Controller {
 			// echo "Failed ".$msg;
 		// }
 		echo $this->retrieve_profiles($post_data['token']);
+		
+		echo json_encode($this->input->post());
 	}
 	
 	private function get_vote_cast($voting_user,$nomination_level,$fcp_id){
@@ -385,7 +387,7 @@ class Partner extends CI_Controller {
 		$data['token'] = $token;
 		$data['fcp'] = $this->input->post('fcp');
 		$data['question_groups'] = $this->reorder_json_groups_from_data_file();
-		$data['nomination_level'] = array('1'=>'Cluster Level','2'=>'Regional Level','3'=>'National Level');
+		$data['nomination_levels'] = array('1'=>'Cluster Level','2'=>'Regional Level','3'=>'National Level');
 		
 		$voting_user = $this->session->login_user_id;
 		$nomination_level = 1;

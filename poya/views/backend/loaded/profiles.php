@@ -24,7 +24,7 @@ $points = range(0, 10);
 					<tr>
 						<td><?=$vote->fcp_id;?></td>
 						<td><?=$question_groups[$vote->question_group_id];?></td>
-						<td><?=$nomination_level[$vote->nomination_level];?></td>
+						<td><?=$nomination_levels[$vote->nomination_level];?></td>
 						<td><?=$vote->score;?></td>
 					</tr>
 				<?php
