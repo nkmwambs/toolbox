@@ -11,11 +11,13 @@
 				</div>
 										
 				<div class="panel-body">
+					<div class="btn btn-warning">Votes Cast</div>
+					<hr />
 					<?php echo form_open(base_url() . 'poya.php/partner/nominate/', array('id' => 'frm_nominate', 'class' => 'form-horizontal form-groups-bordered validate', 'enctype' => 'multipart/form-data')); ?>
 					
 					<div class="form-group">
 						<div class="col-xs-12"  style="text-align: center;">
-							Choose an FCP to View a Profile For
+							<h3>Choose an FCP to View a Profile For</h3> 
 						</div>
 					</div>		
 					

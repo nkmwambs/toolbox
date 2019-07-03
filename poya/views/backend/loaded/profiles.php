@@ -7,7 +7,7 @@ $points = range(0, 10);
 
 <div class="form-group">
 	<div class="col-xs-12" style="text-align: center;">
-		Check on the Profile Per Category to Nominate
+		<h3>Check on the Profile Per Category to Nominate</h3>
 	</div>
 </div>
 
@@ -46,7 +46,7 @@ foreach($grid as $group_key=>$group){
 											<?php
 												if($question['question_type'] == 'U'){
 											?>
-											<textarea class="form-control" disabled="disabled" rows="25">
+											<textarea class="form-control" readonly="readonly" rows="25">
 												<?=$question['response'];?>
 											</textarea>
 											
