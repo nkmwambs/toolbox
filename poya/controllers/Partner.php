@@ -34,8 +34,9 @@ class Partner extends CI_Controller {
 
 	}
 
-	private function get_projects_from_db($nomination_level = 1){
+	private function get_projects_from_db(){
 		
+		$nomination_level = $this->get_nomination_level();
 		$cluster_id = $this->session->cluster_id;
 		
 		$this -> db -> select(array('icpNo','email'));
@@ -71,8 +72,9 @@ class Partner extends CI_Controller {
 		return $filtered_list;
 	}
 	
-	private function nomination_viable_projects($nomination_level) {
+	private function nomination_viable_projects() {
 		
+		$nomination_level = $this->get_nomination_level();
 		$participants = $this->filter_participants_with_complete_responses();
 		
 		$fcp_with_email = $this->get_projects_from_db();
@@ -170,7 +172,9 @@ class Partner extends CI_Controller {
 		return $participants_array;
 	}
 
-	private function get_vote_score($survey_id,$token,$nomination_level){
+	private function get_vote_score($survey_id,$token){
+		
+		$nomination_level = $this->get_nomination_level();
 		
 		$poya_vote_obj = $this->db->select(array('question_group_id','score'))->get_where('poya_vote',
 		array('token'=>$token,'limesurvey_id'=>$survey_id,'voting_user_id'=>$this->session->login_user_id,
@@ -191,11 +195,13 @@ class Partner extends CI_Controller {
 		return $group_by_group_id;
 	}
 	
-	private function survey_groups_with_questions($token, $nomination_level = 1){
+	private function survey_groups_with_questions($token){
 		
 		$grid_array = array();
+		//$nomination_level = $this->get_nomination_level();
+		
 		$survey_id = $this->poya_model->active_for_voting_survey_id();
-		$votes = $this->get_vote_score($survey_id, $token, $nomination_level);
+		$votes = $this->get_vote_score($survey_id, $token);
 		
 		$groups = $this->reorder_json_groups_from_data_file();
 		$questions = $this->reorder_json_questions_from_data_file();
@@ -237,7 +243,41 @@ class Partner extends CI_Controller {
 		return $grid_array;
 	}
 
-	
+	private function get_nomination_level(){
+		$active_survey = (array)$this->poya_model->get_active_survey();
+		
+		extract($active_survey);
+		
+		$current_date = date('Y-m-d');
+		
+		$nomination_level = 0;
+		
+		if(strtotime($current_date)< strtotime($cluster_voting_start_date) && 
+			$cluster_voting_start_date == "0000-00-00"){
+			//Voting has not begun
+			
+		}elseif(strtotime($current_date) >= strtotime($cluster_voting_start_date) && 
+			strtotime($current_date) < strtotime($cluster_voting_end_date)
+		){
+			//We are cluster nomination level
+			$nomination_level = 1;
+			
+		}elseif(strtotime($current_date) >= strtotime($regional_voting_start_date) && 
+			strtotime($current_date) < strtotime($regional_voting_end_date)){
+			//We are regional voting
+			$nomination_level = 2;
+			
+		}elseif(strtotime($current_date) >= strtotime($national_voting_start_date) && 
+			strtotime($current_date) < strtotime($national_voting_end_date)){
+			//We are national voting
+			$nomination_level = 3;
+			
+		}else{
+			//Survey is closed
+		}
+		
+		return $nomination_level;
+	}
 
 	function dashboard() {
 		if ($this -> session -> userdata('admin_login') != 1)
@@ -259,13 +299,13 @@ class Partner extends CI_Controller {
 		//Prepare page_data array for view output
 		
 		$voting_user = $this->session->login_user_id;
-		$nomination_level = 1;
+		//$nomination_level = $this->get_nomination_level();
 		
-		$page_data['votes_cast'] = $this->get_vote_cast($voting_user,$nomination_level,$this->input->post('fcp'));
+		$page_data['votes_cast'] = $this->get_vote_cast($voting_user,$this->input->post('fcp'));
 		$page_data['question_groups'] = $this->reorder_json_groups_from_data_file();
 		$page_data['nomination_levels'] = array('1'=>'Cluster Level','2'=>'Regional Level','3'=>'National Level');
 		
-		$page_data['projects'] = array_chunk($this -> nomination_viable_projects(1), 15,true);
+		$page_data['projects'] = array_chunk($this -> nomination_viable_projects(), $this->config->item('projects_per_row'),true);
 		$page_data['page_name'] = 'dashboard';
 		$page_data['page_title'] = get_phrase('nominate');
 		$this -> load -> view('backend/index', $page_data);
@@ -400,7 +440,9 @@ class Partner extends CI_Controller {
 		echo $this->retrieve_profiles($post_data['token']);
 	}
 	
-	private function get_vote_cast($voting_user,$nomination_level,$fcp_id){
+	private function get_vote_cast($voting_user,$fcp_id){
+		
+		$nomination_level = $this->get_nomination_level();
 		
 		$user_votes = $this->db->get_where('poya_vote',
 		array('voting_user_id'=>$voting_user,'nomination_level'=>$nomination_level));
@@ -416,21 +458,21 @@ class Partner extends CI_Controller {
 	function retrieve_profiles($token) {
 		
 		$survey_id = $this->poya_model->active_for_voting_survey_id();
-		
+		$nomination_level = $this->get_nomination_level();
 		//$data['responses'] = $this->reorder_json_responses_from_data_file();
 		
 		$data['grid'] = $this->survey_groups_with_questions($token);
 		$data['survey_id'] = $survey_id;
-		$data['nomination_level'] = 1;
+		$data['nomination_level'] = $nomination_level;
 		$data['token'] = $token;
 		$data['fcp'] = $this->input->post('fcp');
 		$data['question_groups'] = $this->reorder_json_groups_from_data_file();
 		$data['nomination_levels'] = array('1'=>'Cluster Level','2'=>'Regional Level','3'=>'National Level');
 		
 		$voting_user = $this->session->login_user_id;
-		$nomination_level = 1;
 		
-		$data['votes_cast'] = $this->get_vote_cast($voting_user,$nomination_level,$this->input->post('fcp'));
+		
+		$data['votes_cast'] = $this->get_vote_cast($voting_user,$this->input->post('fcp'));
 		
 		echo $this -> load -> view('backend/loaded/profiles.php', $data, true);
 	}

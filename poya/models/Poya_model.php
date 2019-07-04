@@ -18,4 +18,16 @@ class Poya_model extends  CI_Model{
 		
 		return $survey_id;
 	}
+	
+	function get_active_survey(){
+		$survey = array();
+		
+		$surveys = $this->db->get_where('poya_survey',array('status'=>1));
+		
+		if($surveys->num_rows()>0){
+			$survey = $surveys->row();
+		}
+		
+		return $survey;
+	}
 }

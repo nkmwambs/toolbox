@@ -48,12 +48,19 @@ class Login extends CI_Controller {
 					}
 					
 					$this->session->set_userdata('cluster_id',$cluster_id);
-			
-					//$access_level = "admin";
 					
-					//if($this->session->userdata('logged_user_level')==='1'){
-						//$access_level = "partner";
-					//}	
+					$region_id = 0;
+					
+					$region_obj = $this->db->select(array('region_id'))->get_where('clusters',
+					array('clusters_id'=>$cluster_id));
+					
+					if($region_obj->num_rows() > 0){
+						$region_id = $region_obj->row()->region_id;
+					}
+					
+					$this->session->set_userdata('region_id',$region_id);
+					
+					$this->session->set_userdata('region_id',$cluster_id);	
 					
 					$this->session->set_userdata('app_name', $app_name);	
 					
