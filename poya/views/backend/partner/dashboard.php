@@ -27,7 +27,7 @@
 								<?php
 									foreach($projects as $projects_row){
 								?>
-									<div class="btn-toolbar">
+									<div class="btn-toolbar" style="margin-bottom: 5px;">
 										<?php
 										foreach($projects_row as $project=>$token){
 											
@@ -37,7 +37,7 @@
 										}
 										?>
 									</div>
-									<hr />
+									
 								<?php
 									}
 								?>
