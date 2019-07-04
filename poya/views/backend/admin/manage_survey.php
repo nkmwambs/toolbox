@@ -1,24 +1,19 @@
+<?php 
+foreach($css_files as $file): ?>
+    <link type="text/css" rel="stylesheet" href="<?php echo $file; ?>" />
+ 
+<?php endforeach; ?>
+<?php foreach($js_files as $file): ?>
+ 
+    <script src="<?php echo $file; ?>"></script>
+<?php endforeach; ?>
+
 <hr />
 <div class="row">
-	<div class="col-xs-12">
-		<div class="btn btn-default">Add a Survey</div>	
-		<hr />
-		<table class="table table-striped datatable">
-			<thead>
-				<tr>
-					<th>Survey ID</th>
-					<th>Cluster Voting Start Date</th>
-					<th>Cluster Voting End Date</th>
-					<th>Regional Voting Start Date</th>
-					<th>Regional Voting End Date</th>
-					<th>National Voting Start Date</th>
-					<th>National Voting End Date</th>
-				</tr>
-			</thead>
-		</table>
+	<div class="col-sm-12">
+		<?php echo $output; ?>
 	</div>
 </div>
+ 
 
-<script>
-	$('.datatable').DataTable();
-</script>
+ 
