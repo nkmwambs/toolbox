@@ -30,4 +30,12 @@ class Poya_model extends  CI_Model{
 		
 		return $survey;
 	}
+	
+	function nomination_levels(){
+		return array('1'=>'Cluster Level','2'=>'Regional Level','3'=>'National Level');
+	}
+	
+	function get_all_surveys(){
+		return $this->db->get('poya_survey')->result_object();	
+	}
 }

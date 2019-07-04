@@ -40,13 +40,36 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
                 <span><?php echo get_phrase('dashboard'); ?></span>
             </a>
         </li>
-                
-        <!-- ACCOUNT -->
-        <li class="<?php if ($page_name == 'settings') echo 'active'; ?> ">
-            <a href="<?php echo base_url("poya.php/admin/settings"); ?>">
-                <i class="entypo-lock"></i>
+     
+     	<!--Settings-->   
+        <li class="<?php
+        if ($page_name == 'manage_survey' ||
+                $page_name == 'manage_nominations' ||
+                    $page_name == 'manage_projects')
+                        echo 'opened active';
+        ?> ">
+            <a href="#">
+                <i class="entypo-cog"></i>
                 <span><?php echo get_phrase('settings'); ?></span>
             </a>
+            <ul>
+                <li class="<?php if ($page_name == 'manage_survey') echo 'active'; ?> ">
+                    <a href="<?php echo base_url("poya.php/admin/manage_survey"); ?>">
+                        <span><i class="entypo-cog"></i> <?php echo get_phrase('manage_surveys'); ?></span>
+                    </a>
+                </li>
+                <li class="<?php if ($page_name == 'manage_nominations') echo 'active'; ?> ">
+                    <a href="<?php echo base_url("poya.php/admin/manage_nominations"); ?>">
+                        <span><i class="entypo-mobile"></i> <?php echo get_phrase('manage_nominations'); ?></span>
+                    </a>
+                </li>
+                <li class="<?php if ($page_name == 'manage_projects') echo 'active'; ?> ">
+                    <a href="<?php echo base_url("poya.php/admin/manage_projects"); ?>">
+                        <span><i class="entypo-language"></i> <?php echo get_phrase('manage_projects'); ?></span>
+                    </a>
+                </li>
+				               
+            </ul>
         </li>
 
     </ul>

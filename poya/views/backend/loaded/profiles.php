@@ -90,10 +90,16 @@ foreach($grid as $group_key=>$group){
 											<?php
 													}
 												}elseif($question['question_type'] =='|'){
+													if(isset($question['response'])){
 													foreach($question['response'] as $file_name => $uploaded_file){
 											?>		
 													<a target="__blank" href="<?=$uploaded_file;?>"><?=$file_name;?></a></br/>
 											<?php
+													}
+													}else{
+											?>
+													No Record Available
+											<?php			
 													}
 												}else{
 													echo $question['response'];	

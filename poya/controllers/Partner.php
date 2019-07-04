@@ -92,19 +92,27 @@ class Partner extends CI_Controller {
 	
 	
 	private function create_write_data_file($data_files){
+		
+		$survey_id = $this->poya_model->active_for_voting_survey_id();
+		
 		foreach($data_files['data'] as $file=>$method){
-			if(!file_exists(APPPATH.'data/'.$file.'.json')){
-				file_put_contents(APPPATH."data/".$file.".json",$this->$method($data_files['survey_id']));
+			if(!file_exists(APPPATH.'data/'.$survey_id)){
+				mkdir(APPPATH.'data/'.$survey_id);
+			}
+			
+			if(!file_exists(APPPATH.'data/'.$survey_id.'/'.$file.'.json')){
+				file_put_contents(APPPATH."data/".$survey_id.'/'.$file.".json",$this->$method($data_files['survey_id']));
 			}
 		}
 	}
 	
 	private function reorder_json_responses_from_data_file(){
 		
+		$survey_id = $this->poya_model->active_for_voting_survey_id();
 		$responses_array = array();
 		
-		if(file_exists(APPPATH.'data/responses.json') && filesize(APPPATH.'data/responses.json') > 0){
-			$responses = file_get_contents(APPPATH.'data/responses.json');
+		if(file_exists(APPPATH.'data/'.$survey_id.'/responses.json') && filesize(APPPATH.'data/'.$survey_id.'/responses.json') > 0){
+			$responses = file_get_contents(APPPATH.'data/'.$survey_id.'/responses.json');
 			$responses = json_decode($responses);
 			
 			$response_object = $responses->responses;
@@ -122,11 +130,13 @@ class Partner extends CI_Controller {
 	}
 
 	private function reorder_json_groups_from_data_file(){
+		
+		$survey_id = $this->poya_model->active_for_voting_survey_id();
 		$groups_array = array();
 		
-		if(file_exists(APPPATH.'data/groups.json') && filesize(APPPATH.'data/groups.json') > 0){
+		if(file_exists(APPPATH.'data/'.$survey_id.'/groups.json') && filesize(APPPATH.'data/'.$survey_id.'/groups.json') > 0){
 				
-			$groups = file_get_contents(APPPATH.'data/groups.json');
+			$groups = file_get_contents(APPPATH.'data/'.$survey_id.'/groups.json');
 			$groups = json_decode($groups);
 			
 			foreach($groups as $group){
@@ -139,10 +149,11 @@ class Partner extends CI_Controller {
 	
 	private function reorder_json_questions_from_data_file(){
 		$questions_array = array();
+		$survey_id = $this->poya_model->active_for_voting_survey_id();
 		
-		if(file_exists(APPPATH.'data/questions.json') && filesize(APPPATH.'data/questions.json') > 0){
+		if(file_exists(APPPATH.'data/'.$survey_id.'/questions.json') && filesize(APPPATH.'data/'.$survey_id.'/questions.json') > 0){
 				
-			$questions = file_get_contents(APPPATH.'data/questions.json');
+			$questions = file_get_contents(APPPATH.'data/'.$survey_id.'/questions.json');
 			$questions = json_decode($questions);
 			
 			foreach($questions as $question){
@@ -157,11 +168,12 @@ class Partner extends CI_Controller {
 	}
 
 	private function reorder_json_participants_from_data_file(){
+		$survey_id = $this->poya_model->active_for_voting_survey_id();
 		$participants_array = array();
 		
-		if(file_exists(APPPATH.'data/participants.json') && filesize(APPPATH.'data/participants.json') > 0){
+		if(file_exists(APPPATH.'data/'.$survey_id.'/participants.json') && filesize(APPPATH.'data/'.$survey_id.'/participants.json') > 0){
 				
-			$participants = file_get_contents(APPPATH.'data/participants.json');
+			$participants = file_get_contents(APPPATH.'data/'.$survey_id.'/participants.json');
 			$participants = json_decode($participants);
 			
 			foreach($participants as $participant){
@@ -406,10 +418,12 @@ class Partner extends CI_Controller {
 	
 	function post_a_score(){
 		$post_data = $this->input->post();
+		$groups = $this->reorder_json_groups_from_data_file();
 		
 		$data['nomination_level'] = $post_data['nominationLevel'];
 		$data['limesurvey_id'] = $post_data['surveyId'];
 		$data['question_group_id'] = $post_data['questionGroupId'];
+		$data['question_group_name'] = $groups[$post_data['questionGroupId']];
 		$data['token'] = $post_data['token'];
 		$data['fcp_id'] = $post_data['fcp'];
 		$data['voting_user_id'] = $this->session->login_user_id;
@@ -467,7 +481,7 @@ class Partner extends CI_Controller {
 		$data['token'] = $token;
 		$data['fcp'] = $this->input->post('fcp');
 		$data['question_groups'] = $this->reorder_json_groups_from_data_file();
-		$data['nomination_levels'] = array('1'=>'Cluster Level','2'=>'Regional Level','3'=>'National Level');
+		$data['nomination_levels'] = $this->poya_model->nomination_levels();
 		
 		$voting_user = $this->session->login_user_id;
 		
