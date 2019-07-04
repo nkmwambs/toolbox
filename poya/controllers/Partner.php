@@ -232,7 +232,9 @@ class Partner extends CI_Controller {
 						$response = json_decode($responses[$token][$question['title']]);
 						
 						foreach($response as $file_key=>$uploaded_file){
-							$grid_array[$group_key]['questions'][$question['title']]['response'][urldecode($uploaded_file->name)] = LS_BASEURL."/admin/responses?sa=actionDownloadfile&surveyid=".$survey_id."&iResponseId=".$responses[$token]['id']."&iQID=".$question['qid']."&iIndex=".$file_key;
+							
+							$grid_array[$group_key]['questions'][$question['title']]['response'][urldecode($uploaded_file->name)] = "https://www.compassionkenya.com/hardlinks/surveys/".$survey_id."/files/".$uploaded_file->filename;
+							//LS_BASEURL."/admin/responses?sa=actionDownloadfile&surveyid=".$survey_id."&iResponseId=".$responses[$token]['id']."&iQID=".$question['qid']."&iIndex=".$file_key;
 						}
 						
 						
