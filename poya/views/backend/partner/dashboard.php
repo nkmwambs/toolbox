@@ -15,9 +15,14 @@ if($current_nomination_level == 0){
 				</div>
 										
 				<div class="panel-body">
-					<!-- <div class="btn btn-warning">Votes Cast</div>
-					<hr /> -->
-					<?php echo form_open(base_url() . 'poya.php/partner/nominate/', array('id' => 'frm_nominate', 'class' => 'form-horizontal form-groups-bordered validate', 'enctype' => 'multipart/form-data')); ?>
+					<?php
+						if(empty($projects)){
+					?>	
+							<div class="well" style="text-align: center;color: red;">You do not have eligible partners to vote for at this level</div>
+					<?php
+						}
+						else{		
+					 echo form_open(base_url() . 'poya.php/partner/nominate/', array('id' => 'frm_nominate', 'class' => 'form-horizontal form-groups-bordered validate', 'enctype' => 'multipart/form-data')); ?>
 					
 					<div class="form-group">
 						<div class="col-xs-12"  style="text-align: center;">
@@ -48,6 +53,12 @@ if($current_nomination_level == 0){
 								
 						</div>
 						</div>
+						
+						</form>
+						
+						<?php
+						}
+						?>
 						
 						<div id="profile">
 							<div class="row">
