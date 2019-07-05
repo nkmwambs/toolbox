@@ -1,4 +1,5 @@
 <?php
+//print_r($progress);
 //print_r($fcps_in_progress);
 ?>
 <hr />
@@ -23,6 +24,7 @@
 				<?php foreach($fcps_in_progress  as $fcp_id=>$fcp_progress){?>
 					<tr>
 						<td><?=$fcp_id;?></td>
+						<?php if($fcp_progress == 1){?>
 						<td>
 							<div class="btn btn-success level_1" data-fcp-id = "<?=$fcp_id;?>">
 								<i id="left_arrow" class="fa fa-arrow-circle-left btn_progress"></i> 
@@ -32,6 +34,32 @@
 						</td>
 						<td></td>
 						<td></td>
+						<?php }?>
+						
+						<?php if($fcp_progress == 2){?>
+						<td></td>
+						<td>
+							<div class="btn btn-success level_2" data-fcp-id = "<?=$fcp_id;?>">
+								<i id="left_arrow" class="fa fa-arrow-circle-left btn_progress"></i> 
+									<span>Level 2</span>
+								<i id="right_arrow" class="fa fa-arrow-circle-right btn_progress"></i>
+							</div>
+						</td>
+						<td></td>
+						<?php }?>
+						
+						<?php if($fcp_progress == 3){?>
+						<td></td>
+						<td></td>
+						<td>
+							<div class="btn btn-success level_3" data-fcp-id = "<?=$fcp_id;?>">
+								<i id="left_arrow" class="fa fa-arrow-circle-left btn_progress"></i> 
+									<span>Level 3</span>
+								<i id="right_arrow" class="fa fa-arrow-circle-right btn_progress"></i>
+							</div>
+						</td>
+						<?php }?>
+						
 					</tr>
 				<?php }?>
 			</tbody>
