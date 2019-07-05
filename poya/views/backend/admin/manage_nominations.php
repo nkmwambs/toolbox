@@ -10,6 +10,7 @@
 			<thead>
 				<tr>
 					<th rowspan="2">FCP ID</th>
+					<th rowspan="2">Current Nomination Level</th>
 					<th colspan="3">Eligible Voting Level</th>
 					
 				</tr>
@@ -24,6 +25,7 @@
 				<?php foreach($fcps_in_progress  as $fcp_id=>$fcp_progress){?>
 					<tr>
 						<td><?=$fcp_id;?></td>
+						<td class="nomination_level_label"><?=$nomination_levels[$fcp_progress];?></td>
 						<?php if($fcp_progress == 1){?>
 						<td>
 							<div class="btn btn-success level_1" data-fcp-id = "<?=$fcp_id;?>">
@@ -85,9 +87,13 @@
 			
 			clone.find('span').html('Level 2');
 			clone.toggleClass('level_1 level_2');
+			
+			$(this).closest('td').siblings('.nomination_level_label').html('Regional Level');
+			
 			var next_level = $(this).closest('td').next();
 			next_level.html(clone);
 			$(this).closest('div').remove();
+	
 			nomination_level = 2;
 		}
 		
@@ -96,11 +102,17 @@
 			if($(this).hasClass('fa-arrow-circle-right')){
 				clone.find('span').html('Level 3');
 				clone.toggleClass('level_2 level_3');
+				
+				$(this).closest('td').siblings('.nomination_level_label').html('National Level');
+				
 				var next_level = $(this).closest('td').next();
 				nomination_level = 3;
 			}else{
 				clone.find('span').html('Level 1');
 				clone.toggleClass('level_2 level_1');
+				
+				$(this).closest('td').siblings('.nomination_level_label').html('Cluster Level');
+				
 				var next_level = $(this).closest('td').prev();
 				nomination_level = 1;
 			}
@@ -116,6 +128,9 @@
 			}else{
 				clone.find('span').html('Level 2');
 				clone.toggleClass('level_3 level_2');
+				
+				$(this).closest('td').siblings('.nomination_level_label').html('Regional Level');
+				
 				var next_level = $(this).closest('td').prev();
 				nomination_level = 2;
 			}
