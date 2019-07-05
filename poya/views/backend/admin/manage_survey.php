@@ -15,11 +15,3 @@ foreach($css_files as $file): ?>
 	</div>
 </div>
  
-
-<script>
-	//$('#field-cluster_voting_start_date').removeClass('datepicker-input');
-	$('#field-cluster_voting_end_date').addClass('datepicker');
-	$('.datepicker').datepicker({
-		format:'yyyy-mm-dd'
-	});
-</script> 

@@ -4,20 +4,20 @@
 <hr />
 <div class="row">
 	<div class="col-xs-4">
-		<select class="form-control">
+		<select id="select_survey_id" class="form-control">
 			<option value=""><?php echo "Choose a Survey ID";?></option>
 			<?php foreach($surveys as $survey){?>
-				<option value="<?=$survey->poya_survey_id;?>"><?=$survey->limesurvey_id;?> (<?=$survey->cluster_voting_start_date;?> - <?=$survey->national_voting_end_date;?>)</option>
+				<option value="<?=$survey->limesurvey_id;?>" <?php if($active_survey_id == $survey->poya_survey_id) echo "selected";?>><?=$survey->limesurvey_id;?> (<?=$survey->cluster_voting_start_date;?> - <?=$survey->national_voting_end_date;?>)</option>
 			<?php }?>
 		</select>
 	</div>
 	<div class="col-xs-4">
-		<select class="form-control">
+		<select id="select_nomination_level" class="form-control">
 			<option value=""><?php echo "Choose Nomination Level";?></option>
 			<?php
 				foreach($nomination_levels as $nomination_level_key=>$nomination_level){
 			?>
-				<option value="<?=$nomination_level_key;?>"><?=$nomination_level;?></option>
+				<option value="<?=$nomination_level_key;?>" <?php if($current_nomination_level == $nomination_level_key) echo "selected";?>><?=$nomination_level;?></option>
 			<?php
 			}
 			?>
@@ -30,7 +30,7 @@
 
 <hr />
 
-<div class="row">
+<div class="row" id="results">
 	<div class="col-xs-12">
 		<table class="table table-striped datatable">
 			<thead>
@@ -60,10 +60,36 @@
 </div>
 
 <script>
-	$(".datatable").DataTable();
+	$(".datatable").DataTable({
+		dom: 'Bfrtip',
+	    buttons: [
+	        'copy', 'excel', 'pdf'
+	    ]
+	});
 	
 	$('#btn_go').on('click',function(){
-		alert('You have only one survey with 1 level of nomination. Atleast 2 levels are required');
+		
+		var survey_id = $("#select_survey_id").val();
+		var nomination_level = $("#select_nomination_level").val();
+		var url = "<?=base_url();?>poya.php/admin/get_nomination_votes";
+		var data = {'limesurvey_id':survey_id,"nomination_level":nomination_level};
+		
+		$.ajax({
+			url:url,
+			data:data,
+			type:"POST",
+			beforeSend:function(){
+				$("#overlay").css('display','block');
+			},
+			success:function(resp){
+				$("#results").html(resp);
+				$("#overlay").css('display','none');
+			},
+			error:function(rhx,msgErr){
+				alert(msgErr);
+				$("#overlay").css('display','none');
+			}	
+		});
 	})
 	
 </script>

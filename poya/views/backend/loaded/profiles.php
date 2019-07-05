@@ -5,6 +5,7 @@ $points = range(0, $this->config->item('voting_score_range_max'));
 
 ?>
 
+
 <div class="row">
 	<div class="col-xs-12">
 		<table class="table table-striped datatable">
@@ -39,7 +40,18 @@ $points = range(0, $this->config->item('voting_score_range_max'));
 
 <div class="form-group">
 	<div class="col-xs-12" style="text-align: center;">
-		<h3>Check on the Profile Per Category to Nominate</h3>
+		<?php
+			if(empty($grid)){
+		?>
+			<h3 style="color: red;">FCP submitted an empty profile</h3>
+		<?php	
+			}else{
+		?>
+			<h3>Check on the Profile Per Category to Nominate</h3>
+		<?php		
+			}	
+		?>
+		
 	</div>
 </div>
 

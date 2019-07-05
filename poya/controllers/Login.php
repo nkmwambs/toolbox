@@ -60,7 +60,7 @@ class Login extends CI_Controller {
 					
 					$this->session->set_userdata('region_id',$region_id);
 					
-					$this->session->set_userdata('region_id',$cluster_id);	
+					//$this->session->set_userdata('region_id',$cluster_id);	
 					
 					$this->session->set_userdata('app_name', $app_name);	
 					

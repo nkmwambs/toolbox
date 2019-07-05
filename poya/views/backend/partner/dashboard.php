@@ -7,7 +7,7 @@
 		<div class="panel panel-info">
 								
 				<div class="panel-heading">
-					<div class="panel-title"><?= get_phrase('nominate'); ?></div>						
+					<div class="panel-title"><?= get_phrase('nomination_level'); ?> : <?=$nomination_levels[$current_nomination_level];?></div>						
 				</div>
 										
 				<div class="panel-body">
