@@ -35,6 +35,9 @@ class Partner extends CI_Controller {
 	}
 	
 	private function nomination_level_condition($nomination_level){
+		
+		$cluster_id = $this -> session -> cluster_id;
+			
 		if ($nomination_level == 2) {
 			
 			$this -> db -> join('clusters', 'clusters.clusters_id=projectsdetails.cluster_id');
@@ -57,7 +60,7 @@ class Partner extends CI_Controller {
 	private function get_projects_from_db() {
 
 		$nomination_level = $this -> poya_model->get_nomination_level();
-		$cluster_id = $this -> session -> cluster_id;
+		
 
 		$this -> db -> select(array('icpNo', 'email'));
 		$this -> db -> where(array('email<>' => "", 'status' => 1));
