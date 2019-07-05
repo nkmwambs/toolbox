@@ -123,7 +123,7 @@ foreach($grid as $group_key=>$group){
 								<?php }?>
 								<tr>
 										<td style="text-align: center;">
-											<h4>Nominate</h4>
+											<h4>Nominate in a range of 0 to <?=$this->config->item('voting_score_range_max')?> where 0 is "Not Satisfied" and <?=$this->config->item('voting_score_range_max')?> is "Extremely Satisfied" </h4>
 										</td>
 									</tr>
 									

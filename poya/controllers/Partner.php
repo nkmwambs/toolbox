@@ -206,7 +206,8 @@ class Partner extends CI_Controller {
 
 		$nomination_level = $this -> poya_model->get_nomination_level();
 
-		$poya_vote_obj = $this -> db -> select(array('question_group_id', 'score')) -> get_where('poya_vote', array('token' => $token, 'limesurvey_id' => $survey_id, 'voting_user_id' => $this -> session -> login_user_id, 'nomination_level' => $nomination_level));
+		$poya_vote_obj = $this -> db -> select(array('question_group_id', 'score')) -> get_where('poya_vote', 
+		array('token' => $token, 'limesurvey_id' => $survey_id, 'voting_user_id' => $this -> session -> login_user_id, 'nomination_level' => $nomination_level));
 
 		$group_by_group_id = array();
 
