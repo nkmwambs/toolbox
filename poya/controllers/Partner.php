@@ -108,7 +108,7 @@ class Partner extends CI_Controller {
 
 	private function create_write_data_file($data_files) {
 
-		$survey_id = $this -> poya_model -> active_for_voting_survey_id();
+		$survey_id = $this -> poya_model -> active_for_voting_limesurvey_id();
 
 		foreach ($data_files['data'] as $file => $method) {
 			if (!file_exists(APPPATH . 'data/' . $survey_id)) {
@@ -123,7 +123,7 @@ class Partner extends CI_Controller {
 
 	private function reorder_json_responses_from_data_file() {
 
-		$survey_id = $this -> poya_model -> active_for_voting_survey_id();
+		$survey_id = $this -> poya_model -> active_for_voting_limesurvey_id();
 		$responses_array = array();
 
 		if (file_exists(APPPATH . 'data/' . $survey_id . '/responses.json') && filesize(APPPATH . 'data/' . $survey_id . '/responses.json') > 0) {
@@ -146,7 +146,7 @@ class Partner extends CI_Controller {
 
 	private function reorder_json_groups_from_data_file() {
 
-		$survey_id = $this -> poya_model -> active_for_voting_survey_id();
+		$survey_id = $this -> poya_model -> active_for_voting_limesurvey_id();
 		$groups_array = array();
 
 		if (file_exists(APPPATH . 'data/' . $survey_id . '/groups.json') && filesize(APPPATH . 'data/' . $survey_id . '/groups.json') > 0) {
@@ -164,7 +164,7 @@ class Partner extends CI_Controller {
 
 	private function reorder_json_questions_from_data_file() {
 		$questions_array = array();
-		$survey_id = $this -> poya_model -> active_for_voting_survey_id();
+		$survey_id = $this -> poya_model -> active_for_voting_limesurvey_id();
 
 		if (file_exists(APPPATH . 'data/' . $survey_id . '/questions.json') && filesize(APPPATH . 'data/' . $survey_id . '/questions.json') > 0) {
 
@@ -183,7 +183,7 @@ class Partner extends CI_Controller {
 	}
 
 	private function reorder_json_participants_from_data_file() {
-		$survey_id = $this -> poya_model -> active_for_voting_survey_id();
+		$survey_id = $this -> poya_model -> active_for_voting_limesurvey_id();
 		$participants_array = array();
 
 		if (file_exists(APPPATH . 'data/' . $survey_id . '/participants.json') && filesize(APPPATH . 'data/' . $survey_id . '/participants.json') > 0) {
@@ -225,7 +225,7 @@ class Partner extends CI_Controller {
 		$grid_array = array();
 		//$nomination_level = $this->get_nomination_level();
 
-		$survey_id = $this -> poya_model -> active_for_voting_survey_id();
+		$survey_id = $this -> poya_model -> active_for_voting_limesurvey_id();
 		$votes = $this -> get_vote_score($survey_id, $token);
 
 		$groups = $this -> reorder_json_groups_from_data_file();
@@ -270,7 +270,7 @@ class Partner extends CI_Controller {
 			redirect(base_url(), 'refresh');
 
 		//Set the survey_id
-		$survey_id = $this -> poya_model -> active_for_voting_survey_id();
+		$survey_id = $this -> poya_model -> active_for_voting_limesurvey_id();
 
 		//Write data json
 		$data_files['survey_id'] = $survey_id;
@@ -444,7 +444,7 @@ class Partner extends CI_Controller {
 
 	function retrieve_profiles($token) {
 
-		$survey_id = $this -> poya_model -> active_for_voting_survey_id();
+		$survey_id = $this -> poya_model -> active_for_voting_limesurvey_id();
 		$nomination_level = $this -> poya_model->get_nomination_level();
 		//$data['responses'] = $this->reorder_json_responses_from_data_file();
 

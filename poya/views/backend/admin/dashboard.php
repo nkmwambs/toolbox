@@ -1,5 +1,6 @@
 <?php
 //print_r($votes_cast);
+//echo $count_of_voters;
 ?>
 <hr />
 <div class="row">
@@ -7,7 +8,7 @@
 		<select id="select_survey_id" class="form-control">
 			<option value=""><?php echo "Choose a Survey ID";?></option>
 			<?php foreach($surveys as $survey){?>
-				<option value="<?=$survey->limesurvey_id;?>" <?php if($active_survey_id == $survey->poya_survey_id) echo "selected";?>><?=$survey->limesurvey_id;?> (<?=$survey->cluster_voting_start_date;?> - <?=$survey->national_voting_end_date;?>)</option>
+				<option value="<?=$survey->limesurvey_id;?>" <?php if($active_poya_survey_id == $survey->poya_survey_id) echo "selected";?>><?=$survey->limesurvey_id;?> (<?=$survey->cluster_voting_start_date;?> - <?=$survey->national_voting_end_date;?>)</option>
 			<?php }?>
 		</select>
 	</div>
@@ -27,13 +28,45 @@
 		<div class="btn btn-default" id="btn_go">Go</div>
 	</div>
 </div>
+<hr />
+<div id="results">
+<div class="row">
+	<div class="col-xs-6">
+		<table class="table table-bordered datatable">
+			<thead>
+				<tr>
+					<th colspan="12">Votes Summary</th>
+				</tr>
+				<tr>
+					<th>Cluster</th>
+					<th>FCP ID</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php
+				foreach($count_of_voters as $row){
+				?>
+				<tr>
+					<td><?=$row->cluster;?></td>
+					<td><?=$row->fcp_id;?></td>
+				</tr>
+				<?php
+				}
+				?>
+			</tbody>
+		</table>
+	</div>
+</div>
 
 <hr />
 
-<div class="row" id="results">
+<div class="row">
 	<div class="col-xs-12">
 		<table class="table table-striped datatable">
 			<thead>
+				<tr>
+					<th colspan="6">Votes List</th>
+				</tr>
 				<tr>
 					<th>Survey ID</th>
 					<th>Nomination Level</th>
@@ -57,6 +90,7 @@
 			</tbody>
 		</table>
 	</div>
+</div>
 </div>
 
 <script>

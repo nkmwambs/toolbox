@@ -7,7 +7,7 @@ class Poya_model extends  CI_Model{
         parent::__construct();
     }
 	
-	function active_for_voting_survey_id(){
+	function active_for_voting_limesurvey_id(){
 		$survey_id = 0;
 		
 		$surveys = $this->db->get_where('poya_survey',array('status'=>1));
