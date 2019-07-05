@@ -7,6 +7,230 @@ class Poya_model extends  CI_Model{
         parent::__construct();
     }
 	
+	/**
+	 * 
+	 */
+	function nomination_viable_projects() {
+
+		$nomination_level = $this ->get_nomination_level();
+		$participants = $this -> filter_participants_with_complete_responses();
+
+		$fcp_with_email = $this -> get_projects_from_db();
+
+		$update_participants = array();
+
+		foreach ($participants as $token => $participant_email) {
+			if (in_array($participant_email, $fcp_with_email)) {
+				$update_participants[array_search($participant_email, $fcp_with_email)] = $token;
+			}
+		}
+		
+		return $update_participants;
+	}
+
+private function survey_groups_with_questions($token) {
+
+		$grid_array = array();
+		$nomination_level = $this->get_nomination_level();
+
+		$survey_id = $this -> active_for_voting_limesurvey_id();
+		$votes = $this -> get_vote_score($survey_id, $token);
+
+		$groups = $this -> reorder_json_groups_from_data_file();
+		$questions = $this -> reorder_json_questions_from_data_file();
+		$responses = $this -> reorder_json_responses_from_data_file();
+		
+		foreach ($groups as $group_key => $group_name) {
+			foreach ($questions[$group_key] as $question) {
+				if (($responses[$token][$question['title']] !== "" && $question['type'] !== "U") || (strlen($responses[$token][$question['title']]) > $this -> config -> item('long_text_size') && $question['type'] == "U")) {
+					$grid_array[$group_key]['group_name'] = $group_name;
+
+					if ($question['type'] == "|") {
+						$uploads = array();
+						$response = json_decode($responses[$token][$question['title']]);
+
+						foreach ($response as $file_key => $uploaded_file) {
+							$grid_array[$group_key]['questions'][$question['title']]['response'][urldecode($uploaded_file -> name)] = "https://www.compassionkenya.com/hardlinks/surveys/" . $survey_id . "/files/" . $uploaded_file -> filename;
+						}
+
+					} else {
+						$grid_array[$group_key]['questions'][$question['title']]['response'] = $responses[$token][$question['title']];
+					}
+
+					$grid_array[$group_key]['questions'][$question['title']]['question_text'] = $question['question'];
+					$grid_array[$group_key]['questions'][$question['title']]['question_type'] = $question['type'];
+					$grid_array[$group_key]['questions'][$question['title']]['question_id'] = $question['qid'];
+					$grid_array[$group_key]['score'] = isset($votes[$group_key]) ? $votes[$group_key] : 0;
+				} else {
+					break;
+					unset($grid_array[$group_key]);
+				}
+
+			}
+		}
+
+		return $grid_array;
+	}
+
+	
+	
+private function reorder_json_groups_from_data_file() {
+
+		$survey_id = $this  -> active_for_voting_limesurvey_id();
+		$groups_array = array();
+
+		if (file_exists(APPPATH . 'data/' . $survey_id . '/groups.json') && filesize(APPPATH . 'data/' . $survey_id . '/groups.json') > 0) {
+
+			$groups = file_get_contents(APPPATH . 'data/' . $survey_id . '/groups.json');
+			$groups = json_decode($groups);
+
+			foreach ($groups as $group) {
+				$groups_array[$group -> gid] = $group -> group_name;
+			}
+		}
+
+		return $groups_array;
+	}
+
+	private function reorder_json_questions_from_data_file() {
+		$questions_array = array();
+		$survey_id = $this ->active_for_voting_limesurvey_id();
+
+		if (file_exists(APPPATH . 'data/' . $survey_id . '/questions.json') && filesize(APPPATH . 'data/' . $survey_id . '/questions.json') > 0) {
+
+			$questions = file_get_contents(APPPATH . 'data/' . $survey_id . '/questions.json');
+			$questions = json_decode($questions);
+
+			foreach ($questions as $question) {
+				$questions_array[$question -> gid][$question -> qid]['title'] = $question -> title;
+				$questions_array[$question -> gid][$question -> qid]['question'] = $question -> question;
+				$questions_array[$question -> gid][$question -> qid]['type'] = $question -> type;
+				$questions_array[$question -> gid][$question -> qid]['qid'] = $question -> qid;
+			}
+		}
+
+		return $questions_array;
+	}
+private function get_vote_score($survey_id, $token) {
+
+		$nomination_level = $this -> get_nomination_level();
+
+		$poya_vote_obj = $this -> db -> select(array('question_group_id', 'score')) -> get_where('poya_vote', array('token' => $token, 'limesurvey_id' => $survey_id, 'voting_user_id' => $this -> session -> login_user_id, 'nomination_level' => $nomination_level));
+
+		$group_by_group_id = array();
+
+		if ($poya_vote_obj -> num_rows() > 0) {
+
+			$poya_votes = $poya_vote_obj -> result_object();
+
+			foreach ($poya_votes as $poya_vote) {
+				$group_by_group_id[$poya_vote -> question_group_id] = $poya_vote -> score;
+			}
+
+		}
+
+		return $group_by_group_id;
+	}
+
+private function get_projects_from_db() {
+
+		$nomination_level = $this->get_nomination_level();
+		
+
+		$this -> db -> select(array('icpNo', 'email'));
+		$this -> db -> where(array('email<>' => "", 'status' => 1));
+		
+		if($this->session->logged_user_level == 1){
+			$cluster_id = $this -> session -> cluster_id;
+			$this->nomination_level_condition($nomination_level);
+		}
+		
+
+		$projects = $this -> db -> get('projectsdetails') -> result_array();
+
+		$fcp_id_array = array_column($projects, 'icpNo');
+		$email_array = array_column($projects, 'email');
+
+		$fcp_with_email = array_combine($fcp_id_array, $email_array);
+
+		return $fcp_with_email;
+	}
+private function nomination_level_condition($nomination_level){
+		if ($nomination_level == 2) {
+			
+			$this -> db -> join('clusters', 'clusters.clusters_id=projectsdetails.cluster_id');
+			$this -> db -> join('region', 'region.region_id=clusters.region_id');
+			$this -> db -> join('poya_nomination_progress', 'poya_nomination_progress.projectsdetails_id=projectsdetails.ID');
+			
+			$this -> db -> where(array('poya_nomination_progress.nomination_level' => 2, 
+			'projectsdetails.cluster_id<>' => $this -> session -> cluster_id,
+			'clusters.region_id'=>$this->session->region_id));
+		
+		} elseif ($nomination_level == 3) {
+			$this -> db -> join('poya_nomination_progress', 'poya_nomination_progress.projectsdetails_id=projectsdetails.ID');
+			$this -> db -> where(array('nomination_level' => 3));
+		} else {
+			$this -> db -> where(array('cluster_id' => $cluster_id));
+			$this -> db -> where(array('icpNo<>' => $this -> session -> center_id));
+		}
+	}	
+	private function filter_participants_with_complete_responses() {
+		$participants_in_survey = $this -> reorder_json_participants_from_data_file();
+
+		$tokens_with_responses = array_keys($this -> reorder_json_responses_from_data_file());
+
+		$filtered_list = array();
+
+		foreach ($tokens_with_responses as $token) {
+			$filtered_list[$token] = $participants_in_survey[$token];
+		}
+
+		return $filtered_list;
+	}
+	
+	private function reorder_json_participants_from_data_file() {
+		$survey_id = $this -> active_for_voting_limesurvey_id();
+		$participants_array = array();
+
+		if (file_exists(APPPATH . 'data/' . $survey_id . '/participants.json') && filesize(APPPATH . 'data/' . $survey_id . '/participants.json') > 0) {
+
+			$participants = file_get_contents(APPPATH . 'data/' . $survey_id . '/participants.json');
+			$participants = json_decode($participants);
+
+			foreach ($participants as $participant) {
+				$participants_array[$participant -> token] = $participant -> participant_info -> email;
+			}
+		}
+
+		return $participants_array;
+	}
+	
+	private function reorder_json_responses_from_data_file() {
+
+		$survey_id = $this  -> active_for_voting_limesurvey_id();
+		$responses_array = array();
+
+		if (file_exists(APPPATH . 'data/' . $survey_id . '/responses.json') && filesize(APPPATH . 'data/' . $survey_id . '/responses.json') > 0) {
+			$responses = file_get_contents(APPPATH . 'data/' . $survey_id . '/responses.json');
+			$responses = json_decode($responses);
+
+			$response_object = $responses -> responses;
+
+			$counter = 0;
+			foreach ($response_object as $response) {
+				foreach ($response as $response_data) {
+					$responses_array[$response_data -> token] = (array)$response_data;
+				}
+				$counter++;
+			}
+		}
+
+		return $responses_array;
+	}
+
+	/**
+	 * 
+	 */
 	function active_for_voting_limesurvey_id(){
 		$survey_id = 0;
 		
