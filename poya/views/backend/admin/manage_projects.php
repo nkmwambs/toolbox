@@ -1,22 +1,21 @@
+<?php 
+foreach($css_files as $file): ?>
+    <link type="text/css" rel="stylesheet" href="<?php echo $file; ?>" />
+ 
+<?php endforeach; ?>
+<?php foreach($js_files as $file): ?>
+ 
+    <script src="<?php echo $file; ?>"></script>
+<?php endforeach; ?>
+
 <hr />
 <div class="row">
-	<div class="col-xs-12">
-		<hr />
-		<table class="table table-striped datatable">
-			<thead>
-				<tr>
-					<th>FCP ID</th>
-					<th>Cluster</th>
-					<th>Region</th>
-					<th>Email</th>
-					<th>Status</th>
-					<th>Action</th>
-				</tr>
-			</thead>
-		</table>
+	<div class="col-sm-12">
+		<?php echo $output; ?>
 	</div>
 </div>
+ 
 
 <script>
-	$('.datatable').DataTable();
-</script>
+	
+</script> 

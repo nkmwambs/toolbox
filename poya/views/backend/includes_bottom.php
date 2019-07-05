@@ -24,6 +24,8 @@
 	<script src="<?php echo base_url();?>assets/js/neon-chat.js"></script>
 	<script src="<?php echo base_url();?>assets/js/neon-custom.js"></script>
 	<script src="<?php echo base_url();?>assets/js/neon-demo.js"></script>
+	<script src="<?php echo base_url();?>assets/js/jtable.2.4.0/jquery.jtable.min.js"></script>
+	
 	
 
 	

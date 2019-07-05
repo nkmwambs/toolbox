@@ -4086,6 +4086,11 @@ class Grocery_CRUD extends grocery_CRUD_States
 			break;
 
 			case 'sql-date':
+				$this->php_date_format 		= "$php_year-$php_month-$php_day";
+				$this->js_date_format		= "$js_year-$js_month-$js_day";
+				$this->ui_date_format		= "$ui_year-$ui_month-$ui_day";
+			break;	
+			
 			default:
 				$this->php_date_format 		= "$php_year-$php_month-$php_day";
 				$this->js_date_format		= "$js_year-$js_month-$js_day";

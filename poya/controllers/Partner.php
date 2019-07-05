@@ -40,7 +40,7 @@ class Partner extends CI_Controller {
 		$cluster_id = $this->session->cluster_id;
 		
 		$this -> db -> select(array('icpNo','email'));
-		$this->db->where(array('email<>'=>""));
+		$this->db->where(array('email<>'=>"",'status'=>1));
 		
 		//Make a method to control what to see depending on the level - Replace this code this that method call
 		if ($nomination_level == 1) {

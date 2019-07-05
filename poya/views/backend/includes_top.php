@@ -71,27 +71,7 @@
 <link rel="shortcut icon" href="<?php echo base_url();?>assets/images/favicon.png">
 <link rel="stylesheet" href="<?php echo base_url();?>assets/css/font-icons/font-awesome/css/font-awesome.min.css">
 
-<link rel="stylesheet" href="<?php echo base_url();?>assets/js/vertical-timeline/css/component.css">
-<link rel="stylesheet" href="<?php echo base_url();?>assets/js/datatables/responsive/css/datatables.responsive.css">
-
-<!--Morris Charts-->
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
-
-<!--Amcharts-->
-<script src="<?php echo base_url();?>assets/js/amcharts/amcharts.js" type="text/javascript"></script>
-<script src="<?php echo base_url();?>assets/js/amcharts/pie.js" type="text/javascript"></script>
-<script src="<?php echo base_url();?>assets/js/amcharts/serial.js" type="text/javascript"></script>
-<script src="<?php echo base_url();?>assets/js/amcharts/gauge.js" type="text/javascript"></script>
-<script src="<?php echo base_url();?>assets/js/amcharts/funnel.js" type="text/javascript"></script>
-<script src="<?php echo base_url();?>assets/js/amcharts/radar.js" type="text/javascript"></script>
-<script src="<?php echo base_url();?>assets/js/amcharts/exporting/amexport.js" type="text/javascript"></script>
-<script src="<?php echo base_url();?>assets/js/amcharts/exporting/rgbcolor.js" type="text/javascript"></script>
-<script src="<?php echo base_url();?>assets/js/amcharts/exporting/canvg.js" type="text/javascript"></script>
-<script src="<?php echo base_url();?>assets/js/amcharts/exporting/jspdf.js" type="text/javascript"></script>
-<script src="<?php echo base_url();?>assets/js/amcharts/exporting/filesaver.js" type="text/javascript"></script>
-<script src="<?php echo base_url();?>assets/js/amcharts/exporting/jspdf.plugin.addimage.js" type="text/javascript"></script>
+<link href="<?php echo base_url();?>assets/js/jtable.2.4.0/themes/metro/blue/jtable.min.css" rel="stylesheet" type="text/css" />
 
 <style>
   .datepicker{z-index:1151 !important;}

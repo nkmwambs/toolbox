@@ -2415,7 +2415,7 @@ class grocery_CRUD_Layout extends grocery_CRUD_Model_Driver
 			$date = '';
 		}
 
-		$input = "<input id='field-{$field_info->name}' name='{$field_info->name}' type='text' value='$date' maxlength='10' class='datepicker-input form-control' />
+		$input = "<input data-date-format='yyyy-mm-dd' id='field-{$field_info->name}' name='{$field_info->name}' type='text' value='$date' maxlength='10' class='datepicker-input form-control' />
 		<a class='datepicker-input-clear' tabindex='-1'>".$this->l('form_button_clear')."</a> (".$this->ui_date_format.")";
 		return $input;
 	}
@@ -4074,9 +4074,9 @@ class Grocery_CRUD extends grocery_CRUD_States
 		$date_format = $this->config->date_format;
 		switch ($date_format) {
 			case 'uk-date':
-				$this->php_date_format 		= "$php_day/$php_month/$php_year";
-				$this->js_date_format		= "$js_day/$js_month/$js_year";
-				$this->ui_date_format		= "$ui_day/$ui_month/$ui_year";
+				$this->php_date_format 		= "$php_year-$php_month-$php_day";
+				$this->js_date_format		= "$js_year-$js_month-$js_day";
+				$this->ui_date_format		= "$ui_year-$ui_month-$ui_day";
 			break;
 
 			case 'us-date':
@@ -4086,6 +4086,11 @@ class Grocery_CRUD extends grocery_CRUD_States
 			break;
 
 			case 'sql-date':
+				$this->php_date_format 		= "$php_year-$php_month-$php_day";
+				$this->js_date_format		= "$js_year-$js_month-$js_day";
+				$this->ui_date_format		= "$ui_year-$ui_month-$ui_day";
+			break;
+				
 			default:
 				$this->php_date_format 		= "$php_year-$php_month-$php_day";
 				$this->js_date_format		= "$js_year-$js_month-$js_day";
