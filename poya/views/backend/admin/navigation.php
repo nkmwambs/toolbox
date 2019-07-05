@@ -68,6 +68,16 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
                         <span><i class="entypo-language"></i> <?php echo get_phrase('manage_projects'); ?></span>
                     </a>
                 </li>
+                <li class="<?php if ($page_name == 'manage_clusters') echo 'active'; ?> ">
+                    <a href="<?php echo base_url("poya.php/admin/manage_clusters"); ?>">
+                        <span><i class="entypo-star"></i> <?php echo get_phrase('manage_clusters'); ?></span>
+                    </a>
+                </li>
+                <li class="<?php if ($page_name == 'manage_regions') echo 'active'; ?> ">
+                    <a href="<?php echo base_url("poya.php/admin/manage_regions"); ?>">
+                        <span><i class="entypo-globe"></i> <?php echo get_phrase('manage_regions'); ?></span>
+                    </a>
+                </li>
 				               
             </ul>
         </li>
