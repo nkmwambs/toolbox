@@ -1,6 +1,6 @@
 <?php 
-//$month = date('Y-m-t',1522447200);
-//print_r($this->finance_model->get_uncleared_transactions('CHQ',$month));
+$month = date('Y-m-t',1522447200);
+print_r($this->finance_model->prod_total_for_pc_data_model($month));
 
 $grid_array = $this -> finance_dashboard -> build_dashboard_array($month);
 

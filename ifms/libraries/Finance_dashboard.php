@@ -72,7 +72,13 @@ class Finance_dashboard{
 	}
 
 	//Callback Methods
-
+	
+	/*
+	 This callback method helps check following parameters
+	 * 1) Param 4: 'If MFR has been submitted or not'
+	 * 2) Param 10: 'If the previous/beginning balance agree  with last month ending balance. 
+	 
+	 */
 	private function callback_mfr_submitted($fcp, $month_submitted) {
 
 		$mfr_submitted_data = $this -> CI ->finance_model-> switch_environment($month_submitted, 'test_mfr_submission_data_model', 'prod_mfr_submission_data_model');
@@ -89,6 +95,22 @@ class Finance_dashboard{
 
 		}
 		return $yes_no_flag;
+	}
+	
+	private function callback_total_for_pc($fcp, $month_submitted) {
+
+		$total_pc_data = $this -> CI ->finance_model-> switch_environment($month_submitted, 'test_total_for_pc_data_model', 'prod_total_for_pc_data_model');
+
+		$group = $this -> group_data_by_fcp_id($total_pc_data);
+
+		$total_pc = 0.00;
+
+		//Check if the fcp has an Mfr submitted in the $month_submitted
+		if (isset($group[$fcp])) 
+		{
+			$total_pc=$group[$fcp]['cost'];
+		}
+		return number_format($total_pc, 2);
 	}
 	
 	private function callback_mfr_submitted_date($fcp, $month_submitted) {
@@ -190,8 +212,6 @@ class Finance_dashboard{
 		$deposit_in_transit_data = $this -> CI ->finance_model-> switch_environment($month, 'test_deposit_in_transit_data_model', 'prod_deposit_in_transit_data_model');
 
 		$deposit_in_transit_amount = 0.00;
-
-		//$group = $this -> group_data_by_fcp_id($deposit_in_transit_data);
 
 		//Check if the fcp has an Mfr submitted in the $month_submitted
 		if (isset($deposit_in_transit_data[$fcp])) {

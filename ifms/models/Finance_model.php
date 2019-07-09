@@ -1628,6 +1628,43 @@ function expense_accounts_grouped_by_income(){
 
 	}
 
+	function test_total_for_pc_data_model($month) {
+
+	   $total_pc_data = array();
+
+		//KE0200 array
+		$total_pc_data[1]['fcp_id'] = 'KE0200';
+		$total_pc_data[1]['total'] = 23998.90;
+		$total_pc_data[1]['voucher_type'] = 'PC';
+		$total_pc_data[1]['transaction_date'] = '2019-03-31';
+
+		//KE0215 array
+		$total_pc_data[2]['fcp_id'] = 'KE0215';
+		$total_pc_data[2]['total'] = 23998.90;
+		$total_pc_data[2]['voucher_type'] = 'PC';
+		$total_pc_data[2]['transaction_date'] = '2019-03-31';
+
+		//KE0300 array
+		$total_pc_data[3]['fcp_id'] = 'KE0300';
+		$total_pc_data[3]['total'] = 23998.90;
+		$total_pc_data[3]['voucher_type'] = 'PC';
+		$total_pc_data[3]['transaction_date'] = '2019-03-31';
+
+		//KE0320 array
+		$total_pc_data[4]['fcp_id'] = 'KE0320';
+		$total_pc_data[4]['total'] = 23998.90;
+		$total_pc_data[4]['voucher_type'] = 'PC';
+		$total_pc_data[4]['transaction_date'] = '2019-03-31';
+
+		//KE0540 array
+		$total_pc_data[5]['fcp_id'] = 'KE0540';
+		$total_pc_data[5]['total'] = 23998.90;
+		$total_pc_data[5]['voucher_type'] = 'PC';
+		$total_pc_data[5]['transaction_date'] = '2019-03-31';
+		
+		return $transaction_arrays;
+	}
+
 	//Prod Models Methods
 
 	public function prod_fcps_with_risk_model() {
@@ -1790,6 +1827,8 @@ function expense_accounts_grouped_by_income(){
 		return $transaction_array;
 
 	}
+	
+	
 
 	function prod_deposit_in_transit_data_model($month) {
 
@@ -1823,6 +1862,52 @@ function expense_accounts_grouped_by_income(){
 
 		return $transaction_arrays;
 	}
+	 
+	function prod_total_for_pc_data_model($month) {
+
+		$total_pc_amount_in_amonth = array();
+		
+		$total_pcs = $this -> calculate_pc_chqs_totals('PC', $month);
+
+		//$fcps_array = array_column($get_uncleared_transactions, 'fcp_id');
+
+		foreach ($total_pcs as $row_key=>$total_pc) {
+
+			$total_pc_amount_in_amonth[$total_pc['icpNo']]['fcp_id'] = $total_pc['icpNo'];
+			//$total_pc_amount_in_amonth[$total_pc['fcp_id']]['tdate'] = $month;
+			$total_pc_amount_in_amonth[$total_pc['icpNo']]['cost'] = $total_pc['cost'];
+		}
+
+		return $total_pc_amount_in_amonth;
+	}
+	function calculate_pc_chqs_totals($vtype, $month) {
+		
+		$total_pc_or_chqs=array();
+		
+		//Get the first and last of the month
+		$first_day_of_month = date('Y-m-01', strtotime($month));
+		$last_day_of_month = date('Y-m-t', strtotime($month));
+		
+		$this->db->cache_on();
+		
+		$this -> db -> select_sum('voucher_body.cost');
+		$this -> db -> select(array('voucher_body.icpNo', 'voucher_header.vtype','voucher_body.vnumber'));
+		$this -> db -> join("voucher_body", "voucher_body.hid=voucher_header.hid");
+		$this -> db -> group_by(array('voucher_body.vnumber'));
+		$this -> db -> where('voucher_header.vtype',$vtype);
+		$this -> db -> where('voucher_body.tdate >= ',$first_day_of_month);
+		$this -> db -> where('voucher_body.tdate <= ',$last_day_of_month);
+		
+		$total_pc_or_chqs=$this -> db -> get("voucher_header")-> result_array();
+		
+		$this->db->cache_off();		
+		
+		return $total_pc_or_chqs;
+
+	}
+	
+	 
+	 
 	 
 	 /*
 	  * End of of finance model code
