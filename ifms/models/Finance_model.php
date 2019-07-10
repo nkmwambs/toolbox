@@ -1901,7 +1901,7 @@ function expense_accounts_grouped_by_income(){
 		$total_pc_or_chqs=$this -> db -> get("voucher_header")-> result_array();
 		
 		$this->db->cache_off();		
-		
+
 		return $total_pc_or_chqs;
 
 	}
