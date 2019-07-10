@@ -1,5 +1,5 @@
 <?php
-print_r($funds_balance_grid);
+//print_r($funds_balance_grid);
 //print_r($this->finance_model->project_income_at_given_month('KE345',strtotime('2019-04-30')));
 ?>
 <style>
@@ -581,7 +581,8 @@ function format ( d ) {
 		    pagingType: "full_numbers",
 		    buttons: [
 		         'csv', 'excel', 'print'
-		    ],	      
+		    ],
+		    ordering:false,      
 		    stateSave: true,
 		    oLanguage: {
 			        sProcessing: "<img src='<?php echo base_url();?>uploads/preloader4.gif'>"
