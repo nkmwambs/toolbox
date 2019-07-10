@@ -113,6 +113,22 @@ class Finance_dashboard{
 		return number_format($total_pc, 2);
 	}
 	
+	private function callback_total_for_chq($fcp, $month_submitted) {
+
+		$total_chq_data = $this -> CI ->finance_model-> switch_environment($month_submitted, 'test_total_for_pc_data_model', 'prod_total_for_chq_data_model');
+
+		$group = $this -> group_data_by_fcp_id($total_chq_data);
+
+		$total_chq = 0.00;
+
+		//Check if the fcp has an Mfr submitted in the $month_submitted
+		if (isset($group[$fcp])) 
+		{
+			$total_chq=$group[$fcp]['cost'];
+		}
+		return number_format($total_chq, 2);
+	}
+	
 	private function callback_mfr_submitted_date($fcp, $month_submitted) {
 
 		$mfr_submitted_data = $this -> CI ->finance_model-> switch_environment($month_submitted, 'test_mfr_submission_data_model', 'prod_mfr_submission_data_model');
@@ -247,7 +263,7 @@ class Finance_dashboard{
 	
 	//Main render array methods
 
-	public function build_dashboard_array($dashboard_month) {
+	public function build_dashboard_array($dashboard_month, $vtype='') {
 
 		//$test = new Finance_testData();
 
@@ -275,7 +291,7 @@ class Finance_dashboard{
 
 				if ($value['display_on_dashboard'] == 'yes') {
 
-					$final_grid_array['fcps_with_risks'][$fcp_with_risk['fcp_id']]['params'][$key] = call_user_func(array($this, $value['result_method']), $fcp_with_risk['fcp_id'], $dashboard_month);
+					$final_grid_array['fcps_with_risks'][$fcp_with_risk['fcp_id']]['params'][$key] = call_user_func(array($this, $value['result_method']), $fcp_with_risk['fcp_id'], $dashboard_month, $vtype);
 				}
 			}
 

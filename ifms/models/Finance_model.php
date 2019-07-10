@@ -1880,7 +1880,23 @@ function expense_accounts_grouped_by_income(){
 
 		return $total_pc_amount_in_amonth;
 	}
-	function calculate_pc_chqs_totals($vtype, $month) {
+	
+	function prod_total_for_chq_data_model($month) {
+
+		$total_chq_amount_in_amonth = array();
+		
+		$total_chqs = $this -> calculate_pc_chqs_totals('CHQ', $month);
+
+		foreach ($total_chqs as $row_key=>$total_chq) {
+
+			$total_chq_amount_in_amonth[$total_chq['icpNo']]['fcp_id'] = $total_chq['icpNo'];
+			$total_chq_amount_in_amonth[$total_chq['icpNo']]['cost'] = $total_chq['cost'];
+		}
+
+		return $total_chq_amount_in_amonth;
+	}
+
+	private function calculate_pc_chqs_totals($vtype, $month) {
 		
 		$total_pc_or_chqs=array();
 		
@@ -1891,12 +1907,12 @@ function expense_accounts_grouped_by_income(){
 		$this->db->cache_on();
 		
 		$this -> db -> select_sum('voucher_body.cost');
-		$this -> db -> select(array('voucher_body.icpNo', 'voucher_header.vtype','voucher_body.vnumber'));
+		$this -> db -> select(array('voucher_header.icpNo', 'voucher_header.vtype'));
 		$this -> db -> join("voucher_body", "voucher_body.hid=voucher_header.hid");
-		$this -> db -> group_by(array('voucher_body.vnumber'));
+		$this -> db -> group_by(array('voucher_header.icpNo','voucher_header.vtype'));
 		$this -> db -> where('voucher_header.vtype',$vtype);
-		$this -> db -> where('voucher_body.tdate >= ',$first_day_of_month);
-		$this -> db -> where('voucher_body.tdate <= ',$last_day_of_month);
+		$this -> db -> where('voucher_header.tdate >= ',$first_day_of_month);
+		$this -> db -> where('voucher_header.tdate <= ',$last_day_of_month);
 		
 		$total_pc_or_chqs=$this -> db -> get("voucher_header")-> result_array();
 		
