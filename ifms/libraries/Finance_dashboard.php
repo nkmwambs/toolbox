@@ -129,6 +129,26 @@ class Finance_dashboard{
 		return number_format($total_chq, 2);
 	}
 	
+	private function callback_caculate_transactions_from_petty_cash($fcp, $month){
+		
+		//get the total transactions from Petty cash and bank 
+		$total_transactions_from_pc=floatval(str_replace(',','',$this->callback_total_for_pc($fcp, $month)));
+		
+		$total_transactions_from_chq=floatval(str_replace(',','',$this->callback_total_for_chq($fcp, $month)));
+
+        //Compute denominater and percentage of petty cash transactions
+		$compute_denominator=bcadd($total_transactions_from_pc,$total_transactions_from_chq,2);
+		
+		$compute_percentage=0;
+		
+		//Avoid divide by zero
+		if($total_transactions_from_pc >0)
+		{
+			$compute_percentage=number_format((($total_transactions_from_pc/$compute_denominator)*100),2);//.'%';
+		}
+		return $compute_percentage;
+	}
+	
 	private function callback_mfr_submitted_date($fcp, $month_submitted) {
 
 		$mfr_submitted_data = $this -> CI ->finance_model-> switch_environment($month_submitted, 'test_mfr_submission_data_model', 'prod_mfr_submission_data_model');
@@ -291,7 +311,7 @@ class Finance_dashboard{
 
 				if ($value['display_on_dashboard'] == 'yes') {
 
-					$final_grid_array['fcps_with_risks'][$fcp_with_risk['fcp_id']]['params'][$key] = call_user_func(array($this, $value['result_method']), $fcp_with_risk['fcp_id'], $dashboard_month, $vtype);
+					$final_grid_array['fcps_with_risks'][$fcp_with_risk['fcp_id']]['params'][$key]= call_user_func(array($this, $value['result_method']), $fcp_with_risk['fcp_id'], $dashboard_month, $vtype);
 				}
 			}
 

@@ -151,7 +151,7 @@ if(empty($none_requested_params) && empty($requested_params)){
 				   	 if(isset($value['params'])){
 				   	  foreach ($value['params'] as $param) { 
 				   	 ?>
-				   	   <td><?= $param; ?></td>
+				   	   <td><?= $param;?></td>
 				   	  <?php }
 							}
 				   	  ?>
