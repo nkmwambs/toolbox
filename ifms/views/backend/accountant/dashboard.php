@@ -2,6 +2,11 @@
 //$month = date('Y-m-t',1522447200);
 //print_r($this->finance_model->prod_fcp_local_pc_guideline_data_model($month));
 
+//$fcps = $this -> db -> select(array('icpNo')) -> get('projectsdetails') -> result_array();
+
+//print_r($fcps);
+
+
 $grid_array = $this -> finance_dashboard -> build_dashboard_array($month);
 
 $none_requested_params = isset($grid_array['parameters']['no']) ? $grid_array['parameters']['no'] : array();
