@@ -148,7 +148,21 @@ class Finance_dashboard{
 		}
 		return $compute_percentage;
 	}
-	
+	private function callback_fcp_local_pc_guideline($fcp, $month){
+		
+		$fcp_local_pc_guideline = $this -> CI ->finance_model-> switch_environment($month, 'test_fcp_local_pc_guideline_data_model', 'prod_fcp_local_pc_guideline_data_model');
+
+		$group_data_by_fcp = $this -> group_data_by_fcp_id($fcp_local_pc_guideline);
+
+		$fcp_guideline_set_percentage = 0.00;
+
+		//Check if the fcp has an Mfr submitted in the $month_submitted
+		if (isset($group_data_by_fcp[$fcp])) 
+		{
+			$fcp_guideline_set_percentage=$group_data_by_fcp[$fcp]['fcp_pc_guideline'];
+		}
+		return $fcp_guideline_set_percentage;
+	}
 	private function callback_mfr_submitted_date($fcp, $month_submitted) {
 
 		$mfr_submitted_data = $this -> CI ->finance_model-> switch_environment($month_submitted, 'test_mfr_submission_data_model', 'prod_mfr_submission_data_model');
