@@ -1,4 +1,5 @@
 <?php
+//print_r($fcp_progress);
 //print_r($progress);
 //print_r($fcps_in_progress);
 ?>
@@ -22,60 +23,70 @@
 				</tr>
 			</thead>
 			<tbody>
-				<?php foreach($fcps_in_progress  as $fcp_id=>$fcp_progress){?>
-					<tr>
-						<td><?=$fcp_id;?></td>
-						<td class="nomination_level_label"><?=$nomination_levels[$fcp_progress];?></td>
-						<?php if($fcp_progress == 1){?>
-						<td>
-							<div class="btn btn-success level_1" data-fcp-id = "<?=$fcp_id;?>">
-								<i id="left_arrow" class="fa fa-arrow-circle-left btn_progress"></i> 
-									<span>Level 1</span>
-								<i id="right_arrow" class="fa fa-arrow-circle-right btn_progress"></i>
-							</div>
-						</td>
-						<td></td>
-						<td></td>
-						<?php }?>
-						
-						<?php if($fcp_progress == 2){?>
-						<td></td>
-						<td>
-							<div class="btn btn-success level_2" data-fcp-id = "<?=$fcp_id;?>">
-								<i id="left_arrow" class="fa fa-arrow-circle-left btn_progress"></i> 
-									<span>Level 2</span>
-								<i id="right_arrow" class="fa fa-arrow-circle-right btn_progress"></i>
-							</div>
-						</td>
-						<td></td>
-						<?php }?>
-						
-						<?php if($fcp_progress == 3){?>
-						<td></td>
-						<td></td>
-						<td>
-							<div class="btn btn-success level_3" data-fcp-id = "<?=$fcp_id;?>">
-								<i id="left_arrow" class="fa fa-arrow-circle-left btn_progress"></i> 
-									<span>Level 3</span>
-								<i id="right_arrow" class="fa fa-arrow-circle-right btn_progress"></i>
-							</div>
-						</td>
-						<?php }?>
-						
-					</tr>
-				<?php }?>
+				<?php foreach($fcp_progress  as $fcp_id=>$fcp_progress){
+					 foreach($fcp_progress as $group_id=>$group_progress){
+				?>
+						<tr>
+							<td><?=$fcp_id;?> - <?=$group_progress['group_name'];?></td>
+							<td class="nomination_level_label"><?=$nomination_levels[$group_progress['nomination_level']];?></td>
+							
+							<?php if($group_progress['nomination_level'] == 1){?>
+							<td>
+								<div class="btn btn-success level_1" data-group-id= "<?=$group_id;?>" data-fcp-id = "<?=$fcp_id;?>">
+									<i id="left_arrow" class="fa fa-arrow-circle-left btn_progress"></i> 
+										<span>Level 1</span>
+									<i id="right_arrow" class="fa fa-arrow-circle-right btn_progress"></i>
+								</div>
+							</td>
+							<td></td>
+							<td></td>
+							<?php }?>
+							
+							<?php if($group_progress['nomination_level'] == 2){?>
+							<td></td>
+							<td>
+								<div class="btn btn-success level_2" data-group-id= "<?=$group_id;?>" data-fcp-id = "<?=$fcp_id;?>">
+									<i id="left_arrow" class="fa fa-arrow-circle-left btn_progress"></i> 
+										<span>Level 2</span>
+									<i id="right_arrow" class="fa fa-arrow-circle-right btn_progress"></i>
+								</div>
+							</td>
+							<td></td>
+							<?php }?>
+							
+							<?php if($group_progress['nomination_level'] == 3){?>
+							<td></td>
+							<td></td>
+							<td>
+								<div class="btn btn-success level_3" data-group-id= "<?=$group_id;?>" data-fcp-id = "<?=$fcp_id;?>">
+									<i id="left_arrow" class="fa fa-arrow-circle-left btn_progress"></i> 
+										<span>Level 3</span>
+									<i id="right_arrow" class="fa fa-arrow-circle-right btn_progress"></i>
+								</div>
+							</td>
+							<?php }?>
+							
+							
+						</tr>
+					<?php 
+						}
+					 }
+					?>
 			</tbody>
 		</table>
 	</div>
 </div>
 
 <script>
-	$('.datatable').DataTable();
+	$('.datatable').DataTable({
+		stateSave:true,
+	});
 	
 	$(document).on('click','.btn_progress',function(){
 		var clone = $(this).closest('div').clone();
 		var data_provider = $(this).closest('div').data();
 		var fcp_id = data_provider.fcpId;
+		var group_id = data_provider.groupId;
 		var nomination_level = 1;
 		
 		if($(this).closest('div').hasClass('level_1')){
@@ -140,8 +151,8 @@
 		}
 		
 		var url = "<?=base_url();?>poya.php/admin/change_fcp_nomination_level"
-		var data = {'fcp_id':fcp_id,'nomination_level':nomination_level};
-		
+		var data = {'fcp_id':fcp_id,'nomination_level':nomination_level,'group_id':group_id};
+		//console.log(data);
 		$.ajax({
 			url:url,
 			data:data,

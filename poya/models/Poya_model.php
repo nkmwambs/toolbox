@@ -28,7 +28,7 @@ class Poya_model extends  CI_Model{
 		return $update_participants;
 	}
 
-private function survey_groups_with_questions($token) {
+public function survey_groups_with_questions($token) {
 
 		$grid_array = array();
 		$nomination_level = $this->get_nomination_level();
@@ -48,10 +48,14 @@ private function survey_groups_with_questions($token) {
 					if ($question['type'] == "|") {
 						$uploads = array();
 						$response = json_decode($responses[$token][$question['title']]);
-
-						foreach ($response as $file_key => $uploaded_file) {
-							$grid_array[$group_key]['questions'][$question['title']]['response'][urldecode($uploaded_file -> name)] = "https://www.compassionkenya.com/hardlinks/surveys/" . $survey_id . "/files/" . $uploaded_file -> filename;
+						
+						if($response){
+							foreach ($response as $file_key => $uploaded_file) {
+								$grid_array[$group_key]['questions'][$question['title']]['response'][urldecode($uploaded_file -> name)] = "https://www.compassionkenya.com/hardlinks/surveys/" . $survey_id . "/files/" . $uploaded_file -> filename;
+							}
 						}
+						
+						
 
 					} else {
 						$grid_array[$group_key]['questions'][$question['title']]['response'] = $responses[$token][$question['title']];
@@ -74,7 +78,7 @@ private function survey_groups_with_questions($token) {
 
 	
 	
-private function reorder_json_groups_from_data_file() {
+public function reorder_json_groups_from_data_file() {
 
 		$survey_id = $this  -> active_for_voting_limesurvey_id();
 		$groups_array = array();
