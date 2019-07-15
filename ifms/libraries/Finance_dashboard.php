@@ -137,12 +137,11 @@ class Finance_dashboard {
 		//Compute denominater and percentage of petty cash transactions
 		$compute_denominator = bcadd($total_transactions_from_pc, $total_transactions_from_chq, 2);
 
-		$compute_percentage = 0;
+		$compute_percentage = 0.0;
 
 		//Avoid divide by zero
 		if ($total_transactions_from_pc > 0) {
 			$compute_percentage = number_format((($total_transactions_from_pc / $compute_denominator) * 100), 2);
-			//.'%';
 		}
 		return $compute_percentage;
 	}
@@ -196,7 +195,7 @@ class Finance_dashboard {
 			
 		}
 		//Return the 'Yes' or No concanating it with the computed percentage of pc transactions and append %
-		return $fcp_follows_local_guideline. '( '.$computed_percentage_of_pc_transaction.'%)';
+		return $fcp_follows_local_guideline. ' ( '.$computed_percentage_of_pc_transaction.'%)';
 	}
 
 	private function callback_mfr_submitted_date($fcp, $month_submitted) 
