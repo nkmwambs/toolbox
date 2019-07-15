@@ -7,6 +7,11 @@
 //print_r($fcps);
 
 
+
+
+// Avoid the timeout of execution error on dashboard  file
+ini_set("max_execution_time", 0);
+
 $grid_array = $this -> finance_dashboard -> build_dashboard_array($month);
 
 $none_requested_params = isset($grid_array['parameters']['no']) ? $grid_array['parameters']['no'] : array();
@@ -205,4 +210,5 @@ $('#btn_last_month ,#btn_next_month').on('click',function(ev){
 	ev.preventDefault();
 	
 });
+
 </script>

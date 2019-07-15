@@ -199,7 +199,8 @@ class Finance_dashboard {
 		return $fcp_follows_local_guideline. '( '.$computed_percentage_of_pc_transaction.'%)';
 	}
 
-	private function callback_mfr_submitted_date($fcp, $month_submitted) {
+	private function callback_mfr_submitted_date($fcp, $month_submitted) 
+	{
 
 		$mfr_submitted_data = $this -> CI -> finance_model -> switch_environment($month_submitted, 'test_mfr_submission_data_model', 'prod_mfr_submission_data_model');
 
