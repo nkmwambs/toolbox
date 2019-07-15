@@ -53,6 +53,12 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
                 <span><?php echo get_phrase('settings'); ?></span>
             </a>
             <ul>
+            	<li class="<?php if ($page_name == 'system_settings') echo 'active'; ?> ">
+                    <a href="<?php echo base_url("poya.php/admin/system_settings"); ?>">
+                        <span><i class="entypo-traffic-cone"></i> <?php echo get_phrase('system_settings'); ?></span>
+                    </a>
+                </li>
+                
                 <li class="<?php if ($page_name == 'manage_survey') echo 'active'; ?> ">
                     <a href="<?php echo base_url("poya.php/admin/manage_survey"); ?>">
                         <span><i class="entypo-cog"></i> <?php echo get_phrase('manage_surveys'); ?></span>

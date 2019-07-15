@@ -26,11 +26,24 @@ class Partner extends CI_Controller {
 		$this -> load -> database();
 		$this -> load -> library('session');
 		$this -> load -> model('poya_model');
-		$this -> load -> config('poya');
+		//$this -> load -> config('poya');
 
 		/*cache control*/
 		$this -> output -> set_header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
 		$this -> output -> set_header('Pragma: no-cache');
+		
+		$appConfigOptions = $this->PoyaConfigModel->get_configurations();
+ 	
+	    if($appConfigOptions) {
+	        
+	        foreach($appConfigOptions as $appConfigOption)
+	        {
+	 
+	            $this->config->set_item($appConfigOption->key,$appConfigOption->value);
+	 
+	        }
+	 
+	    }
 
 	}
 	
