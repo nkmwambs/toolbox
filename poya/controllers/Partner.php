@@ -240,7 +240,7 @@ class Partner extends CI_Controller {
 	private function survey_groups_with_questions($token) {
 
 		$grid_array = array();
-		//$nomination_level = $this->get_nomination_level();
+		$nomination_level = $this -> poya_model->get_nomination_level();
 
 		$survey_id = $this -> poya_model -> active_for_voting_limesurvey_id();
 		$votes = $this -> get_vote_score($survey_id, $token);
@@ -257,9 +257,11 @@ class Partner extends CI_Controller {
 					if ($question['type'] == "|") {
 						$uploads = array();
 						$response = json_decode($responses[$token][$question['title']]);
-
-						foreach ($response as $file_key => $uploaded_file) {
-							$grid_array[$group_key]['questions'][$question['title']]['response'][urldecode($uploaded_file -> name)] = "https://www.compassionkenya.com/hardlinks/surveys/" . $survey_id . "/files/" . $uploaded_file -> filename;
+						
+						if($response){
+							foreach ($response as $file_key => $uploaded_file) {
+								$grid_array[$group_key]['questions'][$question['title']]['response'][urldecode($uploaded_file -> name)] = "https://www.compassionkenya.com/hardlinks/surveys/" . $survey_id . "/files/" . $uploaded_file -> filename;
+							}
 						}
 
 					} else {
@@ -463,13 +465,15 @@ class Partner extends CI_Controller {
 
 		$survey_id = $this -> poya_model -> active_for_voting_limesurvey_id();
 		$nomination_level = $this -> poya_model->get_nomination_level();
-		//$data['responses'] = $this->reorder_json_responses_from_data_file();
-
+		$fcp_id = $this -> input -> post('fcp');
+		$poya_nomination_progress = $this->poya_model->poya_nomination_progress();
+		
+		$data['poya_nomination_progress'] = $poya_nomination_progress[$fcp_id];
 		$data['grid'] = $this -> survey_groups_with_questions($token);
 		$data['survey_id'] = $survey_id;
 		$data['nomination_level'] = $nomination_level;
 		$data['token'] = $token;
-		$data['fcp'] = $this -> input -> post('fcp');
+		$data['fcp'] = $fcp_id;//$this -> input -> post('fcp');
 		$data['question_groups'] = $this -> reorder_json_groups_from_data_file();
 		$data['nomination_levels'] = $this -> poya_model -> nomination_levels();
 

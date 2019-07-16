@@ -76,7 +76,34 @@ public function survey_groups_with_questions($token) {
 		return $grid_array;
 	}
 
-	
+
+public function poya_nomination_progress(){
+		$projects_with_profiles = $this->poya_model->nomination_viable_projects();	
+		
+		$fcp_question_groups_submitted = array();
+		
+		foreach($projects_with_profiles as $fcp_id=>$token){
+
+			$groups = $this->poya_model->survey_groups_with_questions($token);
+			
+			foreach($groups as $group_id=>$group_fields){
+				$current_fcp_nomination_level = 1;
+				
+				$this->db->join('projectsdetails','projectsdetails.ID=poya_nomination_progress.projectsdetails_id');
+				$poya_nomination_progress = $this->db->get_where('poya_nomination_progress',
+				array('icpNo'=>$fcp_id,'question_group_id'=>$group_id));
+				
+				if($poya_nomination_progress->num_rows()>0){
+					$current_fcp_nomination_level = $poya_nomination_progress->row()->nomination_level;
+				}
+				
+				$fcp_question_groups_submitted[$fcp_id][$group_id] = array('group_name'=>$group_fields['group_name'],'nomination_level'=>$current_fcp_nomination_level);
+					
+			}
+		}
+		
+		return $fcp_question_groups_submitted;
+	}	
 	
 public function reorder_json_groups_from_data_file() {
 
@@ -160,6 +187,9 @@ private function get_projects_from_db() {
 		return $fcp_with_email;
 	}
 private function nomination_level_condition($nomination_level){
+		
+		$cluster_id = $this->session->cluster_id;
+		
 		if ($nomination_level == 2) {
 			
 			$this -> db -> join('clusters', 'clusters.clusters_id=projectsdetails.cluster_id');

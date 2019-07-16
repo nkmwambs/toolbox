@@ -1,5 +1,5 @@
 <?php
-//print_r($grid);
+//print_r($poya_nomination_progress);
 
 $points = range(0, $this->config->item('voting_score_range_max'));
 
@@ -57,7 +57,9 @@ $points = range(0, $this->config->item('voting_score_range_max'));
 
 <?php
 foreach($grid as $group_key=>$group){
-	if(isset($group['group_name'])){
+	if(isset($group['group_name']) && 
+		$poya_nomination_progress[$group_key]['nomination_level'] == $nomination_level
+		){
 ?>
 
 <div class="form-group">
