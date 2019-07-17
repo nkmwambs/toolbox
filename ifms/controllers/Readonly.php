@@ -19,7 +19,8 @@ class Readonly extends CI_Controller
 		parent::__construct();
 		$this->load->database();
         $this->load->library('session');
-		
+		create_config_items();
+				
        /*cache control*/
 		$this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
 		$this->output->set_header('Pragma: no-cache');

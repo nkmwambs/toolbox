@@ -72,13 +72,29 @@
         </li>
         
         <!-- Apps Settings -->
-        <li class="<?php if ($page_name == 'application_settings') echo 'active'; ?> ">
-            <a href="<?php echo base_url(); ?>admin.php/admin/application_settings">
+        <li class="<?php
+        if ($page_name == 'application_settings' ||
+                $page_name == 'config_settings' )
+                        echo 'opened active';
+        ?> ">
+            <a href="#">
                 <i class="entypo-cog"></i>
-                <span><?php echo get_phrase('application_settings'); ?></span>
+                <span><?php echo get_phrase('system_settings'); ?></span>
             </a>
-        </li>
-        
+            <ul>
+		        <li class="<?php if ($page_name == 'application_settings') echo 'active'; ?> ">
+		            <a href="<?php echo base_url(); ?>admin.php/admin/application_settings">
+		                <!-- <i class="entypo-cog"></i> -->
+		                <span><?php echo get_phrase('application_settings'); ?></span>
+		            </a>
+		        </li>
+		         <li class="<?php if ($page_name == 'config_settings') echo 'active'; ?> ">
+		            <a href="<?php echo base_url(); ?>admin.php/admin/config_settings">
+		                <!-- <i class="entypo-cog"></i> -->
+		                <span><?php echo get_phrase('config_settings'); ?></span>
+		            </a>
+		        </li>
+        	</ul>
 		<!-- DATA MANAGEMENT -->
         <li class="<?php if ($page_name == 'manage_data') echo 'active'; ?> ">
             <a href="<?php echo base_url(); ?>admin.php/admin/manage_data">

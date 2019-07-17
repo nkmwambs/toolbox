@@ -1,5 +1,6 @@
 <hr />
 <?php
+
 if($current_nomination_level == 0){
 ?>
 	<div class="well" style="text-align: center;color:red;">Error has occurred or voting has not commenced, please contact the administrator</div>

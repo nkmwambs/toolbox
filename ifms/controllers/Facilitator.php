@@ -20,6 +20,7 @@ class Facilitator extends CI_Controller
 		$this->load->database();
         $this->load->library('session');
 		$this->load->library('zip');
+		create_config_items();	
 		//$this->load->driver('cache', array('adapter' => 'apc', 'backup' => 'file'));
 		
        /*cache control*/

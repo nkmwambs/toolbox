@@ -19,6 +19,7 @@ class Admin extends CI_Controller
 		parent::__construct();
 		$this->load->database();
         $this->load->library('session');
+		$this->load->library('grocery_CRUD');
 		//$this->load->model('admin_model');
 		$this->load->model('users_model','contact');
 		
@@ -806,6 +807,67 @@ class Admin extends CI_Controller
 		$this->db->where(array('apps_id'=>$app_id));
 		$this->db->update('apps',$data);
 		//echo $status==='1'?get_phrase('app_is_now_active'):get_phrase('app_is_now_inactive');
+	}
+	
+	
+	function config_settings(){
+         if ($this->session->userdata('admin_login') != 1)
+            redirect(base_url(), 'refresh');	
+		
+		
+		$crud = new grocery_CRUD();
+		$crud->set_theme('tablestrap');
+		$crud->set_table('system_config');
+		
+		$crud->columns(array('description','config_value'));
+		
+		$crud->unset_delete();
+		
+		$crud->unset_add();
+	
+		$crud->unset_read();
+		
+		$crud->fields(array('description','config_value'));
+		
+		$crud->callback_edit_field('config_value',array($this,'change_config_value_edit_field'));
+		
+		$crud->callback_column('config_value',array($this,'change_config_value_column_display'));
+		
+		
+		$output = $crud->render();			
+        $page_data['page_name']  = __FUNCTION__;
+        $page_data['page_title'] = get_phrase(__FUNCTION__);
+		$output = array_merge($page_data,(array)$output);
+
+        $this->load->view('backend/index', $output);		
+	}
+	
+	function change_config_value_edit_field ($value, $primary_key){
+			$config_type = $this->db->get_where('system_config',array('system_config_id'=>$primary_key))->row()->config_type;
+			
+			if($config_type == 'pc_local_guideline_approver_level' || $config_type == 'pc_local_guideline_creator_level' ){
+				$positions = $this->db->get('positions')->result_object();
+				
+				$options = "";
+				
+				foreach($positions as $position){
+					$selected = ($position->pstID == $value)?'selected':"";
+					$options .= "<option value='".$position->pstID."' ".$selected.">".$position->dsgn."</option>";
+				}
+				
+				return '<select name="config_value" class="form-control">'.$options.'</select>';
+			}else{
+				return '<input class="form-control" name="config_value" value="'.$value.'" />';
+			}
+	}
+	
+	function change_config_value_column_display($value, $row){
+		if($row->config_type == 'pc_local_guideline_approver_level' || $row->config_type == 'pc_local_guideline_creator_level'){
+				return $this->db->get_where('positions',array('pstID'=>$value))->row()->dsgn;
+			
+			}else{
+				return $value;
+			}
 	}
 	
 	function test(){

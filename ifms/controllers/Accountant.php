@@ -11,7 +11,7 @@ class Accountant extends CI_Controller
 		parent::__construct();
 		$this->load->database();
         $this->load->library('session');
-		
+		create_config_items();
 		$this->load->library('finance_dashboard');
 			
        /*cache control*/

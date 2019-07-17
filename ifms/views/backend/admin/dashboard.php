@@ -1,12 +1,6 @@
-            <?php
-           			//print_r($this->crud_model->get_members());
-           			//print_r($_SESSION);
-           			//echo $this->session->userdata('login_type');
-           			//$this->session->userdata(array('email'=>'nkmwambs@gmail.com'));
-           			///print_r($this->session->userdata());
-					//echo $this->session->has_userdata('email');
-					//print_r($this->session->flashdata());
-            ?>
+<?php
+//echo "Hellooo ".$this->config->item('pc_local_guideline_approver_level');
+?>
 
 <div class="row">
 	<div class="col-md-8">
