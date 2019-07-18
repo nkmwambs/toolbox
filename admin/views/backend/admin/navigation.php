@@ -107,12 +107,47 @@
 
 
         <!-- ACCOUNT -->
-        <li class="<?php if ($page_name == 'manage_profile') echo 'active'; ?> ">
-            <a href="<?php echo base_url(); ?>admin.php/admin/manage_profile">
-                <i class="entypo-lock"></i>
-                <span><?php echo get_phrase('account'); ?></span>
+         <li class="<?php
+        if ($page_name == 'manage_profile' ||
+                $page_name == 'manage_regions' ||
+                $page_name == 'manage_clusters' ||
+                $page_name == 'manage_projects' )
+                        echo 'opened active';
+        ?> ">
+            <a href="#">
+                <i class="entypo-cog"></i>
+                <span><?php echo get_phrase('profile_management'); ?></span>
             </a>
-        </li>
+            <ul>
+		        <li class="<?php if ($page_name == 'manage_profile') echo 'active'; ?> ">
+		            <a href="<?php echo base_url(); ?>admin.php/admin/manage_profile">
+		                <i class="entypo-lock"></i>
+		                <span><?php echo get_phrase('manage_password'); ?></span>
+		            </a>
+		        </li>
+		        
+		         <li class="<?php if ($page_name == 'manage_regions') echo 'active'; ?> ">
+		            <a href="<?php echo base_url(); ?>admin.php/admin/manage_regions">
+		                <!-- <i class="entypo-lock"></i> -->
+		                <span><?php echo get_phrase('manage_regions'); ?></span>
+		            </a>
+		        </li>
+		        
+		        <li class="<?php if ($page_name == 'manage_clusters') echo 'active'; ?> ">
+		            <a href="<?php echo base_url(); ?>admin.php/admin/manage_clusters">
+		                <!-- <i class="entypo-lock"></i> -->
+		                <span><?php echo get_phrase('manage_clusters'); ?></span>
+		            </a>
+		        </li>
+		        
+		        <li class="<?php if ($page_name == 'manage_projects') echo 'active'; ?> ">
+		            <a href="<?php echo base_url(); ?>admin.php/admin/manage_projects">
+		                <!-- <i class="entypo-lock"></i> -->
+		                <span><?php echo get_phrase('manage_projects'); ?></span>
+		            </a>
+		        </li>
+		        
+		    </ul>    
                
 
     </ul>
