@@ -111,7 +111,8 @@
         if ($page_name == 'manage_profile' ||
                 $page_name == 'manage_regions' ||
                 $page_name == 'manage_clusters' ||
-                $page_name == 'manage_projects' )
+                $page_name == 'manage_projects' ||
+                $page_name == 'manage_banks' )
                         echo 'opened active';
         ?> ">
             <a href="#">
@@ -121,7 +122,7 @@
             <ul>
 		        <li class="<?php if ($page_name == 'manage_profile') echo 'active'; ?> ">
 		            <a href="<?php echo base_url(); ?>admin.php/admin/manage_profile">
-		                <i class="entypo-lock"></i>
+		                <!-- <i class="entypo-lock"></i> -->
 		                <span><?php echo get_phrase('manage_password'); ?></span>
 		            </a>
 		        </li>
@@ -147,8 +148,15 @@
 		            </a>
 		        </li>
 		        
+		        <li class="<?php if ($page_name == 'manage_banks') echo 'active'; ?> ">
+		            <a href="<?php echo base_url(); ?>admin.php/admin/manage_banks">
+		                <!-- <i class="entypo-lock"></i> -->
+		                <span><?php echo get_phrase('manage_banks'); ?></span>
+		            </a>
+		        </li>
+		        
 		    </ul>    
-               
+          <li/>    
 
     </ul>
 
