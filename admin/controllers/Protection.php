@@ -18,6 +18,7 @@ class Protection extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->database();
+		create_config_items();
         $this->load->library('session');
 		$this->load->model('admin_model');
 		

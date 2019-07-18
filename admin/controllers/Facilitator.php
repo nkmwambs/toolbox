@@ -18,6 +18,7 @@ class Facilitator extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->database();
+		create_config_items();
         $this->load->library('session');
 		$this->load->model('admin_model');
 		//$this->load->driver('cache', array('adapter' => 'apc', 'backup' => 'file'));
@@ -536,6 +537,7 @@ class Facilitator extends CI_Controller
 	    $page_data['all_users'] = $this->db->order_by('auth','desc')->get_where('users',array('ID!='=>$this->session->login_user_id,"cname"=>$this->session->cluster,"department<>"=>"0"))->result_object();
         $this->load->view('backend/index', $page_data);
     }
+	
 
 	function manage_data($param1="",$param2=""){
          if ($this->session->userdata('admin_login') != 1)

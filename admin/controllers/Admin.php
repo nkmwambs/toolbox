@@ -22,6 +22,7 @@ class Admin extends CI_Controller
 		$this->load->library('grocery_CRUD');
 		//$this->load->model('admin_model');
 		$this->load->model('users_model','contact');
+		create_config_items();
 		
        /*cache control*/
 		//$this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
@@ -778,6 +779,7 @@ class Admin extends CI_Controller
 		$crud->set_theme('tablestrap');
 		$crud->set_table('projectsdetails');
 		
+		
 		$crud->display_as('icpNo',get_phrase('FCP_ID'))
 		->display_as('icpName',get_phrase('FCP_name'))
 		->display_as('cluster_id',get_phrase('cluster'))
@@ -807,9 +809,31 @@ class Admin extends CI_Controller
 			array_push($required_or_viewable_fields,'pc_local_guideline');
 		}
 		
-		$crud->fields($required_or_viewable_fields);
+		if($this->session->logged_user_level == 2){
+			$clusters_id = $this->db->get_where('clusters',array('clusterName'=>$this->session->cluster))->row()->clusters_id;
 		
-		$crud->required_fields($required_or_viewable_fields);
+			$crud->where(array('cluster_id'=>$clusters_id));
+			
+			$crud->fields(array('pc_local_guideline'));
+			
+			$crud->unset_add();
+			
+		}elseif($this->session->logged_user_level == 1){
+
+			$crud->where(array('icpNo'=>$this->session->center_id));
+			
+			$crud->fields(array('pc_local_guideline'));
+			
+			$crud->unset_add();
+			
+		}else{
+			
+			$crud->fields($required_or_viewable_fields);
+		
+			$crud->required_fields($required_or_viewable_fields);
+		}
+		
+		
 		
 		
 		$output = $crud->render();			
