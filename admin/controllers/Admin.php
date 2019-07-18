@@ -783,7 +783,8 @@ class Admin extends CI_Controller
 		$crud->display_as('icpNo',get_phrase('FCP_ID'))
 		->display_as('icpName',get_phrase('FCP_name'))
 		->display_as('cluster_id',get_phrase('cluster'))
-		->display_as('bankID',get_phrase('bank_name'));
+		->display_as('bankID',get_phrase('bank_name'))
+		->display_as('pc_local_guideline_approver_id','pc_local_guideline_approver');
 		
 		$crud->unset_delete();
 		
@@ -791,16 +792,25 @@ class Admin extends CI_Controller
 		
 		$crud->set_relation('bankID', 'banks', 'bankName');
 		
+		$crud->set_relation('pc_local_guideline_approver_id', 'users', '{userfirstname} {userlastname}');
+		
 		$crud->change_field_type('risk', 'dropdown',array('Low'=>'Low','Medium'=>'Medium','High'=>'High'));
 		
 		$crud->change_field_type('status', 'dropdown',array('0'=>'Suspended','1'=>'Active'));
+		
+		$crud->columns(array('icpNo','icpName','cluster_id','risk','pc_local_guideline','status'));
 		
 		$required_or_viewable_fields = array('icpNo','icpName','email','cluster_id','bankID','system_start_date','status');
 		
 		//Control add/edit for risk field
 		if($this->session->logged_user_level == 3){
 			//Add risk to the $required_or_viewable_fields array when accountant is logged in
-			array_push($required_or_viewable_fields,'risk');
+			array_push($required_or_viewable_fields,'risk','risk_last_update_date');
+			
+			//Restrict Risk update to once a year
+		
+			$crud->callback_before_update(array($this,'check_and_update_last_risk_update_date'));
+			
 		}
 		
 		//Control add/edit of PC Guideline
@@ -834,6 +844,12 @@ class Admin extends CI_Controller
 		}
 		
 		
+		//Check PC Approver and toogle action button
+		
+		if($this->config->item('pc_local_guideline_approver_level') == $this->session->logged_user_level){
+			$crud->add_action(get_phrase('approve_pc_guideline'),'','admin/approve_pc_guideline','');		
+		}
+		
 		
 		
 		$output = $crud->render();			
@@ -843,6 +859,38 @@ class Admin extends CI_Controller
 
         $this->load->view('backend/index', $output);	
 	}
+
+	function check_and_update_last_risk_update_date($post_array,$primary_key){
+		//Update if the risk_last_update_date is more than 1 year or 0000-00-00 or null
+		$risk_last_update = $this->db->get_where('projectsdetails',
+		array('ID'=>$primary_key))->row();
+		
+		$months_difference = days_elapsed($risk_last_update->risk_last_update_date,$post_array['risk_last_update_date']);
+		
+		$message = "Risk data update successful";
+		
+		if($months_difference < 365 && $risk_last_update->risk_last_update_date !== '0000-00-00' && $risk_last_update->risk_last_update_date !== null){
+			$post_array['risk_last_update_date'] = $risk_last_update_date;
+			$post_array['risk'] = $risk_last_update->risk;
+			
+			$message = "Risk was not update";
+		}
+		
+		$this->session->set_flashdata('flash_message',$message);
+		
+		return $post_array;
+	}
+	
+	
+
+	function approve_pc_guideline($primary_key){
+		$data['pc_local_guideline_approver_id'] = $this->session->login_user_id;
+		$this->db->where(array('ID'=>$primary_key));
+		$this->db->update('projectsdetails',$data);
+		
+		$this->manage_projects();
+	}
+	
 	function manage_data($param1="",$param2=""){
          if ($this->session->userdata('admin_login') != 1)
             redirect(base_url(), 'refresh');	
@@ -974,6 +1022,12 @@ class Admin extends CI_Controller
 			$config_type = $this->db->get_where('system_config',array('system_config_id'=>$primary_key))->row()->config_type;
 			
 			if($config_type == 'pc_local_guideline_approver_level' || $config_type == 'pc_local_guideline_creator_level' ){
+				if($config_type == 'pc_local_guideline_approver_level'){
+					$this->db->where_in('pstID',array(2,3));
+				}elseif($config_type == 'pc_local_guideline_creator_level'){
+					$this->db->where_in('pstID',array(1,2,3,9));
+				}	
+					
 				$positions = $this->db->get('positions')->result_object();
 				
 				$options = "";
