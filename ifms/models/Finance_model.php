@@ -1587,23 +1587,23 @@ class Finance_model extends CI_Model {
 
 		//KE0200 array
 		$fcp_local_pc_guideline_data[1]['fcp_id'] = 'KE0200';
-		$fcp_local_pc_guideline_data[1]['fcp_pc_guideline'] = 0.89;
+		$fcp_local_pc_guideline_data[1]['pc_local_guideline'] = 0.89;
 
 		//KE0215 array
 		$fcp_local_pc_guideline_data[2]['fcp_id'] = 'KE0215';
-		$fcp_local_pc_guideline_data[2]['fcp_pc_guideline'] = 0.89;
+		$fcp_local_pc_guideline_data[2]['pc_local_guideline'] = 0.89;
 
 		//KE0300 array
 		$fcp_local_pc_guideline_data[3]['fcp_id'] = 'KE0300';
-		$fcp_local_pc_guideline_data[3]['fcp_pc_guideline'] = 98.09;
+		$fcp_local_pc_guideline_data[3]['pc_local_guideline'] = 98.09;
 
 		//KE0320 array
 		$fcp_local_pc_guideline_data[4]['fcp_id'] = 'KE0320';
-		$fcp_local_pc_guideline_data[4]['fcp_pc_guideline'] = 17.1;
+		$fcp_local_pc_guideline_data[4]['pc_local_guideline'] = 17.1;
 
 		//KE0540 array
 		$fcp_local_pc_guideline_data[5]['fcp_id'] = 'KE0540';
-		$fcp_local_pc_guideline_data[5]['fcp_pc_guideline'] = 12.9;
+		$fcp_local_pc_guideline_data[5]['pc_local_guideline'] = 12.9;
 
 		return $fcp_local_pc_guideline_data;
 
@@ -1642,7 +1642,7 @@ class Finance_model extends CI_Model {
 
 	}
 
-<<<<<<< HEAD
+
 	function test_total_for_pc_data_model($month) {
 
 		$total_pc_data = array();
@@ -2106,15 +2106,15 @@ class Finance_model extends CI_Model {
 	}
 
 	function prod_fcp_local_pc_guideline_data_model($month) {
-		//Query the projectsdetails to get the icpNo and fcp_pc_guideline
-		$fcps_with_local_pc_guidelines = $this -> db -> select(array('icpNo', 'fcp_pc_guideline')) -> get('projectsdetails') -> result_array();
+		//Query the projectsdetails to get the icpNo and pc_local_guideline
+		$fcps_with_local_pc_guidelines = $this -> db -> select(array('icpNo', 'pc_local_guideline')) -> get('projectsdetails') -> result_array();
 
 		//Construct the array that will be displayed on the dashboard
 		$fcps_with_local_pc_guidelines_array = array();
 
 		foreach ($fcps_with_local_pc_guidelines as $fcps_with_local_pc_guideline) {
 			$fcps_with_local_pc_guidelines_array[$fcps_with_local_pc_guideline['icpNo']]['fcp_id'] = $fcps_with_local_pc_guideline['icpNo'];
-			$fcps_with_local_pc_guidelines_array[$fcps_with_local_pc_guideline['icpNo']]['fcp_pc_guideline'] = $fcps_with_local_pc_guideline['fcp_pc_guideline'];
+			$fcps_with_local_pc_guidelines_array[$fcps_with_local_pc_guideline['icpNo']]['pc_local_guideline'] = $fcps_with_local_pc_guideline['pc_local_guideline'];
 		}
 
 		return $fcps_with_local_pc_guidelines_array;

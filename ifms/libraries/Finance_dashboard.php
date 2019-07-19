@@ -184,7 +184,7 @@ class Finance_dashboard {
 
 		$fcp_guideline_set_percentage = 0.00;
 		if (isset($group_data_by_fcp[$fcp])) {
-			$fcp_guideline_set_percentage = $group_data_by_fcp[$fcp]['fcp_pc_guideline'];
+			$fcp_guideline_set_percentage = $group_data_by_fcp[$fcp]['pc_local_guideline'];
 		}
 		return $fcp_guideline_set_percentage;
 	}
@@ -374,7 +374,7 @@ class Finance_dashboard {
 		return number_format($cash_received_in_month_amount, 2);
 	}
 		
->>>>>>> param_11
+
 	//Main render array methods
 
 	public function build_dashboard_array($dashboard_month, $vtype = '') {
