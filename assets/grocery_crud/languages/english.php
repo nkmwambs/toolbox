@@ -28,7 +28,7 @@
 	$lang['form_go_back_to_list'] 	= 'Go back to list';
 
 	$lang['form_add'] 				= 'Add';
-	$lang['insert_success_message'] = 'Your data has been successfully stored into the database.';
+	$lang['insert_success_message'] = '';//Your data has been successfully stored into the database
 	$lang['form_or']				= 'or';
 	$lang['form_save'] 				= 'Save';
 	$lang['form_insert_loading'] 	= 'Loading, saving data...';
