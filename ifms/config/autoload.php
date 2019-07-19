@@ -104,7 +104,7 @@ $autoload['helper'] = array('clone_record','curl','financial','url','file','form
 |
 */
 
-$autoload['config'] = array();
+$autoload['config'] = array('general');
 
 
 /*

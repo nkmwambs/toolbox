@@ -2029,7 +2029,7 @@ class Finance_model extends CI_Model {
 		$this -> db -> where('tdate <= ', $last_day_of_month);
 		$this -> db -> where('vtype',$vtype);
 		$this->db->where('chqstate =',0);
-		$this->db->where('DATEDIFF(NOW(), tdate) >',30);
+		$this->db->where('DATEDIFF(NOW(), tdate) >',$this->config->item('allowed_uncleared_days'));
 		
 		
 		$count_of_cr_and_chq = $this -> db -> get("voucher_header") -> result_array();
