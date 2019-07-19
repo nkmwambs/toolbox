@@ -725,6 +725,8 @@ class Admin extends CI_Controller
 		$crud->set_theme('tablestrap');
 		$crud->set_table('banks');
 		
+		$crud->unset_delete();
+		
 		
 		$output = $crud->render();			
         $page_data['page_name']  = 'grocery_crud_view';
@@ -743,6 +745,7 @@ class Admin extends CI_Controller
 		$crud->set_theme('tablestrap');
 		$crud->set_table('region');
 		
+		$crud->unset_delete();		
 		
 		$output = $crud->render();			
         $page_data['page_name']  = 'grocery_crud_view';
@@ -761,6 +764,9 @@ class Admin extends CI_Controller
 		$crud->set_theme('tablestrap');
 		$crud->set_table('clusters');
 		
+		$crud->unset_delete();
+		
+		$crud->set_relation('region_id', 'region', 'region_name');		
 		
 		$output = $crud->render();			
         $page_data['page_name']  = 'grocery_crud_view';
