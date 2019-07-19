@@ -1,5 +1,8 @@
 <?php
-//print_r($this->session->userdata);
+// $risk_last_update_date = $this->db->get_where('projectsdetails',
+		// array('ID'=>8))->row()->risk_last_update_date;
+// 		
+		//echo $months_difference = months_elapsed('2019-06-18','2020-06-18');
 ?>
 <style>
 	.switch_to_offline{

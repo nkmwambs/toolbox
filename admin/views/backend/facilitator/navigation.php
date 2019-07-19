@@ -48,6 +48,13 @@
                 <span><?php echo get_phrase('account'); ?></span>
             </a>
         </li>
+        
+         <li class="<?php if ($page_name == 'manage_projects') echo 'active'; ?> ">
+            <a href="<?php echo base_url(); ?>admin.php/admin/manage_projects">
+                <i class="entypo-home"></i>
+                <span><?php echo get_phrase('manage_projects'); ?></span>
+            </a>
+        </li>
                
 
     </ul>

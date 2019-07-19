@@ -18,8 +18,8 @@ class Login extends CI_Controller {
         $this->load->database();
         $this->load->library('session');
 		$this->load->library('GoogleAuthenticator');
-		$this->load->model('user');
-		//$this->load->driver('cache', array('adapter' => 'apc', 'backup' => 'file'));
+		$this->load->model('user');	
+	
 				
         /* cache control */
 		$this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
@@ -27,6 +27,8 @@ class Login extends CI_Controller {
 		//$this->db->cache_on();
 		//$this->output->cache(60);
 		$this->db->cache_delete_all();
+			
+		
     }
 
     //Default function, redirects to logged in user area
@@ -139,6 +141,7 @@ class Login extends CI_Controller {
 
     //Ajax login function 
     function ajax_login() {
+		
         $response = array();
 
         //Recieving post input of email, password from ajax request

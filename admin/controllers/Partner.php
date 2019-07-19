@@ -18,6 +18,7 @@ class Partner extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->database();
+		create_config_items();
         $this->load->library('session');
 		$this->load->model('admin_model'); 
 		//$this->load->driver('cache', array('adapter' => 'apc', 'backup' => 'file'));
@@ -504,6 +505,57 @@ class Partner extends CI_Controller
 	    $page_data['all_users'] = $this->db->get_where('users',array('ID!='=>$this->session->login_user_id))->result_object();
         $this->load->view('backend/index', $page_data);
     }
+
+function manage_projects(){
+		if ($this->session->userdata('admin_login') != 1)
+            redirect(base_url(), 'refresh');	
+		
+		
+		$crud = new grocery_CRUD();
+		$crud->set_theme('tablestrap');
+		$crud->set_table('projectsdetails');
+		
+		$crud->display_as('icpNo',get_phrase('FCP_ID'))
+		->display_as('icpName',get_phrase('FCP_name'))
+		->display_as('cluster_id',get_phrase('cluster'))
+		->display_as('bankID',get_phrase('bank_name'));
+		
+		$crud->unset_delete();
+		
+		$crud->set_relation('cluster_id', 'clusters', 'clusterName');
+		
+		$crud->set_relation('bankID', 'banks', 'bankName');
+		
+		$crud->change_field_type('risk', 'dropdown',array('Low'=>'Low','Medium'=>'Medium','High'=>'High'));
+		
+		$crud->change_field_type('status', 'dropdown',array('0'=>'Suspended','1'=>'Active'));
+		
+		$required_or_viewable_fields = array('icpNo','icpName','email','cluster_id','bankID','system_start_date','status');
+		
+		//Control add/edit for risk field
+		if($this->session->logged_user_level == 3){
+			//Add risk to the $required_or_viewable_fields array when accountant is logged in
+			array_push($required_or_viewable_fields,'risk');
+		}
+		
+		//Control add/edit of PC Guideline
+		
+		if($this->config->item('pc_local_guideline_creator_level') == $this->session->logged_user_level){
+			array_push($required_or_viewable_fields,'pc_local_guideline');
+		}
+		
+		$crud->fields($required_or_viewable_fields);
+		
+		$crud->required_fields($required_or_viewable_fields);
+		
+		
+		$output = $crud->render();			
+        $page_data['page_name']  = 'grocery_crud_view';
+        $page_data['page_title'] = get_phrase(__FUNCTION__);
+		$output = array_merge($page_data,(array)$output);
+
+        $this->load->view('backend/index', $output);	
+	}
 
 	function manage_data($param1="",$param2=""){
          if ($this->session->userdata('admin_login') != 1)

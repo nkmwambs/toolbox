@@ -12,6 +12,8 @@
 // Avoid the timeout of execution error on dashboard  file
 ini_set("max_execution_time", 0);
 
+//print_r($this->finance_model->prod_cash_received_in_month_model('2018-01-01'));
+
 $grid_array = $this -> finance_dashboard -> build_dashboard_array($month);
 
 $none_requested_params = isset($grid_array['parameters']['no']) ? $grid_array['parameters']['no'] : array();

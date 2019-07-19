@@ -1,11 +1,5 @@
 <?php
-//print_r($this->session->userdata);
 
-//echo "<br/>";
-
-//print_r($_SESSION);
-
-//echo "<br/>";
 
 ?>
 <style>

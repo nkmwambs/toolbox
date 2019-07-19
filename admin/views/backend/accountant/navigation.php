@@ -42,12 +42,48 @@
 
 
         <!-- ACCOUNT -->
-        <li class="<?php if ($page_name == 'manage_profile') echo 'active'; ?> ">
+        <!-- <li class="<?php if ($page_name == 'manage_profile') echo 'active'; ?> ">
             <a href="<?php echo base_url(); ?>admin.php/facilitator/manage_profile">
                 <i class="entypo-lock"></i>
                 <span><?php echo get_phrase('account'); ?></span>
             </a>
-        </li>
+        </li> -->
+        
+        <li class="<?php
+        if ($page_name == 'manage_profile' ||
+                $page_name == 'manage_projects' ||
+                $page_name == 'manage_banks' )
+                        echo 'opened active';
+        ?> ">
+            <a href="#">
+                <i class="entypo-cog"></i>
+                <span><?php echo get_phrase('profile_management'); ?></span>
+            </a>
+            <ul>
+		        <li class="<?php if ($page_name == 'manage_profile') echo 'active'; ?> ">
+		            <a href="<?php echo base_url(); ?>admin.php/admin/manage_profile">
+		                <!-- <i class="entypo-lock"></i> -->
+		                <span><?php echo get_phrase('manage_password'); ?></span>
+		            </a>
+		        </li>
+		        
+		        
+		        <li class="<?php if ($page_name == 'manage_projects') echo 'active'; ?> ">
+		            <a href="<?php echo base_url(); ?>admin.php/admin/manage_projects">
+		                <!-- <i class="entypo-lock"></i> -->
+		                <span><?php echo get_phrase('manage_projects'); ?></span>
+		            </a>
+		        </li>
+		        
+		        <li class="<?php if ($page_name == 'manage_banks') echo 'active'; ?> ">
+		            <a href="<?php echo base_url(); ?>admin.php/admin/manage_banks">
+		                <!-- <i class="entypo-lock"></i> -->
+		                <span><?php echo get_phrase('manage_banks'); ?></span>
+		            </a>
+		        </li>
+		        
+		    </ul>    
+          <li/>
                
 
     </ul>
