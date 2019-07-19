@@ -1,6 +1,16 @@
 <?php 
 //$month = date('Y-m-t',1522447200);
-//print_r($this->finance_model->get_uncleared_transactions('CHQ',$month));
+//print_r($this->finance_model->calculate_uncleared_cash_recieved_and_chqs('CHQ',$month));
+
+//$fcps = $this -> db -> select(array('icpNo')) -> get('projectsdetails') -> result_array();
+
+//print_r($fcps);
+
+
+
+
+// Avoid the timeout of execution error on dashboard  file
+ini_set("max_execution_time", 0);
 
 $grid_array = $this -> finance_dashboard -> build_dashboard_array($month);
 
@@ -79,7 +89,7 @@ if(empty($none_requested_params) && empty($requested_params)){
 	
 		<div class="col-xs-4">
 		
-			<a href="#" id='btn_last_month' type='submit' class='btn btn-success pull-left'><i class='fa fa-angle-left'></i> Previous Month</a>
+			<a href="" id='btn_last_month' type='submit' class='btn btn-success pull-left'><i class='fa fa-angle-left'></i> Previous Month</a>
 			
 		</div>
 		
@@ -89,7 +99,7 @@ if(empty($none_requested_params) && empty($requested_params)){
 	   </div>
 	   	<div class="col-xs-4">
 			
-			<a id='btn_next_month' type='submit' href="#" class='btn btn-success pull-right'>Next Month <i class='fa fa-angle-right'></i></a>
+			<a id='btn_next_month' type='submit' href="" class='btn btn-success pull-right'>Next Month <i class='fa fa-angle-right'></i></a>
 			
 		</div>
 	
@@ -145,13 +155,36 @@ if(empty($none_requested_params) && empty($requested_params)){
 				 foreach ($grid_array['fcps_with_risks'] as $fcp_id => $value) { 
 				?>
 				   <tr>
-				   	 <td><?= $fcp_id; ?></td>
-				   	 <td><?= $value['risk']; ?></td>
+				   	 <td style="background-color: black; color: white;"><?= $fcp_id; ?></td>
+				   	 <?php if($value['risk']=='Low'){ ?>
+				   	 
+				   	 <td style="background-color: green; color: white;"><?= $value['risk']; ?></td>
+				   	 
+				   	 <?php }elseif($value['risk']=='High'){?>
+				   	 <td style="background-color: red; color: white;"><?= $value['risk']; ?></td>
+				   	 <?php }else{?>
+				   	 	<td style="background-color: orange; color: white;"><?= $value['risk']; ?></td>
+				   	<?php }?>
+				   	 
 				   	 <?php
 				   	 if(isset($value['params'])){
-				   	  foreach ($value['params'] as $param) { 
+				   	  foreach ($value['params'] as $param) {
+				   	  	if($param=='Yes') {
 				   	 ?>
-				   	   <td><?= $param; ?></td>
+				   	   <td style="background-color: green; color: white;"><?= $param;?></td>
+				   	   <?php }else if($param=='No'){?>
+				   	   	
+				   	   	<td style="background-color: red; color: white;"><?= $param;?></td>
+				   	   	
+				   	   <?php }elseif(strrchr($param,'Yes')){?>
+				   	   	 <td style="background-color: green; color: white;"><?= $param;?></td>
+				   	   	<?php } elseif(strrchr($param,'No')){?>
+				   	   	  	 <td style="background-color: red; color: white;"><?= $param;?></td>
+				   	   	<?php }else{?>
+				   	   	
+				   	   	 <td><?= $param;?></td>
+				   	   	 
+				   	   	<?php }?>
 				   	  <?php }
 							}
 				   	  ?>
@@ -200,4 +233,9 @@ $('#btn_last_month ,#btn_next_month').on('click',function(ev){
 	ev.preventDefault();
 	
 });
+
+function modify_td_background_color(){
+ 	
+}
+
 </script>
