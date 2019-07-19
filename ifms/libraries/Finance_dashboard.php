@@ -225,6 +225,19 @@ class Finance_dashboard{
 		return $yes_no_flag;
 	}
 	
+	private function callback_cash_received_in_month($fcp,$month) {
+		$cash_received_in_month = $this -> CI ->finance_model-> switch_environment($month, 'test_cash_received_in_month_model', 'prod_cash_received_in_month_model');
+		
+		$cash_received_in_month_amount = 0.00;
+		
+		//Check if the fcp has an Mfr submitted in the $month_submitted
+		if (isset($cash_received_in_month[$fcp])) {
+			$cash_received_in_month_amount = $cash_received_in_month[$fcp]['cash_received_in_month_amount'];
+		}
+
+		return number_format($cash_received_in_month_amount, 2);
+	}
+		
 	//Main render array methods
 
 	public function build_dashboard_array($dashboard_month) {

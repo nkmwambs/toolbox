@@ -1417,6 +1417,13 @@ function expense_accounts_grouped_by_income(){
 		$dashboard_params[7]['result_method'] = 'callback_bank_reconcile_correct';
 		$dashboard_params[7]['is_requested'] = 'no';
 		$dashboard_params[7]['display_on_dashboard'] = 'yes';
+		
+		$dashboard_params[8]['dashboard_parameter_name'] = 'Cash Received';
+		$dashboard_params[8]['result_method'] = 'test_cash_received_in_month_model';
+		$dashboard_params[8]['is_requested'] = 'no';
+		$dashboard_params[8]['display_on_dashboard'] = 'yes';
+		
+		
 
 		return $dashboard_params;
 	}
@@ -1628,7 +1635,64 @@ function expense_accounts_grouped_by_income(){
 
 	}
 
+	 function test_cash_received_in_month_model() {
+		$cash_received_in_month_data = array();
+
+		//KE0200 array
+		$cash_received_in_month_data[1]['KE0200']['fcp_id'] = 'KE0200';
+		$cash_received_in_month_data[1]['KE0200']['cash_received_in_month_amount'] = 23998.90;
+		$cash_received_in_month_data[1]['KE0200']['closure_date'] = '2019-03-31';
+
+		//KE0215 array
+		$cash_received_in_month_data[2]['KE0215']['fcp_id'] = 'KE0215';
+		$cash_received_in_month_data[2]['KE0215']['cash_received_in_month_amount'] = 100298.60;
+		$cash_received_in_month_data[2]['KE0215']['closure_date'] = '2019-03-31';
+
+		//KE0300 array
+		$cash_received_in_month_data[3]['KE0300']['fcp_id'] = 'KE0300';
+		$cash_received_in_month_data[3]['KE0300']['cash_received_in_month_amount'] = 1619643.16;
+		$statement_bank_balance_data[3]['KE0300']['closure_date'] = '2019-03-31';
+
+		//KE0320 array
+		$cash_received_in_month_data[4]['KE0300']['fcp_id'] = 'KE0320';
+		$cash_received_in_month_data[4]['KE0300']['cash_received_in_month_amount'] = 238989.71;
+		$cash_received_in_month_data[4]['KE0300']['closure_date'] = '2019-03-31';
+
+		//KE0540 array
+		$cash_received_in_month_data[5]['KE0540']['fcp_id'] = 'KE0540';
+		$cash_received_in_month_data[5]['KE0540']['cash_received_in_month_amount'] = 97600.81;
+		$cash_received_in_month_data[5]['KE0540']['closure_date'] = '2019-03-31';
+
+		return $cash_received_in_month_data;
+	}
+
 	//Prod Models Methods
+	
+	public function prod_cash_received_in_month_model($month){
+		$this->db->cache_on();
+		$query_conditon = "voucher_header.TDate BETWEEN '".date('Y-m-01',strtotime($month))."' AND '".date("Y-m-t",strtotime($month))."' AND voucher_header.VType='CR'";
+		
+		$this->db->select_sum('voucher_body.Cost');
+		$this->db->select(array('voucher_header.icpNo'));
+		$this->db->where($query_conditon);
+		$this->db->group_by(array('voucher_header.icpNo'));
+		$this->db->join('voucher_body','voucher_body.hID=voucher_header.hID');
+		$cash_received_in_month = $this->db->get('voucher_header')->result_object();
+		$this->db->cache_off();
+		
+		$cr_array = array();
+		
+		$cnt = 0;
+		foreach($cash_received_in_month as $row){
+			$cr_array[$row->icpNo]['fcp_id'] = $row->Cost;
+			$cr_array[$row->icpNo]['closure_date'] = $row->Cost;
+			$cr_array[$row->icpNo]['cash_received_in_month_amount'] = $row->Cost;
+			
+			$cnt++;
+		}
+		
+		return $cr_array;
+	}
 
 	public function prod_fcps_with_risk_model() {
 
