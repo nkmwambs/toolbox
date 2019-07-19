@@ -1672,6 +1672,61 @@ class Finance_model extends CI_Model {
 		return $transaction_arrays;
 	}
 
+    function test_uncleared_cash_recieved_data_model($month) {
+
+		$uncleared_cash_recieved_data = array();
+
+		//KE0200 array
+		$uncleared_cash_recieved_data[1]['fcp_id'] = 'KE0200';
+		$uncleared_cash_recieved_data[1]['totals'] = 23998.90;
+
+		//KE0215 array
+		$uncleared_cash_recieved_data[2]['fcp_id'] = 'KE0215';
+		$uncleared_cash_recieved_data[2]['totals'] = 23998.90;
+
+		//KE0300 array
+		$uncleared_cash_recieved_data[3]['fcp_id'] = 'KE0300';
+		$uncleared_cash_recieved_data[3]['totals'] = 23998.90;
+
+		//KE0320 array
+		$uncleared_cash_recieved_data[4]['fcp_id'] = 'KE0320';
+		$uncleared_cash_recieved_data[4]['totals'] = 23998.90;
+
+		//KE0540 array
+		$uncleared_cash_recieved_data[5]['fcp_id'] = 'KE0540';
+		$uncleared_cash_recieved_data[5]['totals'] = 23998.90;
+
+		return $uncleared_cash_recieved_data;
+	}
+	
+	function test_uncleared_cheques_data_model($month) {
+
+		$uncleared_cheques_data = array();
+
+		//KE0200 array
+		$uncleared_cheques_data[1]['fcp_id'] = 'KE0200';
+		$uncleared_cheques_data[1]['totals'] = 23998.90;
+
+		//KE0215 array
+		$uncleared_cheques_data[2]['fcp_id'] = 'KE0215';
+		$uncleared_cheques_data[2]['totals'] = 23998.90;
+
+		//KE0300 array
+		$uncleared_cheques_data[3]['fcp_id'] = 'KE0300';
+		$uncleared_cheques_data[3]['totals'] = 23998.90;
+
+		//KE0320 array
+		$uncleared_cheques_data[4]['fcp_id'] = 'KE0320';
+		$uncleared_cheques_data[4]['totals'] = 23998.90;
+
+		//KE0540 array
+		$uncleared_cheques_data[5]['fcp_id'] = 'KE0540';
+		$uncleared_cheques_data[5]['totals'] = 23998.90;
+
+		return $uncleared_cheques_data;
+	}
+
+
 
 	//Prod Models Methods
 
@@ -1898,6 +1953,37 @@ class Finance_model extends CI_Model {
 		return $total_chq_amount_in_amonth;
 	}
 
+    function prod_uncleared_cash_recieved_data_model($month) {
+
+		$uncleared_cash_recieved_in_amonth = array();
+
+		$total_uncleared_cash_recieved= $this -> calculate_uncleared_cash_recieved_and_chqs('CR', $month);
+
+		foreach ($total_uncleared_cash_recieved as $row_key => $total_uncleared_cr) {
+
+			$uncleared_cash_recieved_in_amonth[$total_uncleared_cr['icpNo']]['fcp_id'] = $total_uncleared_cr['icpNo'];
+			$uncleared_cash_recieved_in_amonth[$total_uncleared_cr['icpNo']]['totals'] = $total_uncleared_cr['totals'];
+		}
+
+		return $uncleared_cash_recieved_in_amonth;
+	}
+	
+	 function prod_uncleared_cheques_data_model($month) {
+
+		$uncleared_cheques_in_amonth = array();
+
+		$total_uncleared_cheques= $this -> calculate_uncleared_cash_recieved_and_chqs('CHQ', $month);
+
+		foreach ($total_uncleared_cheques as $row_key => $total_uncleared_chqs) {
+
+			$uncleared_cheques_in_amonth[$total_uncleared_chqs['icpNo']]['fcp_id'] = $total_uncleared_chqs['icpNo'];
+			$uncleared_cheques_in_amonth[$total_uncleared_chqs['icpNo']]['totals'] = $total_uncleared_chqs['totals'];
+		}
+
+		return $uncleared_cheques_in_amonth;
+	}
+	
+
 	private function calculate_pc_chqs_totals($vtype, $month) {
 
 		$total_pc_or_chqs = array();
@@ -1921,6 +2007,36 @@ class Finance_model extends CI_Model {
 		$this -> db -> cache_off();
 
 		return $total_pc_or_chqs;
+
+	}
+	
+	private function calculate_uncleared_cash_recieved_and_chqs($vtype, $month) {
+
+		$count_of_cr_and_chq = array();
+
+		//Get the first and last of the month
+		$first_day_of_month = date('Y-m-01', strtotime($month));
+		$last_day_of_month = date('Y-m-t', strtotime($month));
+		
+		//select icpNo, tdate,chqstate,clrmonth from voucher_header where chqstate=0 limit 10
+		
+		$this -> db -> cache_on();
+		
+		$this->db->select(array('icpNo'));
+		$this->db->select_sum('totals');
+		$this -> db -> group_by(array('icpNo','vtype'));
+		$this -> db -> where('tdate >= ', $first_day_of_month);
+		$this -> db -> where('tdate <= ', $last_day_of_month);
+		$this -> db -> where('vtype',$vtype);
+		$this->db->where('chqstate =',0);
+		$this->db->where('DATEDIFF(NOW(), tdate) >',30);
+		
+		
+		$count_of_cr_and_chq = $this -> db -> get("voucher_header") -> result_array();
+
+        $this -> db -> cache_off();
+
+		return $count_of_cr_and_chq;
 
 	}
 

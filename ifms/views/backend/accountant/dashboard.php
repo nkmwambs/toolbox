@@ -1,6 +1,6 @@
 <?php 
 //$month = date('Y-m-t',1522447200);
-//print_r($this->finance_model->prod_fcp_local_pc_guideline_data_model($month));
+//print_r($this->finance_model->calculate_uncleared_cash_recieved_and_chqs('CHQ',$month));
 
 //$fcps = $this -> db -> select(array('icpNo')) -> get('projectsdetails') -> result_array();
 

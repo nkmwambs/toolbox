@@ -126,6 +126,36 @@ class Finance_dashboard {
 		}
 		return number_format($total_chq, 2);
 	}
+	
+	private function callback_uncleared_cash_received($fcp, $month) {
+
+		$uncleared_cash_recieved_data = $this -> CI -> finance_model -> switch_environment($month, 'test_uncleared_cash_recieved_data_model', 'prod_uncleared_cash_recieved_data_model');
+
+		$group = $this -> group_data_by_fcp_id($uncleared_cash_recieved_data);
+
+		$uncleared_cash_recieved = 0.00;
+
+		//Check if the FCP is set and get the totals
+		if (isset($group[$fcp])) {
+			$uncleared_cash_recieved = $group[$fcp]['totals'];
+		}
+		return number_format($uncleared_cash_recieved, 2);
+	}
+	
+	private function callback_uncleared_cheques($fcp, $month) {
+
+		$uncleared_cheques_data = $this -> CI -> finance_model -> switch_environment($month, 'test_uncleared_cheques_data_model', 'prod_uncleared_cheques_data_model');
+
+		$group = $this -> group_data_by_fcp_id($uncleared_cheques_data);
+
+		$uncleared_cheques = 0.00;
+
+		//Check if the fcp
+		if (isset($group[$fcp])) {
+			$uncleared_cheques = $group[$fcp]['totals'];
+		}
+		return number_format($uncleared_cheques, 2);
+	}
 
 	private function callback_caculate_transactions_from_petty_cash($fcp, $month) {
 
