@@ -1799,7 +1799,7 @@ class Finance_model extends CI_Model {
 
 		$fcp_array = array();
 
-		$data = $this -> db -> get($this -> table_prefix . 'projectsdetails') -> result_array();
+		$data = $this -> db -> get_where($this -> table_prefix . 'projectsdetails', array('status='=>1)) -> result_array();
 
 		foreach ($data as $fcp) {
 
