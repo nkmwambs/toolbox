@@ -1776,8 +1776,10 @@ class Finance_model extends CI_Model {
 		$this->db->select_sum('voucher_body.Cost');
 		$this->db->select(array('voucher_header.icpNo'));
 		$this->db->where($query_conditon);
+		$this->db->where(array('ci_income='=>1));
 		$this->db->group_by(array('voucher_header.icpNo'));
 		$this->db->join('voucher_body','voucher_body.hID=voucher_header.hID');
+		$this->db->join('accounts','accounts.AccNo = voucher_body.AccNo');		
 		$cash_received_in_month = $this->db->get('voucher_header')->result_object();
 		$this->db->cache_off();
 		
