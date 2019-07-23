@@ -1329,6 +1329,8 @@ class Finance_model extends CI_Model {
 
 		return $group_by_fcp_id_array;
 	}
+	
+
 
 	//Test Models Methods
 
@@ -1587,23 +1589,23 @@ class Finance_model extends CI_Model {
 
 		//KE0200 array
 		$fcp_local_pc_guideline_data[1]['fcp_id'] = 'KE0200';
-		$fcp_local_pc_guideline_data[1]['pc_local_guideline'] = 0.89;
+		$fcp_local_pc_guideline_data[1]['pc_local_month_expense_limit'] = 0.89;
 
 		//KE0215 array
 		$fcp_local_pc_guideline_data[2]['fcp_id'] = 'KE0215';
-		$fcp_local_pc_guideline_data[2]['pc_local_guideline'] = 0.89;
+		$fcp_local_pc_guideline_data[2]['pc_local_month_expense_limit'] = 0.89;
 
 		//KE0300 array
 		$fcp_local_pc_guideline_data[3]['fcp_id'] = 'KE0300';
-		$fcp_local_pc_guideline_data[3]['pc_local_guideline'] = 98.09;
+		$fcp_local_pc_guideline_data[3]['pc_local_month_expense_limit'] = 98.09;
 
 		//KE0320 array
 		$fcp_local_pc_guideline_data[4]['fcp_id'] = 'KE0320';
-		$fcp_local_pc_guideline_data[4]['pc_local_guideline'] = 17.1;
+		$fcp_local_pc_guideline_data[4]['pc_local_month_expense_limit'] = 17.1;
 
 		//KE0540 array
 		$fcp_local_pc_guideline_data[5]['fcp_id'] = 'KE0540';
-		$fcp_local_pc_guideline_data[5]['pc_local_guideline'] = 12.9;
+		$fcp_local_pc_guideline_data[5]['pc_local_month_expense_limit'] = 12.9;
 
 		return $fcp_local_pc_guideline_data;
 
@@ -1766,8 +1768,111 @@ class Finance_model extends CI_Model {
 		return $cash_received_in_month_data;
 	}
 
+	public function  test_pc_limit_per_transaction_by_type_model(){
+		$pc_per_withdrawal_limit_data = array();
 
+		//KE0200 array
+		$pc_per_withdrawal_limit_data[1]['KE0200']['fcp_id'] = 'KE0200';
+		$pc_per_withdrawal_limit_data[1]['KE0200']['limit_compliance_flag'] = 'yes';
+
+		//KE0215 array
+		$pc_per_withdrawal_limit_data[2]['KE0215']['fcp_id'] = 'KE0215';
+		$pc_per_withdrawal_limit_data[2]['KE0215']['limit_compliance_flag'] = 'no';
+
+		//KE0300 array
+		$pc_per_withdrawal_limit_data[3]['KE0300']['fcp_id'] = 'KE0300';
+		$pc_per_withdrawal_limit_data[3]['KE0300']['limit_compliance_flag'] = 'no';
+
+		//KE0320 array
+		$pc_per_withdrawal_limit_data[4]['KE0320']['fcp_id'] = 'KE0320';
+		$pc_per_withdrawal_limit_data[4]['KE0320']['limit_compliance_flag'] = 'yes';
+
+		//KE0540 array
+		$pc_per_withdrawal_limit_data[5]['KE0540']['fcp_id'] = 'KE0540';
+		$pc_per_withdrawal_limit_data[5]['KE0540']['limit_compliance_flag'] = 'yes';
+
+		return $pc_per_withdrawal_limit_data;
+	}
+	
+	private function  test_project_with_pc_guideline_limits_model(){
+		$project_with_pc_guideline_limit_data = array();
+
+		//KE0200 array
+		$project_with_pc_guideline_limit['KE0200']['pc_local_withdrawal_limit'] = 15000;
+		$project_with_pc_guideline_limit['KE0200']['pc_local_expense_transaction_limit'] = 5000;
+		$project_with_pc_guideline_limit['KE0200']['pc_local_month_expense_limit'] = 150000;
+		
+		//KE0215 array
+		$project_with_pc_guideline_limit['KE0215']['pc_local_withdrawal_limit'] = 16000;
+		$project_with_pc_guideline_limit['KE0215']['pc_local_expense_transaction_limit'] = 4000;
+		$project_with_pc_guideline_limit['KE0215']['pc_local_month_expense_limit'] = 200000;
+
+		//KE0300 array
+		$project_with_pc_guideline_limit['KE0300']['pc_local_withdrawal_limit'] = 10000;
+		$project_with_pc_guideline_limit['KE0300']['pc_local_expense_transaction_limit'] = 8000;
+		$project_with_pc_guideline_limit['KE0300']['pc_local_month_expense_limit'] = 250000;
+
+		//KE0320 array
+		$project_with_pc_guideline_limit['KE0320']['pc_local_withdrawal_limit'] = 15000;
+		$project_with_pc_guideline_limit['KE0320']['pc_local_expense_transaction_limit'] = 10000;
+		$project_with_pc_guideline_limit['KE0320']['pc_local_month_expense_limit'] = 180000;
+
+		//KE0540 array
+		$project_with_pc_guideline_limit['KE0540']['pc_local_withdrawal_limit'] = 20000;
+		$project_with_pc_guideline_limit['KE0540']['pc_local_expense_transaction_limit'] = 10000;
+		$project_with_pc_guideline_limit['KE0540']['pc_local_month_expense_limit'] = 250000;
+
+		return $project_with_pc_guideline_limit;
+	}
+	
 	//Prod Models Methods
+	
+	private function prod_project_with_pc_guideline_limits_model(){
+		$this->db->select('icpNo as fcp_id');
+		$this->db->select(array('pc_local_withdrawal_limit','pc_local_expense_transaction_limit','pc_local_month_expense_limit'));	
+		$project_with_pc_guideline_limits = $this->db->get_where('projectsdetails',array('status'=>1))->result_array();
+		
+		$grouped_by_fcp_id = $this->group_data_by_fcp_id($project_with_pc_guideline_limits);
+						
+		return $grouped_by_fcp_id;
+	}
+	
+	public function prod_pc_limit_per_transaction_by_type_model($month,$limit_type = 'per_withdrawal'){
+		
+		$pc_guideline_column_name = 'pc_local_withdrawal_limit'; 
+		
+		if($limit_type == 'per_transaction'){
+			$pc_guideline_column_name = 'pc_local_expense_transaction_limit';
+		}elseif($limit_type == 'per_month'){
+			$pc_guideline_column_name = 'pc_local_month_expense_limit';
+		}
+		
+		$this->db->cache_on();
+		$project_with_pc_guideline_limits = $this->prod_project_with_pc_guideline_limits_model();
+		
+		$db_call = 'CALL get_max_pc_withdrawal_transactions("'.date('Y-m-01',strtotime($month)).'","'.date('Y-m-t',strtotime($month)).'","'.$limit_type.'")';
+		
+		$pc_withdrawal_result = $this->db->query($db_call)->result_array(); 		
+		
+		$this->db->cache_off();
+		
+		$pc_per_withdrawal_limit = array();
+		
+		foreach($pc_withdrawal_result as $pc_withdrawal){
+			$pc_per_withdrawal_limit[$pc_withdrawal['fcp_id']]['fcp_id'] = $pc_withdrawal['fcp_id'];
+			$pc_per_withdrawal_limit[$pc_withdrawal['fcp_id']]['limit_compliance_flag'] = 'No';
+			
+			if($project_with_pc_guideline_limits[$pc_withdrawal['fcp_id']][$pc_guideline_column_name] > $pc_withdrawal['cost'] ){
+			
+				$pc_per_withdrawal_limit[$pc_withdrawal['fcp_id']]['limit_compliance_flag'] = 'Yes';
+				
+			}
+		}
+		
+		
+		
+		return $pc_per_withdrawal_limit;
+	}
 	
 	public function prod_cash_received_in_month_model($month){
 		$this->db->cache_on();
@@ -1897,13 +2002,20 @@ class Finance_model extends CI_Model {
 
 	//Switch Environment method for model (prod/test) called in callback methods and build_dashboard_array method
 
-	public function switch_environment($month, $test_method, $prod_method) {
-
+	public function switch_environment(...$args) {
+			
+		//0=>$month, 1=>$test_method, 2=>$prod_method, 
+		
+		$month = array_shift($args); 
+		$test_method = array_shift($args); 
+		$prod_method = array_shift($args);
+		$extra_args =  !empty($args)?implode(',', $args):"";
+		
 		if ($this -> config -> item('environment') == 'test') {
 			return $this -> $test_method();
 		} elseif ($this -> config -> item('environment') == 'prod') {
 
-			return $this -> $prod_method($month);
+			return $this -> $prod_method($month,$extra_args);
 		}
 	}
 
@@ -2109,14 +2221,14 @@ class Finance_model extends CI_Model {
 
 	function prod_fcp_local_pc_guideline_data_model($month) {
 		//Query the projectsdetails to get the icpNo and pc_local_guideline
-		$fcps_with_local_pc_guidelines = $this -> db -> select(array('icpNo', 'pc_local_guideline')) -> get('projectsdetails') -> result_array();
+		$fcps_with_local_pc_guidelines = $this -> db -> select(array('icpNo', 'pc_local_month_expense_limit')) -> get('projectsdetails') -> result_array();
 
 		//Construct the array that will be displayed on the dashboard
 		$fcps_with_local_pc_guidelines_array = array();
 
 		foreach ($fcps_with_local_pc_guidelines as $fcps_with_local_pc_guideline) {
 			$fcps_with_local_pc_guidelines_array[$fcps_with_local_pc_guideline['icpNo']]['fcp_id'] = $fcps_with_local_pc_guideline['icpNo'];
-			$fcps_with_local_pc_guidelines_array[$fcps_with_local_pc_guideline['icpNo']]['pc_local_guideline'] = $fcps_with_local_pc_guideline['pc_local_guideline'];
+			$fcps_with_local_pc_guidelines_array[$fcps_with_local_pc_guideline['icpNo']]['pc_local_month_expense_limit'] = $fcps_with_local_pc_guideline['pc_local_month_expense_limit'];
 		}
 
 		return $fcps_with_local_pc_guidelines_array;

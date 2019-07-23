@@ -1,12 +1,12 @@
 <?php 
-//$month = date('Y-m-t',1522447200);
+$month = date('Y-m-t',1522447200);
 //print_r($this->finance_model->calculate_uncleared_cash_recieved_and_chqs('CHQ',$month));
 
 //$fcps = $this -> db -> select(array('icpNo')) -> get('projectsdetails') -> result_array();
 
 //print_r($fcps);
 
-
+//print_r($this->finance_model->prod_pc_per_withdrawal_limit_model($month));
 
 
 // Avoid the timeout of execution error on dashboard  file

@@ -79,6 +79,28 @@ class Finance_dashboard {
 	 * 2) Param 10: 'If the previous/beginning balance agree  with last month ending balance.
 
 	 */
+	 
+	private function callback_pc_per_withdrawal_limit($fcp, $month){
+		
+		$pc_per_withdrawal_limit = $this -> CI -> finance_model -> switch_environment($month, 'test_pc_limit_per_transaction_by_type_model', 'prod_pc_limit_per_transaction_by_type_model');
+		
+		return isset($pc_per_withdrawal_limit[$fcp])?$pc_per_withdrawal_limit[$fcp]['limit_compliance_flag']:"Yes";
+	}
+
+	private function callback_pc_per_expense_transaction_limit($fcp, $month){
+		
+		$pc_per_withdrawal_limit = $this -> CI -> finance_model -> switch_environment($month, 'test_pc_limit_per_transaction_by_type_model', 'prod_pc_limit_per_transaction_by_type_model','per_transaction');
+		
+		return isset($pc_per_withdrawal_limit[$fcp])?$pc_per_withdrawal_limit[$fcp]['limit_compliance_flag']:"Yes";
+	} 
+	
+	private function callback_pc_per_month_expense_limit($fcp, $month){
+		
+		$pc_per_withdrawal_limit = $this -> CI -> finance_model -> switch_environment($month, 'test_pc_limit_per_transaction_by_type_model', 'prod_pc_limit_per_transaction_by_type_model','per_month');
+		
+		return isset($pc_per_withdrawal_limit[$fcp])?$pc_per_withdrawal_limit[$fcp]['limit_compliance_flag']:"Yes";
+	} 		 
+	
 	private function callback_mfr_submitted($fcp, $month_submitted) {
 
 		$mfr_submitted_data = $this -> CI -> finance_model -> switch_environment($month_submitted, 'test_mfr_submission_data_model', 'prod_mfr_submission_data_model');
@@ -184,7 +206,7 @@ class Finance_dashboard {
 
 		$fcp_guideline_set_percentage = 0.00;
 		if (isset($group_data_by_fcp[$fcp])) {
-			$fcp_guideline_set_percentage = $group_data_by_fcp[$fcp]['pc_local_guideline'];
+			$fcp_guideline_set_percentage = $group_data_by_fcp[$fcp]['pc_local_month_expense_limit'];
 		}
 		return $fcp_guideline_set_percentage;
 	}
