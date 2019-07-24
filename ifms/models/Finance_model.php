@@ -1847,14 +1847,12 @@ class Finance_model extends CI_Model {
 			$pc_guideline_column_name = 'pc_local_month_expense_limit';
 		}
 
-		$this->db->cache_on();
 		$project_with_pc_guideline_limits = $this->prod_project_with_pc_guideline_limits_model();
 
 		$db_call = 'CALL get_max_pc_withdrawal_transactions("'.date('Y-m-01',strtotime($month)).'","'.date('Y-m-t',strtotime($month)).'","'.$limit_type.'")';
 
 		$pc_withdrawal_result = $this->db->query($db_call)->result_array();
 
-		$this->db->cache_off();
 
 		$pc_per_withdrawal_limit = array();
 
