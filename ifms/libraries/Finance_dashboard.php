@@ -79,26 +79,57 @@ class Finance_dashboard {
 	 * 2) Param 10: 'If the previous/beginning balance agree  with last month ending balance.
 
 	 */
+	
+	private $pc_local_guideline_flags = array();
+	
+	private function callback_pc_local_guideline_compliance($fcp, $month){
+		// $flags = $this->pc_local_guideline_flags;
+// 		
+		// $set_flag = 'Yes';
+// 		
+		// foreach($flags as $key=>$flag){
+			// if($flag == 'No'){
+				// $set_flag = "Yes";
+				// break;
+			// }
+		// }
+// 		
+		// return $set_flag;
+		
+		return "";
+	} 
 	 
 	private function callback_pc_per_withdrawal_limit($fcp, $month){
 		
 		$pc_per_withdrawal_limit = $this -> CI -> finance_model -> switch_environment($month, 'test_pc_limit_per_transaction_by_type_model', 'prod_pc_limit_per_transaction_by_type_model');
 		
-		return isset($pc_per_withdrawal_limit[$fcp])?$pc_per_withdrawal_limit[$fcp]['limit_compliance_flag']:"Yes";
+		$flag = isset($pc_per_withdrawal_limit[$fcp])?$pc_per_withdrawal_limit[$fcp]['limit_compliance_flag']:"Yes";
+		
+		$this->pc_local_guideline_flags['per_withdrawal'] = $flag;
+		
+		return $flag;//isset($pc_per_withdrawal_limit[$fcp])?$pc_per_withdrawal_limit[$fcp]['limit_compliance_flag']:"Yes";
 	}
 
 	private function callback_pc_per_expense_transaction_limit($fcp, $month){
 		
 		$pc_per_withdrawal_limit = $this -> CI -> finance_model -> switch_environment($month, 'test_pc_limit_per_transaction_by_type_model', 'prod_pc_limit_per_transaction_by_type_model','per_transaction');
 		
-		return isset($pc_per_withdrawal_limit[$fcp])?$pc_per_withdrawal_limit[$fcp]['limit_compliance_flag']:"Yes";
+		$flag = isset($pc_per_withdrawal_limit[$fcp])?$pc_per_withdrawal_limit[$fcp]['limit_compliance_flag']:"Yes";
+		
+		$this->pc_local_guideline_flags['per_transaction'] = $flag;
+		
+		return $flag;//isset($pc_per_withdrawal_limit[$fcp])?$pc_per_withdrawal_limit[$fcp]['limit_compliance_flag']:"Yes";
 	} 
 	
 	private function callback_pc_per_month_expense_limit($fcp, $month){
 		
 		$pc_per_withdrawal_limit = $this -> CI -> finance_model -> switch_environment($month, 'test_pc_limit_per_transaction_by_type_model', 'prod_pc_limit_per_transaction_by_type_model','per_month');
 		
-		return isset($pc_per_withdrawal_limit[$fcp])?$pc_per_withdrawal_limit[$fcp]['limit_compliance_flag']:"Yes";
+		$flag = isset($pc_per_withdrawal_limit[$fcp])?$pc_per_withdrawal_limit[$fcp]['limit_compliance_flag']:"Yes";;
+		
+		$this->pc_local_guideline_flags['per_month'] = $flag;
+		
+		return $flag;//isset($pc_per_withdrawal_limit[$fcp])?$pc_per_withdrawal_limit[$fcp]['limit_compliance_flag']:"Yes";
 	} 		 
 	
 	private function callback_mfr_submitted($fcp, $month_submitted) {
