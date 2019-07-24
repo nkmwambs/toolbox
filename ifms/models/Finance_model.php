@@ -33,9 +33,9 @@ class Finance_model extends CI_Model {
 
 	function project_income_at_given_month($project, $month) {
 
-		$sql = "SELECT SUM(voucher_body.Cost) as Cost, AccNo FROM voucher_body JOIN voucher_header 
-				ON voucher_header.hID=voucher_body.hID 
-				WHERE voucher_header.TDate <= '" . date('Y-m-t', $month) . "' 
+		$sql = "SELECT SUM(voucher_body.Cost) as Cost, AccNo FROM voucher_body JOIN voucher_header
+				ON voucher_header.hID=voucher_body.hID
+				WHERE voucher_header.TDate <= '" . date('Y-m-t', $month) . "'
 				AND voucher_header.VType = 'CR' AND voucher_header.icpNo = '" . $project . "' GROUP BY AccNo";
 
 		$sum_of_income = $this -> db -> query($sql) -> result_object();
@@ -1329,7 +1329,7 @@ class Finance_model extends CI_Model {
 
 		return $group_by_fcp_id_array;
 	}
-	
+
 
 
 	//Test Models Methods
@@ -1398,13 +1398,13 @@ class Finance_model extends CI_Model {
 		$dashboard_params[7]['result_method'] = 'callback_bank_reconcile_correct';
 		$dashboard_params[7]['is_requested'] = 'no';
 		$dashboard_params[7]['display_on_dashboard'] = 'yes';
-		
+
 		$dashboard_params[8]['dashboard_parameter_name'] = 'Cash Received';
 		$dashboard_params[8]['result_method'] = 'test_cash_received_in_month_model';
 		$dashboard_params[8]['is_requested'] = 'no';
 		$dashboard_params[8]['display_on_dashboard'] = 'yes';
-		
-		
+
+
 
 		return $dashboard_params;
 	}
@@ -1708,7 +1708,7 @@ class Finance_model extends CI_Model {
 
 		return $uncleared_cash_recieved_data;
 	}
-	
+
 	function test_uncleared_cheques_data_model($month) {
 
 		$uncleared_cheques_data = array();
@@ -1793,7 +1793,7 @@ class Finance_model extends CI_Model {
 
 		return $pc_per_withdrawal_limit_data;
 	}
-	
+
 	private function  test_project_with_pc_guideline_limits_model(){
 		$project_with_pc_guideline_limit_data = array();
 
@@ -1801,7 +1801,7 @@ class Finance_model extends CI_Model {
 		$project_with_pc_guideline_limit['KE0200']['pc_local_withdrawal_limit'] = 15000;
 		$project_with_pc_guideline_limit['KE0200']['pc_local_expense_transaction_limit'] = 5000;
 		$project_with_pc_guideline_limit['KE0200']['pc_local_month_expense_limit'] = 150000;
-		
+
 		//KE0215 array
 		$project_with_pc_guideline_limit['KE0215']['pc_local_withdrawal_limit'] = 16000;
 		$project_with_pc_guideline_limit['KE0215']['pc_local_expense_transaction_limit'] = 4000;
@@ -1824,81 +1824,83 @@ class Finance_model extends CI_Model {
 
 		return $project_with_pc_guideline_limit;
 	}
-	
+
 	//Prod Models Methods
-	
+
 	private function prod_project_with_pc_guideline_limits_model(){
 		$this->db->select('icpNo as fcp_id');
-		$this->db->select(array('pc_local_withdrawal_limit','pc_local_expense_transaction_limit','pc_local_month_expense_limit'));	
+		$this->db->select(array('pc_local_withdrawal_limit','pc_local_expense_transaction_limit','pc_local_month_expense_limit'));
 		$project_with_pc_guideline_limits = $this->db->get_where('projectsdetails',array('status'=>1))->result_array();
-		
+
 		$grouped_by_fcp_id = $this->group_data_by_fcp_id($project_with_pc_guideline_limits);
-						
+
 		return $grouped_by_fcp_id;
 	}
-	
+
 	public function prod_pc_limit_per_transaction_by_type_model($month,$limit_type = 'per_withdrawal'){
-		
-		$pc_guideline_column_name = 'pc_local_withdrawal_limit'; 
-		
+
+		$pc_guideline_column_name = 'pc_local_withdrawal_limit';
+
 		if($limit_type == 'per_transaction'){
 			$pc_guideline_column_name = 'pc_local_expense_transaction_limit';
 		}elseif($limit_type == 'per_month'){
 			$pc_guideline_column_name = 'pc_local_month_expense_limit';
 		}
-		
+
 		$this->db->cache_on();
 		$project_with_pc_guideline_limits = $this->prod_project_with_pc_guideline_limits_model();
-		
+
 		$db_call = 'CALL get_max_pc_withdrawal_transactions("'.date('Y-m-01',strtotime($month)).'","'.date('Y-m-t',strtotime($month)).'","'.$limit_type.'")';
-		
-		$pc_withdrawal_result = $this->db->query($db_call)->result_array(); 		
-		
+
+		$pc_withdrawal_result = $this->db->query($db_call)->result_array();
+
 		$this->db->cache_off();
-		
+
 		$pc_per_withdrawal_limit = array();
-		
+
 		foreach($pc_withdrawal_result as $pc_withdrawal){
 			$pc_per_withdrawal_limit[$pc_withdrawal['fcp_id']]['fcp_id'] = $pc_withdrawal['fcp_id'];
 			$pc_per_withdrawal_limit[$pc_withdrawal['fcp_id']]['limit_compliance_flag'] = 'No';
-			
-			if($project_with_pc_guideline_limits[$pc_withdrawal['fcp_id']][$pc_guideline_column_name] > $pc_withdrawal['cost'] ){
-			
+
+			if(($project_with_pc_guideline_limits[$pc_withdrawal['fcp_id']][$pc_guideline_column_name] <=> 0.00) == 0){
+				$pc_per_withdrawal_limit[$pc_withdrawal['fcp_id']]['limit_compliance_flag'] = 'Not Set';
+			}elseif($project_with_pc_guideline_limits[$pc_withdrawal['fcp_id']][$pc_guideline_column_name] > $pc_withdrawal['cost'] ){
+
 				$pc_per_withdrawal_limit[$pc_withdrawal['fcp_id']]['limit_compliance_flag'] = 'Yes';
-				
+
 			}
 		}
-		
-		
-		
+
+
+
 		return $pc_per_withdrawal_limit;
 	}
-	
+
 	public function prod_cash_received_in_month_model($month){
 		$this->db->cache_on();
 		$query_conditon = "voucher_header.TDate BETWEEN '".date('Y-m-01',strtotime($month))."' AND '".date("Y-m-t",strtotime($month))."' AND voucher_header.VType='CR'";
-		
+
 		$this->db->select_sum('voucher_body.Cost');
 		$this->db->select(array('voucher_header.icpNo'));
 		$this->db->where($query_conditon);
 		$this->db->where(array('ci_income='=>1));
 		$this->db->group_by(array('voucher_header.icpNo'));
 		$this->db->join('voucher_body','voucher_body.hID=voucher_header.hID');
-		$this->db->join('accounts','accounts.AccNo = voucher_body.AccNo');		
+		$this->db->join('accounts','accounts.AccNo = voucher_body.AccNo');
 		$cash_received_in_month = $this->db->get('voucher_header')->result_object();
 		$this->db->cache_off();
-		
+
 		$cr_array = array();
-		
+
 		$cnt = 0;
 		foreach($cash_received_in_month as $row){
 			$cr_array[$row->icpNo]['fcp_id'] = $row->Cost;
 			$cr_array[$row->icpNo]['closure_date'] = $row->Cost;
 			$cr_array[$row->icpNo]['cash_received_in_month_amount'] = $row->Cost;
-			
+
 			$cnt++;
 		}
-		
+
 		return $cr_array;
 	}
 
@@ -2003,14 +2005,14 @@ class Finance_model extends CI_Model {
 	//Switch Environment method for model (prod/test) called in callback methods and build_dashboard_array method
 
 	public function switch_environment(...$args) {
-			
-		//0=>$month, 1=>$test_method, 2=>$prod_method, 
-		
-		$month = array_shift($args); 
-		$test_method = array_shift($args); 
+
+		//0=>$month, 1=>$test_method, 2=>$prod_method,
+
+		$month = array_shift($args);
+		$test_method = array_shift($args);
 		$prod_method = array_shift($args);
 		$extra_args =  !empty($args)?implode(',', $args):"";
-		
+
 		if ($this -> config -> item('environment') == 'test') {
 			return $this -> $test_method();
 		} elseif ($this -> config -> item('environment') == 'prod') {
@@ -2146,7 +2148,7 @@ class Finance_model extends CI_Model {
 
 		return $uncleared_cash_recieved_in_amonth;
 	}
-	
+
 	 function prod_uncleared_cheques_data_model($month) {
 
 		$uncleared_cheques_in_amonth = array();
@@ -2161,7 +2163,7 @@ class Finance_model extends CI_Model {
 
 		return $uncleared_cheques_in_amonth;
 	}
-	
+
 
 	private function calculate_pc_chqs_totals($vtype, $month) {
 
@@ -2188,7 +2190,7 @@ class Finance_model extends CI_Model {
 		return $total_pc_or_chqs;
 
 	}
-	
+
 	private function calculate_uncleared_cash_recieved_and_chqs($vtype, $month) {
 
 		$count_of_cr_and_chq = array();
@@ -2196,11 +2198,11 @@ class Finance_model extends CI_Model {
 		//Get the first and last of the month
 		$first_day_of_month = date('Y-m-01', strtotime($month));
 		$last_day_of_month = date('Y-m-t', strtotime($month));
-		
+
 		//select icpNo, tdate,chqstate,clrmonth from voucher_header where chqstate=0 limit 10
-		
+
 		$this -> db -> cache_on();
-		
+
 		$this->db->select(array('icpNo'));
 		$this->db->select_sum('totals');
 		$this -> db -> group_by(array('icpNo','vtype'));
@@ -2209,8 +2211,8 @@ class Finance_model extends CI_Model {
 		$this -> db -> where('vtype',$vtype);
 		$this->db->where('chqstate =',0);
 		$this->db->where('DATEDIFF(NOW(), tdate) >',$this->config->item('allowed_uncleared_days'));
-		
-		
+
+
 		$count_of_cr_and_chq = $this -> db -> get("voucher_header") -> result_array();
 
         $this -> db -> cache_off();
@@ -2241,5 +2243,5 @@ class Finance_model extends CI_Model {
 	 * End of of finance model code.............................................................
       * ....................................................................
 	 */
-	
+
 }
