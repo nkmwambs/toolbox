@@ -294,8 +294,9 @@ if(empty($none_requested_params) && empty($requested_params)){
 
 		var datatable = $(".datatable").dataTable({
 			dom : 'lBfrtip',
-			buttons : ['pdf', 'csv', 'excel', 'copy']
-
+			buttons : ['pdf', 'csv', 'excel', 'copy'],
+			lengthMenu: [[25,50, 100, 150,-1], [25,50 ,100,150 ,"All"]],
+			pageLength: 25
 		});
 
 		$(".dataTables_wrapper select").select2({
