@@ -33,7 +33,7 @@ class Crons extends CI_Controller {
 		//$this->db->cache_delete('accountant', 'dasboard');
 		$dir = "accountant+dashboard";
 		$this -> emptyDir($dir);
-		rmdir($dir);
+		//rmdir($dir);
 	}
 
 	public function minute_jobs() {
