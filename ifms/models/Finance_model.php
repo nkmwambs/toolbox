@@ -1583,33 +1583,33 @@ class Finance_model extends CI_Model {
 
 	}
 
-	private function test_fcp_local_pc_guideline_data_model() {
-
-		$fcp_local_pc_guideline_data = array();
-
-		//KE0200 array
-		$fcp_local_pc_guideline_data[1]['fcp_id'] = 'KE0200';
-		$fcp_local_pc_guideline_data[1]['pc_local_month_expense_limit'] = 0.89;
-
-		//KE0215 array
-		$fcp_local_pc_guideline_data[2]['fcp_id'] = 'KE0215';
-		$fcp_local_pc_guideline_data[2]['pc_local_month_expense_limit'] = 0.89;
-
-		//KE0300 array
-		$fcp_local_pc_guideline_data[3]['fcp_id'] = 'KE0300';
-		$fcp_local_pc_guideline_data[3]['pc_local_month_expense_limit'] = 98.09;
-
-		//KE0320 array
-		$fcp_local_pc_guideline_data[4]['fcp_id'] = 'KE0320';
-		$fcp_local_pc_guideline_data[4]['pc_local_month_expense_limit'] = 17.1;
-
-		//KE0540 array
-		$fcp_local_pc_guideline_data[5]['fcp_id'] = 'KE0540';
-		$fcp_local_pc_guideline_data[5]['pc_local_month_expense_limit'] = 12.9;
-
-		return $fcp_local_pc_guideline_data;
-
-	}
+	// private function test_fcp_local_pc_guideline_data_model() {
+// 
+		// $fcp_local_pc_guideline_data = array();
+// 
+		// //KE0200 array
+		// $fcp_local_pc_guideline_data[1]['fcp_id'] = 'KE0200';
+		// $fcp_local_pc_guideline_data[1]['pc_local_month_expense_limit'] = 0.89;
+// 
+		// //KE0215 array
+		// $fcp_local_pc_guideline_data[2]['fcp_id'] = 'KE0215';
+		// $fcp_local_pc_guideline_data[2]['pc_local_month_expense_limit'] = 0.89;
+// 
+		// //KE0300 array
+		// $fcp_local_pc_guideline_data[3]['fcp_id'] = 'KE0300';
+		// $fcp_local_pc_guideline_data[3]['pc_local_month_expense_limit'] = 98.09;
+// 
+		// //KE0320 array
+		// $fcp_local_pc_guideline_data[4]['fcp_id'] = 'KE0320';
+		// $fcp_local_pc_guideline_data[4]['pc_local_month_expense_limit'] = 17.1;
+// 
+		// //KE0540 array
+		// $fcp_local_pc_guideline_data[5]['fcp_id'] = 'KE0540';
+		// $fcp_local_pc_guideline_data[5]['pc_local_month_expense_limit'] = 12.9;
+// 
+		// return $fcp_local_pc_guideline_data;
+// 
+	// }
 
 	private function test_statement_bank_balance_data_model() {
 
@@ -2221,20 +2221,20 @@ class Finance_model extends CI_Model {
 
 	}
 
-	function prod_fcp_local_pc_guideline_data_model($month) {
-		//Query the projectsdetails to get the icpNo and pc_local_guideline
-		$fcps_with_local_pc_guidelines = $this -> db -> select(array('icpNo', 'pc_local_month_expense_limit')) -> get('projectsdetails') -> result_array();
-
-		//Construct the array that will be displayed on the dashboard
-		$fcps_with_local_pc_guidelines_array = array();
-
-		foreach ($fcps_with_local_pc_guidelines as $fcps_with_local_pc_guideline) {
-			$fcps_with_local_pc_guidelines_array[$fcps_with_local_pc_guideline['icpNo']]['fcp_id'] = $fcps_with_local_pc_guideline['icpNo'];
-			$fcps_with_local_pc_guidelines_array[$fcps_with_local_pc_guideline['icpNo']]['pc_local_month_expense_limit'] = $fcps_with_local_pc_guideline['pc_local_month_expense_limit'];
-		}
-
-		return $fcps_with_local_pc_guidelines_array;
-	}
+	// function prod_fcp_local_pc_guideline_data_model($month) {
+		// //Query the projectsdetails to get the icpNo and pc_local_guideline
+		// $fcps_with_local_pc_guidelines = $this -> db -> select(array('icpNo', 'pc_local_month_expense_limit')) -> get('projectsdetails') -> result_array();
+// 
+		// //Construct the array that will be displayed on the dashboard
+		// $fcps_with_local_pc_guidelines_array = array();
+// 
+		// foreach ($fcps_with_local_pc_guidelines as $fcps_with_local_pc_guideline) {
+			// $fcps_with_local_pc_guidelines_array[$fcps_with_local_pc_guideline['icpNo']]['fcp_id'] = $fcps_with_local_pc_guideline['icpNo'];
+			// $fcps_with_local_pc_guidelines_array[$fcps_with_local_pc_guideline['icpNo']]['pc_local_month_expense_limit'] = $fcps_with_local_pc_guideline['pc_local_month_expense_limit'];
+		// }
+// 
+		// return $fcps_with_local_pc_guidelines_array;
+	// }
 
 
 

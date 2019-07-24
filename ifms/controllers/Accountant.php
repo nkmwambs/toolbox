@@ -18,7 +18,8 @@ class Accountant extends CI_Controller
 		// $this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
 		// $this->output->set_header('Pragma: no-cache');
 		
-		$this->output->cache(30);
+		//$this->output->cache(30);
+		$this->output->delete_cache();
     }
     
     /***default functin, redirects to login page if no admin logged in yet***/
