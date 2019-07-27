@@ -445,6 +445,8 @@ class Finance_dashboard {
 		$parameters_array = $this -> CI -> finance_model -> switch_environment('', 'test_dashboard_parameters_model', 'prod_dashboard_parameters_model');
 
 		$final_grid_array = array();
+		
+		$final_grid_array['benchmark']['pc_local_expense_transaction_limit'] = $this->CI->benchmark->elapsed_time('pc_local_expense_transaction_limit', 'pc_local_expense_transaction_limit');
 
 		$final_grid_array['fcps_with_risks'] = array();
 

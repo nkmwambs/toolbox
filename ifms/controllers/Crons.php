@@ -28,19 +28,25 @@ class Crons extends CI_Controller {
 		}
 	}
 
-	private function clear_cached_data() {
+	private function clear_database_cached_data() {
 
 		$database_cache_dir = "accountant+dashboard";
-		$page_cache_dir = "ifms/cache";
-		
+
 		$this -> emptyDir($database_cache_dir);
-		$this -> emptyDir($page_cache_dir);
 		
 		rmdir($database_cache_dir);
 	}
+	
+	private function clear_page_cached_data() {
+
+		$page_cache_dir = "ifms/cache";
+		
+		$this -> emptyDir($page_cache_dir);
+
+	}
 
 	public function minute_jobs() {
-		$this -> clear_cached_data();
+		
 	}
 
 	public function semi_hourly_jobs() {
@@ -48,11 +54,11 @@ class Crons extends CI_Controller {
 	}
 
 	public function hourly_jobs() {
-
+		$this -> clear_page_cached_data();
 	}
 
 	public function daily_jobs() {
-
+		$this -> clear_database_cached_data();
 	}
 
 	public function weekly_jobs() {
