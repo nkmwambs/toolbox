@@ -1,11 +1,15 @@
 <?php 
 
+print_r($this->finance_model->pc_limit_per_month);
+
+
 // Avoid the timeout of execution error on dashboard  file
 ini_set("max_execution_time", 0);
 
 //print_r($this->finance_model->prod_cash_received_in_month_model('2018-01-01'));
 
 $grid_array = $this -> finance_dashboard -> build_dashboard_array($month);
+
 
 //print_r($grid_array['benchmark']);
 

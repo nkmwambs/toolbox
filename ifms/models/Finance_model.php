@@ -8,12 +8,19 @@ class Finance_model extends CI_Model {
 	private $table_prefix = "";
 	
 	private $pc_local_guide_line_data = array();
+	
+	public $pc_limit_by_type = array();
+	
+	private $month = "";
 		
     function __construct() {
         parent::__construct();
 		$this->load->database();
 		
-		$this->pc_local_guide_line_data = $this->get_pc_local_guide_line_data();
+		$this->month = $this->uri->segment(3,strtotime(date('Y-m-01')));
+		
+		$this->pc_local_guide_line_data = $this->get_pc_local_guide_line_data(date("Y-m-01",$this->month));
+		$this->pc_limit_by_type = $this->prod_pc_limit_by_type_model(date("Y-m-01",$this->month));
     }
 
     function clear_cache() {
@@ -1294,7 +1301,9 @@ class Finance_model extends CI_Model {
 		return $group_by_fcp_id_array;
 	}
 
-
+	//Prod data arrays
+	
+	
 
 	//Test Models Methods
 
@@ -1825,42 +1834,104 @@ class Finance_model extends CI_Model {
 		return $results;
 	}
 	
-	public function prod_pc_limit_per_transaction_by_type_model($month,$limit_type = 'per_withdrawal'){
+	// public function prod_pc_limit_per_month_model($month){
+		// $project_with_pc_guideline_limits = $this->prod_project_with_pc_guideline_limits_model();
+		// $limit_type = "per_month";	
+		// $db_call = 'CALL get_max_pc_withdrawal_transactions("'.date('Y-m-01',strtotime($month)).'","'.date('Y-m-t',strtotime($month)).'","'.$limit_type.'")';
+// 
+		// $pc_withdrawal_result = $this->db->query($db_call)->result_array();
+// 
+		// $pc_per_withdrawal_limit = array();
+// 
+		// foreach($pc_withdrawal_result as $pc_withdrawal){
+			// $pc_per_withdrawal_limit[$pc_withdrawal['fcp_id']]['fcp_id'] = $pc_withdrawal['fcp_id'];
+			// $pc_per_withdrawal_limit[$pc_withdrawal['fcp_id']]['limit_compliance_flag'] = 'No';
+// 
+			// if(($project_with_pc_guideline_limits[$pc_withdrawal['fcp_id']][$pc_guideline_column_name] <=> 0.00) == 0){
+				// $pc_per_withdrawal_limit[$pc_withdrawal['fcp_id']]['limit_compliance_flag'] = 'Not Set';
+			// }elseif($project_with_pc_guideline_limits[$pc_withdrawal['fcp_id']][$pc_guideline_column_name] > $pc_withdrawal['cost'] ){
+// 
+				// $pc_per_withdrawal_limit[$pc_withdrawal['fcp_id']]['limit_compliance_flag'] = 'Yes';
+// 
+			// }
+		// }
+// 
+		// return $pc_withdrawal_result;
+	// }
+	
+	// public function prod_pc_limit_per_transaction_by_type_model($month,$limit_type = 'per_withdrawal'){
+// 			
+		// $this->benchmark->mark('prod_pc_limit_per_transaction_by_type_model_start');
+// 		
+		// $pc_guideline_column_name = 'pc_local_withdrawal_limit';
+// 
+		// if($limit_type == 'per_transaction'){
+			// $pc_guideline_column_name = 'pc_local_expense_transaction_limit';
+		// }elseif($limit_type == 'per_month'){
+			// $pc_guideline_column_name = 'pc_local_month_expense_limit';
+		// }
+// 
+		// $project_with_pc_guideline_limits = $this->prod_project_with_pc_guideline_limits_model();
+// 
+		// $db_call = 'CALL get_max_pc_withdrawal_transactions("'.date('Y-m-01',strtotime($month)).'","'.date('Y-m-t',strtotime($month)).'","'.$limit_type.'")';
+// 
+		// $pc_withdrawal_result = $this->db->query($db_call)->result_array();
+		// //$pc_withdrawal_result = $this->pc_local_guide_line_data['per_month'];
+// 
+		// $pc_per_withdrawal_limit = array();
+// 
+		// foreach($pc_withdrawal_result as $pc_withdrawal){
+			// $pc_per_withdrawal_limit[$pc_withdrawal['fcp_id']]['fcp_id'] = $pc_withdrawal['fcp_id'];
+			// $pc_per_withdrawal_limit[$pc_withdrawal['fcp_id']]['limit_compliance_flag'] = 'No';
+// 
+			// if(($project_with_pc_guideline_limits[$pc_withdrawal['fcp_id']][$pc_guideline_column_name] <=> 0.00) == 0){
+				// $pc_per_withdrawal_limit[$pc_withdrawal['fcp_id']]['limit_compliance_flag'] = 'Not Set';
+			// }elseif($project_with_pc_guideline_limits[$pc_withdrawal['fcp_id']][$pc_guideline_column_name] > $pc_withdrawal['cost'] ){
+// 
+				// $pc_per_withdrawal_limit[$pc_withdrawal['fcp_id']]['limit_compliance_flag'] = 'Yes';
+// 
+			// }
+		// }
+// 
+		// $this->benchmark->mark('prod_pc_limit_per_transaction_by_type_model_end');
+// 
+		// return $pc_per_withdrawal_limit;
+	// }
+	
+	public function prod_pc_limit_by_type_model($month){
 			
-		$this->benchmark->mark('prod_pc_limit_per_transaction_by_type_model_start');
+		$this->benchmark->mark('prod_pc_limit_by_type_model_start');
 		
-		$pc_guideline_column_name = 'pc_local_withdrawal_limit';
-
-		if($limit_type == 'per_transaction'){
-			$pc_guideline_column_name = 'pc_local_expense_transaction_limit';
-		}elseif($limit_type == 'per_month'){
-			$pc_guideline_column_name = 'pc_local_month_expense_limit';
-		}
-
+		
 		$project_with_pc_guideline_limits = $this->prod_project_with_pc_guideline_limits_model();
-
-		$db_call = 'CALL get_max_pc_withdrawal_transactions("'.date('Y-m-01',strtotime($month)).'","'.date('Y-m-t',strtotime($month)).'","'.$limit_type.'")';
-
-		$pc_withdrawal_result = $this->db->query($db_call)->result_array();
-		//$pc_withdrawal_result = $this->pc_local_guide_line_data['per_month'];
-
+		
+		$type_array = array('per_withdrawal'=>'pc_local_withdrawal_limit','per_month'=>'pc_local_month_expense_limit','per_transaction'=>'pc_local_expense_transaction_limit');
+		
 		$pc_per_withdrawal_limit = array();
+		
+		foreach($type_array as $limit_type=>$pc_guideline_column_name){
+			$this->db->cache_on();	
+			$db_call = 'CALL get_max_pc_withdrawal_transactions("'.date('Y-m-01',strtotime($month)).'","'.date('Y-m-t',strtotime($month)).'","'.$limit_type.'")';
 
-		foreach($pc_withdrawal_result as $pc_withdrawal){
-			$pc_per_withdrawal_limit[$pc_withdrawal['fcp_id']]['fcp_id'] = $pc_withdrawal['fcp_id'];
-			$pc_per_withdrawal_limit[$pc_withdrawal['fcp_id']]['limit_compliance_flag'] = 'No';
-
-			if(($project_with_pc_guideline_limits[$pc_withdrawal['fcp_id']][$pc_guideline_column_name] <=> 0.00) == 0){
-				$pc_per_withdrawal_limit[$pc_withdrawal['fcp_id']]['limit_compliance_flag'] = 'Not Set';
-			}elseif($project_with_pc_guideline_limits[$pc_withdrawal['fcp_id']][$pc_guideline_column_name] > $pc_withdrawal['cost'] ){
-
-				$pc_per_withdrawal_limit[$pc_withdrawal['fcp_id']]['limit_compliance_flag'] = 'Yes';
-
-			}
+			$pc_withdrawal_result = $this->db->query($db_call)->result_array();
+			$this->db->cache_off();
+	
+			foreach($pc_withdrawal_result as $pc_withdrawal){
+				$pc_per_withdrawal_limit[$limit_type][$pc_withdrawal['fcp_id']]['fcp_id'] = $pc_withdrawal['fcp_id'];
+				$pc_per_withdrawal_limit[$limit_type][$pc_withdrawal['fcp_id']]['limit_compliance_flag'] = 'No';
+	
+				if(($project_with_pc_guideline_limits[$pc_withdrawal['fcp_id']][$pc_guideline_column_name] <=> 0.00) == 0){
+					$pc_per_withdrawal_limit[$limit_type][$pc_withdrawal['fcp_id']]['limit_compliance_flag'] = 'Not Set';
+				}elseif($project_with_pc_guideline_limits[$pc_withdrawal['fcp_id']][$pc_guideline_column_name] > $pc_withdrawal['cost'] ){
+	
+					$pc_per_withdrawal_limit[$limit_type][$pc_withdrawal['fcp_id']]['limit_compliance_flag'] = 'Yes';
+	
+				}
+			}	
 		}
 
-		$this->benchmark->mark('prod_pc_limit_per_transaction_by_type_model_end');
-
+		$this->benchmark->mark('prod_pc_limit_by_type_model_end');
+		
 		return $pc_per_withdrawal_limit;
 	}
 

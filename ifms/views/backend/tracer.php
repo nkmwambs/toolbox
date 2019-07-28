@@ -1,11 +1,21 @@
+<?php
+
+//print_r($response);
+$grid_array = $response;
+?>
+
 <?php 
+
+$month = $this->uri->segment(3,strtotime(date('Y-m-01')));
+
+$month = date('Y-m-01',$month);
 
 // Avoid the timeout of execution error on dashboard  file
 ini_set("max_execution_time", 0);
 
 //print_r($this->finance_model->prod_cash_received_in_month_model('2018-01-01'));
 
-$grid_array = $this -> finance_dashboard -> build_dashboard_array($month);
+//$grid_array = $this -> finance_dashboard -> build_dashboard_array($month);
 
 //print_r($grid_array['benchmark']);
 
@@ -281,43 +291,3 @@ if(empty($none_requested_params) && empty($requested_params)){
 
 </div>
 <?php } ?>
-
-<script type="text/javascript">
-	jQuery(document).ready(function($) {
-
-		var datatable = $(".datatable").dataTable({
-			dom : 'lBfrtip',
-			buttons : ['pdf', 'csv', 'excel', 'copy'],
-			lengthMenu: [[25,50, 100, 150,-1], [25,50 ,100,150 ,"All"]],
-			pageLength: 25
-		});
-
-		$(".dataTables_wrapper select").select2({
-			minimumResultsForSearch : -1
-		});
-	});
-
-$('#btn_last_month ,#btn_next_month').on('click',function(ev){
-	
-	if($(this).attr('id')=='btn_last_month')
-	{
-		 var href='<?=base_url();?>ifms.php/accountant/dashboard/<?=strtotime(date('Y-m-t',strtotime('last day of previous month',strtotime($month))));?>';
-		 
-		 window.location.href=href;
-	}
-	else
-	{
-		var href='<?=base_url();?>ifms.php/accountant/dashboard/<?=strtotime(date('Y-m-t',strtotime('last day of next month',strtotime($month))));?>';
-		 
-		 window.location.href=href;
-	}
-	
-	ev.preventDefault();
-	
-});
-
-function modify_td_background_color(){
- 	
-}
-
-</script>

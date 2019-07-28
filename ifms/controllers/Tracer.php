@@ -10,8 +10,10 @@ class Tracer extends CI_controller{
 	}
 	
 	function execution_time($month){
-		$this->finance_dashboard->build_dashboard_array($month);
+		$month = date('Y-m-01',$month);
+		$data['response'] = $this->finance_dashboard->build_dashboard_array($month);
 		$this->output->enable_profiler(TRUE);
+		$this->load->view('backend/tracer',$data);
 	}
 	
 }
