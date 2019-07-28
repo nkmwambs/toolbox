@@ -1792,14 +1792,14 @@ class Finance_model extends CI_Model {
 	//Prod Models Methods
 
 	private function prod_project_with_pc_guideline_limits_model(){
-		//$this->benchmark->mark('prod_project_with_pc_guideline_limits_model_start');
+		$this->benchmark->mark('prod_project_with_pc_guideline_limits_model_start');
 		$this->db->select('icpNo as fcp_id');
 		$this->db->select(array('pc_local_withdrawal_limit','pc_local_expense_transaction_limit','pc_local_month_expense_limit'));
 		$project_with_pc_guideline_limits = $this->db->get_where('projectsdetails',array('status'=>1))->result_array();
 
 		$grouped_by_fcp_id = $this->group_data_by_fcp_id($project_with_pc_guideline_limits);
 		
-		//$this->benchmark->mark('prod_project_with_pc_guideline_limits_model_end');
+		$this->benchmark->mark('prod_project_with_pc_guideline_limits_model_end');
 		
 		return $grouped_by_fcp_id;
 	}
@@ -1827,7 +1827,7 @@ class Finance_model extends CI_Model {
 	
 	public function prod_pc_limit_per_transaction_by_type_model($month,$limit_type = 'per_withdrawal'){
 			
-		//$this->benchmark->mark('prod_pc_limit_per_transaction_by_type_model_start');
+		$this->benchmark->mark('prod_pc_limit_per_transaction_by_type_model_start');
 		
 		$pc_guideline_column_name = 'pc_local_withdrawal_limit';
 
@@ -1839,10 +1839,10 @@ class Finance_model extends CI_Model {
 
 		$project_with_pc_guideline_limits = $this->prod_project_with_pc_guideline_limits_model();
 
-		//$db_call = 'CALL get_max_pc_withdrawal_transactions("'.date('Y-m-01',strtotime($month)).'","'.date('Y-m-t',strtotime($month)).'","'.$limit_type.'")';
+		$db_call = 'CALL get_max_pc_withdrawal_transactions("'.date('Y-m-01',strtotime($month)).'","'.date('Y-m-t',strtotime($month)).'","'.$limit_type.'")';
 
-		//$pc_withdrawal_result = $this->db->query($db_call)->result_array();
-		$pc_withdrawal_result = $this->pc_local_guide_line_data['per_month'];
+		$pc_withdrawal_result = $this->db->query($db_call)->result_array();
+		//$pc_withdrawal_result = $this->pc_local_guide_line_data['per_month'];
 
 		$pc_per_withdrawal_limit = array();
 
@@ -1859,13 +1859,13 @@ class Finance_model extends CI_Model {
 			}
 		}
 
-		//$this->benchmark->mark('prod_pc_limit_per_transaction_by_type_model_end');
+		$this->benchmark->mark('prod_pc_limit_per_transaction_by_type_model_end');
 
 		return $pc_per_withdrawal_limit;
 	}
 
 	public function prod_cash_received_in_month_model($month){
-		//$this->benchmark->mark('prod_cash_received_in_month_model_start');
+		$this->benchmark->mark('prod_cash_received_in_month_model_start');
 		$this->db->cache_on();
 		$query_conditon = "voucher_header.TDate BETWEEN '".date('Y-m-01',strtotime($month))."' AND '".date("Y-m-t",strtotime($month))."' AND voucher_header.VType='CR'";
 
@@ -1890,13 +1890,13 @@ class Finance_model extends CI_Model {
 			$cnt++;
 		}
 		
-		//$this->benchmark->mark('prod_cash_received_in_month_model_end');
+		$this->benchmark->mark('prod_cash_received_in_month_model_end');
 		
 		return $cr_array;
 	}
 
 	public function prod_fcps_with_risk_model() {
-		//$this->benchmark->mark('prod_fcps_with_risk_model_start');
+		$this->benchmark->mark('prod_fcps_with_risk_model_start');
 		$fcp_array = array();
 
 		$data = $this -> db -> get_where($this -> table_prefix . 'projectsdetails', array('status='=>1)) -> result_array();
@@ -1908,11 +1908,11 @@ class Finance_model extends CI_Model {
 		}
 
 		return $fcp_array;
-		//$this->benchmark->mark('prod_fcps_with_risk_model_end');
+		$this->benchmark->mark('prod_fcps_with_risk_model_end');
 	}
 
 	private function prod_bank_statement_uploaded_model($month_bank_statement_uploaded) {
-		//$this->benchmark->mark('prod_bank_statement_uploaded_model_start');
+		$this->benchmark->mark('prod_bank_statement_uploaded_model_start');
 		$files = array();
 		try {
 			$dir_path = 'uploads/bank_statements';
@@ -1945,40 +1945,41 @@ class Finance_model extends CI_Model {
 		} catch(Exception $e) {
 
 		}
-		//$this->benchmark->mark('prod_bank_statement_uploaded_model_end');
+		$this->benchmark->mark('prod_bank_statement_uploaded_model_end');
 		return $files;
 
 	}
 
 	private function prod_statement_bank_balance_data_model($month) {
-		//$this->benchmark->mark('prod_statement_bank_balance_data_model_start');
+		$this->benchmark->mark('prod_statement_bank_balance_data_model_start');
 		$this -> db -> cache_on();
 		$statement_bank_balance = $this -> db -> get_where($this -> table_prefix . 'view_funds_statement_balance', array('closure_date' => $month)) -> result_array();
 		$this -> db -> cache_on();
-		//$this->benchmark->mark('prod_statement_bank_balance_data_model_end');
+		$this->benchmark->mark('prod_statement_bank_balance_data_model_end');
 		return $statement_bank_balance;
 	}
 
 	private function prod_book_bank_cash_balance_data_model($month) {
-		//$this->benchmark->mark('prod_book_bank_cash_balance_data_model_start');
+		$this->benchmark->mark('prod_book_bank_cash_balance_data_model_start');
 		$this -> db -> cache_on();
 		$bank_cash_balance_data = $this -> db -> get_where($this -> table_prefix . 'view_book_bank_balance', array('closure_date' => $month)) -> result_array();
 		$this -> db -> cache_off();
-		//$this->benchmark->mark('prod_book_bank_cash_balance_data_model_end');
+		$this->benchmark->mark('prod_book_bank_cash_balance_data_model_end');
 		return $bank_cash_balance_data;	
 	}
 
 	//We will have to pass month aurgumet in prod models
 	private function prod_mfr_submission_data_model($month) {
-
+		$this->benchmark->mark('prod_mfr_submission_data_model_start');
 		$this -> db -> cache_on();
 		$mfr_submission_data = $this -> db -> get_where($this -> table_prefix . 'view_opening_funds_balance', array('closure_date' => $month)) -> result_array();
 		$this -> db -> cache_off();
-
+		$this->benchmark->mark('prod_mfr_submission_data_model_end');
 		return $mfr_submission_data;
 	}
 
 	private function prod_dashboard_parameters_model() {
+		$this->benchmark->mark('prod_dashboard_parameters_model_start');	
 		$dashboard_params = array();
 
 		$data = $this -> db -> get($this -> table_prefix . 'dashboard_parameter') -> result_array();
@@ -1990,15 +1991,16 @@ class Finance_model extends CI_Model {
 			$dashboard_params[$parameter['dashboard_parameter_id']]['is_requested'] = $parameter['is_requested'];
 			$dashboard_params[$parameter['dashboard_parameter_id']]['display_on_dashboard'] = $parameter['display_on_dashboard'];
 		}
-
+		$this->benchmark->mark('prod_mfr_submission_data_model_end');
 		return $dashboard_params;
+		
 	}
 
 	//Switch Environment method for model (prod/test) called in callback methods and build_dashboard_array method
 
 	public function switch_environment(...$args) {
 
-		//0=>$month, 1=>$test_method, 2=>$prod_method,
+		$this->benchmark->mark('switch_environment_start');	
 
 		$month = array_shift($args);
 		$test_method = array_shift($args);
@@ -2006,17 +2008,19 @@ class Finance_model extends CI_Model {
 		$extra_args =  !empty($args)?implode(',', $args):"";
 
 		if ($this -> config -> item('environment') == 'test') {
+			$this->benchmark->mark('switch_environment_end');
 			return $this -> $test_method();
 		} elseif ($this -> config -> item('environment') == 'prod') {
-
+			$this->benchmark->mark('switch_environment_end');
 			return $this -> $prod_method($month,$extra_args);
 		}
+
 	}
 
 	//Transaction methods
 
 	function get_uncleared_transactions($vtype, $month) {
-
+		$this->benchmark->mark('get_uncleared_transactions_start');	
 		$amount_key = "";
 		$table = "";
 
@@ -2057,13 +2061,17 @@ class Finance_model extends CI_Model {
 		$transaction_array = $this -> db -> get($this -> table_prefix . $table) -> result_array();
 
 		$this -> db -> cache_off();
-
+		
+		$this->benchmark->mark('get_uncleared_transactions_end');	
+		
 		return $transaction_array;
 
 	}
 
 	function prod_deposit_in_transit_data_model($month) {
-
+		
+		$this->benchmark->mark('prod_deposit_in_transit_data_model_start');
+		
 		$transaction_arrays = array();
 
 		$get_uncleared_transactions = $this -> get_uncleared_transactions('CR', $month);
@@ -2073,12 +2081,14 @@ class Finance_model extends CI_Model {
 			$transaction_arrays[$transaction['fcp_id']]['closure_date'] = $month;
 			$transaction_arrays[$transaction['fcp_id']]['deposit_in_transit_amount'] = $transaction['deposit_in_transit_amount'];
 		}
-
+		
+		$this->benchmark->mark('prod_deposit_in_transit_data_model_end');
+		
 		return $transaction_arrays;
 	}
 
 	function prod_outstanding_cheques_data_model($month) {
-
+		$this->benchmark->mark('prod_outstanding_cheques_data_model_start');
 		$transaction_arrays = array();
 
 		$get_uncleared_transactions = $this -> get_uncleared_transactions('CHQ', $month);
@@ -2091,12 +2101,12 @@ class Finance_model extends CI_Model {
 			$transaction_arrays[$transaction['fcp_id']]['closure_date'] = $month;
 			$transaction_arrays[$transaction['fcp_id']]['outstanding_cheque_amount'] = $transaction['outstanding_cheque_amount'];
 		}
-
+		$this->benchmark->mark('prod_outstanding_cheques_data_model_end');
 		return $transaction_arrays;
 	}
 
 	function prod_total_for_pc_data_model($month) {
-
+		$this->benchmark->mark('prod_total_for_pc_data_model_start');
 		//Construct the array to dsipla the total transactions from PC
 		$total_pc_amount_in_amonth = array();
 
@@ -2107,12 +2117,12 @@ class Finance_model extends CI_Model {
 			$total_pc_amount_in_amonth[$total_pc['icpNo']]['fcp_id'] = $total_pc['icpNo'];
 			$total_pc_amount_in_amonth[$total_pc['icpNo']]['cost'] = $total_pc['cost'];
 		}
-
+		$this->benchmark->mark('prod_total_for_pc_data_model_end');
 		return $total_pc_amount_in_amonth;
 	}
 
 	function prod_total_for_chq_data_model($month) {
-
+		$this->benchmark->mark('prod_total_for_chq_data_model_start');
 		$total_chq_amount_in_amonth = array();
 
 		$total_chqs = $this -> calculate_pc_chqs_totals('CHQ', $month);
@@ -2122,12 +2132,12 @@ class Finance_model extends CI_Model {
 			$total_chq_amount_in_amonth[$total_chq['icpNo']]['fcp_id'] = $total_chq['icpNo'];
 			$total_chq_amount_in_amonth[$total_chq['icpNo']]['cost'] = $total_chq['cost'];
 		}
-
+		$this->benchmark->mark('prod_total_for_chq_data_model_end');
 		return $total_chq_amount_in_amonth;
 	}
 
     function prod_uncleared_cash_recieved_data_model($month) {
-
+		$this->benchmark->mark('prod_uncleared_cash_recieved_data_model_start');
 		$uncleared_cash_recieved_in_amonth = array();
 
 		$total_uncleared_cash_recieved= $this -> calculate_uncleared_cash_recieved_and_chqs('CR', $month);
@@ -2137,12 +2147,12 @@ class Finance_model extends CI_Model {
 			$uncleared_cash_recieved_in_amonth[$total_uncleared_cr['icpNo']]['fcp_id'] = $total_uncleared_cr['icpNo'];
 			$uncleared_cash_recieved_in_amonth[$total_uncleared_cr['icpNo']]['totals'] = $total_uncleared_cr['totals'];
 		}
-
+		$this->benchmark->mark('prod_uncleared_cash_recieved_data_model_end');
 		return $uncleared_cash_recieved_in_amonth;
 	}
 
 	 function prod_uncleared_cheques_data_model($month) {
-
+		$this->benchmark->mark('prod_uncleared_cheques_data_model_start');
 		$uncleared_cheques_in_amonth = array();
 
 		$total_uncleared_cheques= $this -> calculate_uncleared_cash_recieved_and_chqs('CHQ', $month);
@@ -2152,13 +2162,13 @@ class Finance_model extends CI_Model {
 			$uncleared_cheques_in_amonth[$total_uncleared_chqs['icpNo']]['fcp_id'] = $total_uncleared_chqs['icpNo'];
 			$uncleared_cheques_in_amonth[$total_uncleared_chqs['icpNo']]['totals'] = $total_uncleared_chqs['totals'];
 		}
-
+		$this->benchmark->mark('prod_uncleared_cheques_data_model_end');
 		return $uncleared_cheques_in_amonth;
 	}
 
 
 	private function calculate_pc_chqs_totals($vtype, $month) {
-
+		$this->benchmark->mark('calculate_pc_chqs_totals_start');
 		$total_pc_or_chqs = array();
 
 		//Get the first and last of the month
@@ -2178,13 +2188,13 @@ class Finance_model extends CI_Model {
 		$total_pc_or_chqs = $this -> db -> get("voucher_header") -> result_array();
 
 		$this -> db -> cache_off();
-
+		$this->benchmark->mark('calculate_pc_chqs_totals_end');
 		return $total_pc_or_chqs;
 
 	}
 
 	private function calculate_uncleared_cash_recieved_and_chqs($vtype, $month) {
-
+		$this->benchmark->mark('calculate_uncleared_cash_recieved_and_chqs_start');
 		$count_of_cr_and_chq = array();
 
 		//Get the first and last of the month
@@ -2207,7 +2217,7 @@ class Finance_model extends CI_Model {
 		$count_of_cr_and_chq = $this -> db -> get("voucher_header") -> result_array();
 
         $this -> db -> cache_off();
-
+		$this->benchmark->mark('calculate_uncleared_cash_recieved_and_chqs_end');
 		return $count_of_cr_and_chq;
 
 	}

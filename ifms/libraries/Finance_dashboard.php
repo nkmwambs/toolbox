@@ -57,7 +57,7 @@ class Finance_dashboard {
 	}
 
 	private function group_data_by_fcp_id($database_results) {
-
+		$this->CI->benchmark->mark('group_data_by_fcp_id_start');
 		$group_by_fcp_id_array = array();
 
 		foreach ($database_results as $row) {
@@ -67,7 +67,7 @@ class Finance_dashboard {
 			}
 
 		}
-
+		$this->CI->benchmark->mark('group_data_by_fcp_id_end');
 		return $group_by_fcp_id_array;
 	}
 
@@ -432,18 +432,20 @@ class Finance_dashboard {
 
 	public function build_dashboard_array($dashboard_month, $vtype = '') {
 
-		//$test = new Finance_testData();
+		$this->CI->benchmark->mark('build_dashboard_array_start');
 
 		$fcps_array_with_risk = '';
-
+		$this->CI->benchmark->mark('build_dashboard_array_switch_environ_start');
 		if ($this -> CI -> config -> item('environment') == 'test') {
 			$fcps_array_with_risk = $this -> CI -> finance_model -> test_fcps_with_risk_model();
 		} elseif ($this -> CI -> config -> item('environment') == 'prod') {
 			$fcps_array_with_risk = $this -> CI -> finance_model -> prod_fcps_with_risk_model();
 		}
-
+		
 		$parameters_array = $this -> CI -> finance_model -> switch_environment('', 'test_dashboard_parameters_model', 'prod_dashboard_parameters_model');
 
+		$this->CI->benchmark->mark('build_dashboard_array_switch_environ_end');
+		
 		$final_grid_array = array();
 		
 		//$final_grid_array['benchmark']['pc_local_expense_transaction_limit'] = $this->CI->benchmark->elapsed_time('pc_local_expense_transaction_limit', 'pc_local_expense_transaction_limit');
@@ -451,7 +453,9 @@ class Finance_dashboard {
 		$final_grid_array['fcps_with_risks'] = array();
 
 		$final_grid_array['parameters'] = array();
-
+		
+		$this->CI->benchmark->mark('build_dashboard_array_fcp_loop_start');
+		
 		foreach ($fcps_array_with_risk as $fcp_with_risk) {
 
 			$final_grid_array['fcps_with_risks'][$fcp_with_risk['fcp_id']]['risk'] = $fcp_with_risk['risk'];
@@ -467,14 +471,18 @@ class Finance_dashboard {
 			}
 
 		}
-
+		$this->CI->benchmark->mark('build_dashboard_array_fcp_loop_end');
+		
+		$this->CI->benchmark->mark('build_dashboard_array_param_loop_start');	
 		foreach ($parameters_array as $key => $value) {
 			if ($value['display_on_dashboard'] == 'yes') {
 				$final_grid_array['parameters'][$value['is_requested']][$key] = $value['dashboard_parameter_name'];
 			}
 
 		}
-
+		$this->CI->benchmark->mark('build_dashboard_array_param_loop_end');
+		
+		$this->CI->benchmark->mark('build_dashboard_array_end');
 		return $final_grid_array;
 	}
 
