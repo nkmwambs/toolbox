@@ -446,7 +446,7 @@ class Finance_dashboard {
 
 		$final_grid_array = array();
 		
-		$final_grid_array['benchmark']['pc_local_expense_transaction_limit'] = $this->CI->benchmark->elapsed_time('pc_local_expense_transaction_limit', 'pc_local_expense_transaction_limit');
+		//$final_grid_array['benchmark']['pc_local_expense_transaction_limit'] = $this->CI->benchmark->elapsed_time('pc_local_expense_transaction_limit', 'pc_local_expense_transaction_limit');
 
 		$final_grid_array['fcps_with_risks'] = array();
 
@@ -459,8 +459,10 @@ class Finance_dashboard {
 			foreach ($parameters_array as $key => $value) {
 
 				if ($value['display_on_dashboard'] == 'yes') {
-
+					$this->CI->benchmark->mark($value['result_method'].'_start');
 					$final_grid_array['fcps_with_risks'][$fcp_with_risk['fcp_id']]['params'][$key] = call_user_func(array($this, $value['result_method']), $fcp_with_risk['fcp_id'], $dashboard_month, $vtype);
+					$this->CI->benchmark->mark($value['result_method'].'_end');
+					
 				}
 			}
 

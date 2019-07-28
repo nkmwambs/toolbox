@@ -5,7 +5,8 @@ if (!defined('BASEPATH'))
 
 class Finance_model extends CI_Model {
 	
-    
+	private $table_prefix = "";
+		
     function __construct() {
         parent::__construct();
     }
@@ -1786,18 +1787,22 @@ class Finance_model extends CI_Model {
 	//Prod Models Methods
 
 	private function prod_project_with_pc_guideline_limits_model(){
+		//$this->benchmark->mark('prod_project_with_pc_guideline_limits_model_start');
 		$this->db->select('icpNo as fcp_id');
 		$this->db->select(array('pc_local_withdrawal_limit','pc_local_expense_transaction_limit','pc_local_month_expense_limit'));
 		$project_with_pc_guideline_limits = $this->db->get_where('projectsdetails',array('status'=>1))->result_array();
 
 		$grouped_by_fcp_id = $this->group_data_by_fcp_id($project_with_pc_guideline_limits);
-
+		
+		//$this->benchmark->mark('prod_project_with_pc_guideline_limits_model_end');
+		
 		return $grouped_by_fcp_id;
 	}
+	
 
 	public function prod_pc_limit_per_transaction_by_type_model($month,$limit_type = 'per_withdrawal'){
 			
-		$this->benchmark->mark('prod_pc_limit_per_transaction_by_type_model');
+		//$this->benchmark->mark('prod_pc_limit_per_transaction_by_type_model_start');
 		
 		$pc_guideline_column_name = 'pc_local_withdrawal_limit';
 
@@ -1829,12 +1834,13 @@ class Finance_model extends CI_Model {
 			}
 		}
 
-		$this->benchmark->mark('prod_pc_limit_per_transaction_by_type_model');
+		//$this->benchmark->mark('prod_pc_limit_per_transaction_by_type_model_end');
 
 		return $pc_per_withdrawal_limit;
 	}
 
 	public function prod_cash_received_in_month_model($month){
+		//$this->benchmark->mark('prod_cash_received_in_month_model_start');
 		$this->db->cache_on();
 		$query_conditon = "voucher_header.TDate BETWEEN '".date('Y-m-01',strtotime($month))."' AND '".date("Y-m-t",strtotime($month))."' AND voucher_header.VType='CR'";
 
@@ -1858,12 +1864,14 @@ class Finance_model extends CI_Model {
 
 			$cnt++;
 		}
-
+		
+		//$this->benchmark->mark('prod_cash_received_in_month_model_end');
+		
 		return $cr_array;
 	}
 
 	public function prod_fcps_with_risk_model() {
-
+		//$this->benchmark->mark('prod_fcps_with_risk_model_start');
 		$fcp_array = array();
 
 		$data = $this -> db -> get_where($this -> table_prefix . 'projectsdetails', array('status='=>1)) -> result_array();
@@ -1875,10 +1883,11 @@ class Finance_model extends CI_Model {
 		}
 
 		return $fcp_array;
+		//$this->benchmark->mark('prod_fcps_with_risk_model_end');
 	}
 
 	private function prod_bank_statement_uploaded_model($month_bank_statement_uploaded) {
-
+		//$this->benchmark->mark('prod_bank_statement_uploaded_model_start');
 		$files = array();
 		try {
 			$dir_path = 'uploads/bank_statements';
@@ -1911,27 +1920,27 @@ class Finance_model extends CI_Model {
 		} catch(Exception $e) {
 
 		}
-
+		//$this->benchmark->mark('prod_bank_statement_uploaded_model_end');
 		return $files;
 
 	}
 
 	private function prod_statement_bank_balance_data_model($month) {
-
+		//$this->benchmark->mark('prod_statement_bank_balance_data_model_start');
 		$this -> db -> cache_on();
 		$statement_bank_balance = $this -> db -> get_where($this -> table_prefix . 'view_funds_statement_balance', array('closure_date' => $month)) -> result_array();
 		$this -> db -> cache_on();
-
+		//$this->benchmark->mark('prod_statement_bank_balance_data_model_end');
 		return $statement_bank_balance;
 	}
 
 	private function prod_book_bank_cash_balance_data_model($month) {
-
+		//$this->benchmark->mark('prod_book_bank_cash_balance_data_model_start');
 		$this -> db -> cache_on();
 		$bank_cash_balance_data = $this -> db -> get_where($this -> table_prefix . 'view_book_bank_balance', array('closure_date' => $month)) -> result_array();
 		$this -> db -> cache_off();
-
-		return $bank_cash_balance_data;
+		//$this->benchmark->mark('prod_book_bank_cash_balance_data_model_end');
+		return $bank_cash_balance_data;	
 	}
 
 	//We will have to pass month aurgumet in prod models
@@ -2164,11 +2173,11 @@ class Finance_model extends CI_Model {
 		$this->db->select(array('icpNo'));
 		$this->db->select_sum('totals');
 		$this -> db -> group_by(array('icpNo','vtype'));
-		$this -> db -> where('tdate >= ', $first_day_of_month);
-		$this -> db -> where('tdate <= ', $last_day_of_month);
-		$this -> db -> where('vtype',$vtype);
-		$this->db->where('chqstate =',0);
-		$this->db->where('DATEDIFF(NOW(), tdate) >',$this->config->item('allowed_uncleared_days'));
+		$this -> db -> where('TDate >= ', $first_day_of_month);
+		$this -> db -> where('TDate <= ', $last_day_of_month);
+		$this -> db -> where('VType',$vtype);
+		$this->db->where('chqState =',0);
+		$this->db->where('DATEDIFF(NOW(), TDate) >',$this->config->item('allowed_uncleared_days'));
 		
 		$count_of_cr_and_chq = $this -> db -> get("voucher_header") -> result_array();
 
@@ -2177,6 +2186,7 @@ class Finance_model extends CI_Model {
 		return $count_of_cr_and_chq;
 
 	}
+	
 	
 	/** Finance Dashbaord Model Methods - End **/
 }
