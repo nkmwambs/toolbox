@@ -13,7 +13,7 @@ class Accountant extends CI_Controller
         $this->load->library('session');
 		create_config_items();
 		$this->load->library('finance_dashboard');
-		//$this->load->model('finance_model');
+		$this->load->model('finance_model');
 			
        /*cache control*/
 		// $this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');

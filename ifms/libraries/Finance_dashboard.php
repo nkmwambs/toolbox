@@ -103,10 +103,10 @@ class Finance_dashboard {
 
 		$flag = "Yes";
 		
-		$pc_per_withdrawal_limit = isset($this->CI->finance_model->pc_limit_by_type['per_withdrawal'][$fcp])?$this->CI->finance_model->pc_limit_by_type['per_withdrawal'][$fcp]:array();
+		$pc_per_withdrawal_limit = isset($this->CI->finance_model->pc_limit_by_type['per_withdrawal'][$fcp])?$this->CI->finance_model->pc_limit_by_type['per_withdrawal'][$fcp]:"";
 		
-		if(!empty($pc_per_withdrawal_limit)){
-			$flag = isset($pc_per_withdrawal_limit['per_withdrawal'][$fcp]['limit_compliance_flag'])?$pc_per_withdrawal_limit['per_withdrawal'][$fcp]['limit_compliance_flag']:"Yes";	
+		if(is_array($pc_per_withdrawal_limit)){
+			$flag = $pc_per_withdrawal_limit['limit_compliance_flag'];	
 		}
 		
 		return $flag;
@@ -116,10 +116,10 @@ class Finance_dashboard {
 
 		$flag = "Yes";
 		
-		$pc_per_withdrawal_limit = isset($this->CI->finance_model->pc_limit_by_type['per_transaction'][$fcp])?$this->CI->finance_model->pc_limit_by_type['per_transaction'][$fcp]:array();
+		$pc_per_withdrawal_limit = isset($this->CI->finance_model->pc_limit_by_type['per_transaction'][$fcp])?$this->CI->finance_model->pc_limit_by_type['per_transaction'][$fcp]:"";
 		
-		if(!empty($pc_per_withdrawal_limit)){
-			$flag = isset($pc_per_withdrawal_limit['per_transaction'][$fcp]['limit_compliance_flag'])?$pc_per_withdrawal_limit['per_transaction'][$fcp]['limit_compliance_flag']:"Yes";	
+		if(is_array($pc_per_withdrawal_limit)){
+			$flag = $pc_per_withdrawal_limit['limit_compliance_flag'];	
 		}
 		
 		return $flag;
@@ -128,10 +128,10 @@ class Finance_dashboard {
 	 function callback_pc_per_month_expense_limit($fcp, $month = ""){
 		$flag = "Yes";
 		
-		$pc_per_withdrawal_limit = isset($this->CI->finance_model->pc_limit_by_type['per_month'][$fcp])?$this->CI->finance_model->pc_limit_by_type['per_month'][$fcp]:array();
+		$pc_per_withdrawal_limit = isset($this->CI->finance_model->pc_limit_by_type['per_month'][$fcp])?$this->CI->finance_model->pc_limit_by_type['per_month'][$fcp]:"";
 		
-		if(!empty($pc_per_withdrawal_limit)){
-			$flag = isset($pc_per_withdrawal_limit['per_month'][$fcp]['limit_compliance_flag'])?$pc_per_withdrawal_limit['per_month'][$fcp]['limit_compliance_flag']:"Yes";	
+		if(is_array($pc_per_withdrawal_limit)){
+			$flag = $pc_per_withdrawal_limit['limit_compliance_flag'];	
 		}
 		
 		return $flag;
@@ -453,13 +453,9 @@ class Finance_dashboard {
 		
 		$final_grid_array = array();
 		
-		//$final_grid_array['benchmark']['pc_local_expense_transaction_limit'] = $this->CI->benchmark->elapsed_time('pc_local_expense_transaction_limit', 'pc_local_expense_transaction_limit');
-
 		$final_grid_array['fcps_with_risks'] = array();
 
 		$final_grid_array['parameters'] = array();
-		
-		//$final_grid_array['test'] = $this->CI->finance_model->pc_limit_per_month;
 		
 		$this->CI->benchmark->mark('build_dashboard_array_fcp_loop_start');
 		
@@ -471,7 +467,7 @@ class Finance_dashboard {
 
 				if ($value['display_on_dashboard'] == 'yes') {
 					$this->CI->benchmark->mark($value['result_method'].'_start');
-					$final_grid_array['fcps_with_risks'][$fcp_with_risk['fcp_id']]['params'][$key] = call_user_func(array($this, $value['result_method']), $fcp_with_risk['fcp_id'], $dashboard_month, $vtype);
+						$final_grid_array['fcps_with_risks'][$fcp_with_risk['fcp_id']]['params'][$key] = call_user_func(array($this, $value['result_method']), $fcp_with_risk['fcp_id'], $dashboard_month, $vtype);
 					$this->CI->benchmark->mark($value['result_method'].'_end');
 					
 				}

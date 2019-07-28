@@ -7,9 +7,11 @@ class Finance_model extends CI_Model {
 	
 	private $table_prefix = "";
 	
-	private $pc_local_guide_line_data = array();
+	//private $pc_local_guide_line_data = array();
 	
 	public $pc_limit_by_type = array();
+	
+	public $uncleared_transactions = array();
 	
 	private $month = "";
 		
@@ -19,8 +21,9 @@ class Finance_model extends CI_Model {
 		
 		$this->month = $this->uri->segment(3,strtotime(date('Y-m-01')));
 		
-		$this->pc_local_guide_line_data = $this->get_pc_local_guide_line_data(date("Y-m-01",$this->month));
+		//$this->pc_local_guide_line_data = $this->get_pc_local_guide_line_data(date("Y-m-01",$this->month));
 		$this->pc_limit_by_type = $this->prod_pc_limit_by_type_model(date("Y-m-01",$this->month));
+		$this->uncleared_transactions = $this->get_uncleared_transactions(date("Y-m-01",$this->month));
     }
 
     function clear_cache() {
@@ -1813,26 +1816,26 @@ class Finance_model extends CI_Model {
 		return $grouped_by_fcp_id;
 	}
 	
-	function get_pc_local_guide_line_data(){
-		
-		$month = "2019-03-01";
-		
-		$types_array = array('per_withdrawal','per_transaction','per_month');
-		
-		$results = array();
-			
-		foreach($types_array as $type){
-			$call_statement = 'CALL get_max_pc_withdrawal_transactions("'.date('Y-m-01',strtotime($month)).'","'.date('Y-m-t',strtotime($month)).'","'.$type.'")';
-		
-			$stmt = $this->db->conn_id->prepare($call_statement);
-			$result = $stmt->execute();
-			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-			
-			$results[$type] = $result;
-		}
-		
-		return $results;
-	}
+	// function get_pc_local_guide_line_data(){
+// 		
+		// $month = "2019-03-01";
+// 		
+		// $types_array = array('per_withdrawal','per_transaction','per_month');
+// 		
+		// $results = array();
+// 			
+		// foreach($types_array as $type){
+			// $call_statement = 'CALL get_max_pc_withdrawal_transactions("'.date('Y-m-01',strtotime($month)).'","'.date('Y-m-t',strtotime($month)).'","'.$type.'")';
+// 		
+			// $stmt = $this->db->conn_id->prepare($call_statement);
+			// $result = $stmt->execute();
+			// $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// 			
+			// $results[$type] = $result;
+		// }
+// 		
+		// return $results;
+	// }
 	
 	// public function prod_pc_limit_per_month_model($month){
 		// $project_with_pc_guideline_limits = $this->prod_project_with_pc_guideline_limits_model();
@@ -1898,6 +1901,20 @@ class Finance_model extends CI_Model {
 		// return $pc_per_withdrawal_limit;
 	// }
 	
+	function test_guideline(){
+		return $this->prod_project_with_pc_guideline_limits_model();
+	}
+	
+	function test_pc_guideline_call(){
+		$month = "2018-04-01";
+		$limit_type = 'per_withdrawal';
+		$db_call = 'CALL get_max_pc_withdrawal_transactions("'.date('Y-m-01',strtotime($month)).'","'.date('Y-m-t',strtotime($month)).'","'.$limit_type.'")';
+
+		$pc_withdrawal_result = $this->db->query($db_call)->result_array();
+		
+		return $pc_withdrawal_result;
+	}
+	
 	public function prod_pc_limit_by_type_model($month){
 			
 		$this->benchmark->mark('prod_pc_limit_by_type_model_start');
@@ -1923,7 +1940,7 @@ class Finance_model extends CI_Model {
 				if(($project_with_pc_guideline_limits[$pc_withdrawal['fcp_id']][$pc_guideline_column_name] <=> 0.00) == 0){
 					$pc_per_withdrawal_limit[$limit_type][$pc_withdrawal['fcp_id']]['limit_compliance_flag'] = 'Not Set';
 				}elseif($project_with_pc_guideline_limits[$pc_withdrawal['fcp_id']][$pc_guideline_column_name] > $pc_withdrawal['cost'] ){
-	
+					
 					$pc_per_withdrawal_limit[$limit_type][$pc_withdrawal['fcp_id']]['limit_compliance_flag'] = 'Yes';
 	
 				}
@@ -2089,55 +2106,114 @@ class Finance_model extends CI_Model {
 	}
 
 	//Transaction methods
+	
 
-	function get_uncleared_transactions($vtype, $month) {
+	function get_uncleared_transactions($month) {
 		$this->benchmark->mark('get_uncleared_transactions_start');	
-		$amount_key = "";
-		$table = "";
-
-		if ($vtype == 'CHQ') {
-			$amount_key = "outstanding_cheque_amount";
-			$table = 'view_voucher_with_oustanding_cheques';
-		} elseif ('CR') {
-			$amount_key = "deposit_in_transit_amount";
-			$table = 'view_voucher_with_deposit_deposit_in_transit';
-		}
-
-		$first_day_of_month = date('Y-m-01', strtotime($month));
-		$last_day_of_month = date('Y-m-t', strtotime($month));
-
-		$this -> db -> cache_on();
-
-		$this -> db -> select_sum($amount_key);
-		$this -> db -> select(array('fcp_id', 'voucher_raised_date', 'clearance_state', 'clearance_date', 'voucher_type'));
-		$this -> db -> group_by(array('voucher_type', 'fcp_id'));
-
-		$condition_array = array();
-
-		//Query string conditions
-		$where_string = "(";
-		//transactions_raised_in_month_not_cleared
-		$where_string .= "(voucher_raised_date BETWEEN '" . $first_day_of_month . "' AND '" . $last_day_of_month . "' AND clearance_state = 0 AND clearance_date = '0000-00-00')";
-		//transactions_raised_in_month_cleared_in_future
-		$where_string .= " OR (voucher_raised_date BETWEEN '" . $first_day_of_month . "' AND '" . $last_day_of_month . "' AND clearance_state = 1 AND clearance_date > '" . $last_day_of_month . "')";
-		//transactions_raised_in_past_cleared_in_future
-		$where_string .= " OR (voucher_raised_date <= '" . $first_day_of_month . "' AND clearance_state = 1 AND clearance_date > '" . $last_day_of_month . "')";
-		//transactions_raised_in_past_not_cleared
-		$where_string .= " OR (voucher_raised_date <= '" . $first_day_of_month . "' AND clearance_state = 0 AND clearance_date = '0000-00-00')";
-
-		$where_string .= ")";
-
-		$this -> db -> where($where_string);
-
-		$transaction_array = $this -> db -> get($this -> table_prefix . $table) -> result_array();
-
-		$this -> db -> cache_off();
+		
+		$vtype_array = array('CHQ','CR');
+		
+		$transaction_array = array();
+		
+		foreach($vtype_array as $vtype){
+			$amount_key = "";
+				$table = "";
+		
+				if ($vtype == 'CHQ') {
+					$amount_key = "outstanding_cheque_amount";
+					$table = 'view_voucher_with_oustanding_cheques';
+				} elseif ('CR') {
+					$amount_key = "deposit_in_transit_amount";
+					$table = 'view_voucher_with_deposit_deposit_in_transit';
+				}
+		
+				$first_day_of_month = date('Y-m-01', strtotime($month));
+				$last_day_of_month = date('Y-m-t', strtotime($month));
+		
+				$this -> db -> cache_on();
+		
+				$this -> db -> select_sum($amount_key);
+				$this -> db -> select(array('fcp_id', 'voucher_raised_date', 'clearance_state', 'clearance_date', 'voucher_type'));
+				$this -> db -> group_by(array('voucher_type', 'fcp_id'));
+		
+				$condition_array = array();
+		
+				//Query string conditions
+				$where_string = "(";
+				//transactions_raised_in_month_not_cleared
+				$where_string .= "(voucher_raised_date BETWEEN '" . $first_day_of_month . "' AND '" . $last_day_of_month . "' AND clearance_state = 0 AND clearance_date = '0000-00-00')";
+				//transactions_raised_in_month_cleared_in_future
+				$where_string .= " OR (voucher_raised_date BETWEEN '" . $first_day_of_month . "' AND '" . $last_day_of_month . "' AND clearance_state = 1 AND clearance_date > '" . $last_day_of_month . "')";
+				//transactions_raised_in_past_cleared_in_future
+				$where_string .= " OR (voucher_raised_date <= '" . $first_day_of_month . "' AND clearance_state = 1 AND clearance_date > '" . $last_day_of_month . "')";
+				//transactions_raised_in_past_not_cleared
+				$where_string .= " OR (voucher_raised_date <= '" . $first_day_of_month . "' AND clearance_state = 0 AND clearance_date = '0000-00-00')";
+		
+				$where_string .= ")";
+		
+				$this -> db -> where($where_string);
+		
+				$transaction_array[$vtype] = $this -> db -> get($this -> table_prefix . $table) -> result_array();
+		
+				$this -> db -> cache_off();	
+			}
+		
+		
 		
 		$this->benchmark->mark('get_uncleared_transactions_end');	
 		
 		return $transaction_array;
 
 	}
+	
+	// function get_uncleared_transactions($vtype, $month) {
+		// $this->benchmark->mark('get_uncleared_transactions_start');	
+		// $amount_key = "";
+		// $table = "";
+// 
+		// if ($vtype == 'CHQ') {
+			// $amount_key = "outstanding_cheque_amount";
+			// $table = 'view_voucher_with_oustanding_cheques';
+		// } elseif ('CR') {
+			// $amount_key = "deposit_in_transit_amount";
+			// $table = 'view_voucher_with_deposit_deposit_in_transit';
+		// }
+// 
+		// $first_day_of_month = date('Y-m-01', strtotime($month));
+		// $last_day_of_month = date('Y-m-t', strtotime($month));
+// 
+		// $this -> db -> cache_on();
+// 
+		// $this -> db -> select_sum($amount_key);
+		// $this -> db -> select(array('fcp_id', 'voucher_raised_date', 'clearance_state', 'clearance_date', 'voucher_type'));
+		// $this -> db -> group_by(array('voucher_type', 'fcp_id'));
+// 
+		// $condition_array = array();
+// 
+		// //Query string conditions
+		// $where_string = "(";
+		// //transactions_raised_in_month_not_cleared
+		// $where_string .= "(voucher_raised_date BETWEEN '" . $first_day_of_month . "' AND '" . $last_day_of_month . "' AND clearance_state = 0 AND clearance_date = '0000-00-00')";
+		// //transactions_raised_in_month_cleared_in_future
+		// $where_string .= " OR (voucher_raised_date BETWEEN '" . $first_day_of_month . "' AND '" . $last_day_of_month . "' AND clearance_state = 1 AND clearance_date > '" . $last_day_of_month . "')";
+		// //transactions_raised_in_past_cleared_in_future
+		// $where_string .= " OR (voucher_raised_date <= '" . $first_day_of_month . "' AND clearance_state = 1 AND clearance_date > '" . $last_day_of_month . "')";
+		// //transactions_raised_in_past_not_cleared
+		// $where_string .= " OR (voucher_raised_date <= '" . $first_day_of_month . "' AND clearance_state = 0 AND clearance_date = '0000-00-00')";
+// 
+		// $where_string .= ")";
+// 
+		// $this -> db -> where($where_string);
+// 
+		// $transaction_array = $this -> db -> get($this -> table_prefix . $table) -> result_array();
+// 
+		// $this -> db -> cache_off();
+// 		
+		// $this->benchmark->mark('get_uncleared_transactions_end');	
+// 		
+		// return $transaction_array;
+// 
+	// }
 
 	function prod_deposit_in_transit_data_model($month) {
 		
@@ -2145,7 +2221,7 @@ class Finance_model extends CI_Model {
 		
 		$transaction_arrays = array();
 
-		$get_uncleared_transactions = $this -> get_uncleared_transactions('CR', $month);
+		$get_uncleared_transactions = $this -> uncleared_transactions['CR'];
 
 		foreach ($get_uncleared_transactions as $hid => $transaction) {
 			$transaction_arrays[$transaction['fcp_id']]['fcp_id'] = $transaction['fcp_id'];
@@ -2162,7 +2238,7 @@ class Finance_model extends CI_Model {
 		$this->benchmark->mark('prod_outstanding_cheques_data_model_start');
 		$transaction_arrays = array();
 
-		$get_uncleared_transactions = $this -> get_uncleared_transactions('CHQ', $month);
+		$get_uncleared_transactions = $this -> uncleared_transactions['CHQ'];
 
 		$fcps_array = array_column($get_uncleared_transactions, 'fcp_id');
 
