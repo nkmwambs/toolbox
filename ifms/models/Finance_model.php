@@ -6,9 +6,14 @@ if (!defined('BASEPATH'))
 class Finance_model extends CI_Model {
 	
 	private $table_prefix = "";
+	
+	private $pc_local_guide_line_data = array();
 		
     function __construct() {
         parent::__construct();
+		$this->load->database();
+		
+		$this->pc_local_guide_line_data = $this->get_pc_local_guide_line_data();
     }
 
     function clear_cache() {
@@ -1799,7 +1804,27 @@ class Finance_model extends CI_Model {
 		return $grouped_by_fcp_id;
 	}
 	
-
+	function get_pc_local_guide_line_data(){
+		
+		$month = "2019-03-01";
+		
+		$types_array = array('per_withdrawal','per_transaction','per_month');
+		
+		$results = array();
+			
+		foreach($types_array as $type){
+			$call_statement = 'CALL get_max_pc_withdrawal_transactions("'.date('Y-m-01',strtotime($month)).'","'.date('Y-m-t',strtotime($month)).'","'.$type.'")';
+		
+			$stmt = $this->db->conn_id->prepare($call_statement);
+			$result = $stmt->execute();
+			$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			
+			$results[$type] = $result;
+		}
+		
+		return $results;
+	}
+	
 	public function prod_pc_limit_per_transaction_by_type_model($month,$limit_type = 'per_withdrawal'){
 			
 		//$this->benchmark->mark('prod_pc_limit_per_transaction_by_type_model_start');
@@ -1814,10 +1839,10 @@ class Finance_model extends CI_Model {
 
 		$project_with_pc_guideline_limits = $this->prod_project_with_pc_guideline_limits_model();
 
-		$db_call = 'CALL get_max_pc_withdrawal_transactions("'.date('Y-m-01',strtotime($month)).'","'.date('Y-m-t',strtotime($month)).'","'.$limit_type.'")';
+		//$db_call = 'CALL get_max_pc_withdrawal_transactions("'.date('Y-m-01',strtotime($month)).'","'.date('Y-m-t',strtotime($month)).'","'.$limit_type.'")';
 
-		$pc_withdrawal_result = $this->db->query($db_call)->result_array();
-
+		//$pc_withdrawal_result = $this->db->query($db_call)->result_array();
+		$pc_withdrawal_result = $this->pc_local_guide_line_data['per_month'];
 
 		$pc_per_withdrawal_limit = array();
 

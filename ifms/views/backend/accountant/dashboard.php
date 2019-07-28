@@ -16,7 +16,7 @@ ini_set("max_execution_time", 0);
 
 $grid_array = $this -> finance_dashboard -> build_dashboard_array($month);
 
-print_r($grid_array['benchmark']);
+//print_r($grid_array['benchmark']);
 
 $none_requested_params = isset($grid_array['parameters']['no']) ? $grid_array['parameters']['no'] : array();
 
