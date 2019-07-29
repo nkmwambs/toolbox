@@ -197,7 +197,9 @@ class Finance_dashboard {
 		if (isset($group[$fcp])) {
 			$uncleared_cash_recieved = $group[$fcp]['totals'];
 		}
-		return number_format($uncleared_cash_recieved, 2);
+		//return number_format($uncleared_cash_recieved, 2);
+		
+		return $uncleared_cash_recieved>0?"Yes":"No";
 	}
 
 	private function callback_uncleared_cheques($fcp, $month) {
@@ -212,7 +214,8 @@ class Finance_dashboard {
 		if (isset($group[$fcp])) {
 			$uncleared_cheques = $group[$fcp]['totals'];
 		}
-		return number_format($uncleared_cheques, 2);
+		//return number_format($uncleared_cheques, 2);
+		return $uncleared_cheques>0?"Yes":"No";
 	}
 
 	// private function callback_caculate_transactions_from_petty_cash($fcp, $month) {
