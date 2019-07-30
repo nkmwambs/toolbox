@@ -1,5 +1,5 @@
 <?php 
-
+//echo time();
 //print_r($this->finance_model->pc_limit_by_type);
 
 // Avoid the timeout of execution error on dashboard  file
@@ -161,7 +161,7 @@ if(empty($none_requested_params) && empty($requested_params)){
 						    </button>
 						    	<ul class="dropdown-menu dropdown-default pull-left" role="menu">              
 									<li  style="">
-										<a href="#" onclick="showAjaxModal('<?php echo base_url();?>ifms.php/modal/popup/modal_outstanding_cheques/<?php echo date('Y-m-t',strtotime($month));?>/<?=$fcp_id;?>')"><?php echo get_phrase('outstanding_cheques');?></a>
+										<a href="#" onclick="showAjaxModal('<?php echo base_url();?>ifms.php/modal/popup/modal_outstanding_cheques/<?php echo strtotime($month);?>/<?=$fcp_id;?>')"><?php echo get_phrase('outstanding_cheques');?></a>
 									</li>
 																
 									<li  style="" class="divider"></li>

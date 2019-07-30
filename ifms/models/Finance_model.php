@@ -13,13 +13,13 @@ class Finance_model extends CI_Model {
 	
 	public $uncleared_transactions = array();
 	
-	private $month = "";
+	private $month = 0;
 		
     function __construct() {
         parent::__construct();
 		$this->load->database();
 		
-		$this->month = $this->uri->segment(3,strtotime(date('Y-m-01')));
+		$this->month = $this->uri->segment(3,time());
 		
 		//$this->pc_local_guide_line_data = $this->get_pc_local_guide_line_data(date("Y-m-01",$this->month));
 		$this->pc_limit_by_type = $this->prod_pc_limit_by_type_model(date("Y-m-01",$this->month));
