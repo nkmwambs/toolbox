@@ -424,6 +424,18 @@ function decline_mfr($month="",$project=""){
 	
 }
 
+	function bank_statements($param1="",$param2="",$param3=""){
+		 if ($this->session->userdata('admin_login') != 1)
+            redirect(base_url(), 'refresh');
+			
+					
+        $page_data['page_name']  = 'bank_statements_upload';
+		$page_data['tym'] = $param1;
+		$page_data['project'] = $param2;;
+        $page_data['page_title'] = get_phrase('bank_statements');
+        $this->load->view('backend/index', $page_data);		
+	}
+
 	public function delete_bank_statement($param1,$param2){
 		//$t= $_POST['name'];
 		$storeFolder = 'uploads/bank_statements/'.$param2.'/'.date('Y-m',$param1).'/';  

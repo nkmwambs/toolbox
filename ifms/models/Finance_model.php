@@ -16,10 +16,10 @@ class Finance_model extends CI_Model {
 	private $month = 0;
 		
     function __construct() {
-        parent::__construct();
+        parent::__construct($month_arg = '');
 		$this->load->database();
 		
-		$this->month = $this->uri->segment(3,time());
+		$this->month = $month_arg!==""?$this->uri->segment(3,time()):time();
 		
 		//$this->pc_local_guide_line_data = $this->get_pc_local_guide_line_data(date("Y-m-01",$this->month));
 		$this->pc_limit_by_type = $this->prod_pc_limit_by_type_model(date("Y-m-01",$this->month));

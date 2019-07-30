@@ -214,25 +214,20 @@ if(empty($none_requested_params) && empty($requested_params)){
 									<li class="divider"></li>
 																
 										<li style="">
-											<a href="<?php echo base_url();?>ifms.php/facilitator/cash_journal/<?php echo strtotime($month);?>/<?=$fcp_id;?>"><?php echo get_phrase('cash_journal');?></a>
+											<a href="<?php echo base_url();?>ifms.php/accountant/cash_journal/<?php echo strtotime($month);?>/<?=$fcp_id;?>"><?php echo get_phrase('cash_journal');?></a>
 										</li>
 																
 									<li class="divider"></li>
 																
 										<li style="">
-											<a href="<?php echo base_url();?>ifms.php/facilitator/bank_statements/<?php echo strtotime($month);?>/<?=$fcp_id;?>"><?php echo get_phrase('bank_statements');?></a>
+											<a href="<?php echo base_url();?>ifms.php/accountant/bank_statements/<?php echo strtotime($month);?>/<?=$fcp_id;?>"><?php echo get_phrase('bank_statements');?></a>
 										</li>
-	                        									
-	                        		<li class="divider"></li>
-																
-										<li style="">
-											<a href="#" onclick="confirm_dialog('<?php echo base_url();?>ifms.php/facilitator/decline_mfr/<?=strtotime($month);?>/<?=$fcp_id;?>');"><?php echo get_phrase('decline_financial_report');?></a>
-										</li>
+	                   
 																
 									<li class="divider"></li>
 																
 										<li style="">
-											<a href="<?php echo base_url();?>ifms.php/facilitator/plans/<?=strtotime($month);?>/<?=$fcp_id;?>"><?php echo get_phrase('budget');?></a>
+											<a href="<?php echo base_url();?>ifms.php/accountant/plans/<?=strtotime($month);?>/<?=$fcp_id;?>"><?php echo get_phrase('budget');?></a>
 										</li>
 																
 									<li class="divider"></li>
