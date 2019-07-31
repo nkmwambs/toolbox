@@ -17,11 +17,13 @@ class Accountant extends CI_Controller
 		$this->load->helper('date');
 			
        /*cache control*/
-		// $this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
-		// $this->output->set_header('Pragma: no-cache');
 		
-		$this->output->cache(30);
+		$this->page_cache_on();
     }
+	
+	private function page_cache_on(){
+		return $this->config->item('page_cache_on') == true?$this->output->cache($this->config->item('page_cache_duration')):null;
+	} 
     
     /***default functin, redirects to login page if no admin logged in yet***/
     public function index()

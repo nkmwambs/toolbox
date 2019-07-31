@@ -1,5 +1,5 @@
 <?php 
-//echo time();
+//echo strtotime('2018-04-01');
 //print_r($this->finance_model->pc_limit_by_type);
 
 // Avoid the timeout of execution error on dashboard  file

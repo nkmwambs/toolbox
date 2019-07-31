@@ -1267,7 +1267,15 @@ class Finance_model extends CI_Model {
 	/** Finance Dashbaord Model Methods - Begin **/
 	
 	//General Methods
-
+	
+	private function db_cache_on(){
+		return $this->config->item('db_cache_on') == true?$this->db->cache_on():null;	
+	}
+	
+	private function db_cache_off(){
+		return $this->config->item('db_cache_on') == true?$this->db->cache_off():null;
+	}
+	
 	private function get_table_prefix() {
 
 		$this -> table_prefix = $this -> config -> item('table_prefix');
@@ -1927,11 +1935,11 @@ class Finance_model extends CI_Model {
 		$pc_per_withdrawal_limit = array();
 		
 		foreach($type_array as $limit_type=>$pc_guideline_column_name){
-			$this->db->cache_on();	
+			$this->db_cache_on();
 			$db_call = 'CALL get_max_pc_withdrawal_transactions("'.date('Y-m-01',strtotime($month)).'","'.date('Y-m-t',strtotime($month)).'","'.$limit_type.'")';
 
 			$pc_withdrawal_result = $this->db->query($db_call)->result_array();
-			$this->db->cache_off();
+			$this->db_cache_off();
 	
 			foreach($pc_withdrawal_result as $pc_withdrawal){
 				$pc_per_withdrawal_limit[$limit_type][$pc_withdrawal['fcp_id']]['fcp_id'] = $pc_withdrawal['fcp_id'];
@@ -1954,7 +1962,7 @@ class Finance_model extends CI_Model {
 
 	public function prod_cash_received_in_month_model($month){
 		$this->benchmark->mark('prod_cash_received_in_month_model_start');
-		$this->db->cache_on();
+		$this->db_cache_on();
 		$query_conditon = "voucher_header.TDate BETWEEN '".date('Y-m-01',strtotime($month))."' AND '".date("Y-m-t",strtotime($month))."' AND voucher_header.VType='CR'";
 
 		$this->db->select_sum('voucher_body.Cost');
@@ -1965,7 +1973,7 @@ class Finance_model extends CI_Model {
 		$this->db->join('voucher_body','voucher_body.hID=voucher_header.hID');
 		$this->db->join('accounts','accounts.AccNo = voucher_body.AccNo');
 		$cash_received_in_month = $this->db->get('voucher_header')->result_object();
-		$this->db->cache_off();
+		$this->db_cache_off();
 
 		$cr_array = array();
 
@@ -2040,18 +2048,18 @@ class Finance_model extends CI_Model {
 
 	private function prod_statement_bank_balance_data_model($month) {
 		$this->benchmark->mark('prod_statement_bank_balance_data_model_start');
-		$this -> db -> cache_on();
+		$this->db_cache_on();
 		$statement_bank_balance = $this -> db -> get_where($this -> table_prefix . 'view_funds_statement_balance', array('closure_date' => $month)) -> result_array();
-		$this -> db -> cache_on();
+		$this->db_cache_off();
 		$this->benchmark->mark('prod_statement_bank_balance_data_model_end');
 		return $statement_bank_balance;
 	}
 
 	private function prod_book_bank_cash_balance_data_model($month) {
 		$this->benchmark->mark('prod_book_bank_cash_balance_data_model_start');
-		$this -> db -> cache_on();
+		$this->db_cache_on();
 		$bank_cash_balance_data = $this -> db -> get_where($this -> table_prefix . 'view_book_bank_balance', array('closure_date' => $month)) -> result_array();
-		$this -> db -> cache_off();
+		$this->db_cache_off();
 		$this->benchmark->mark('prod_book_bank_cash_balance_data_model_end');
 		return $bank_cash_balance_data;	
 	}
@@ -2059,9 +2067,9 @@ class Finance_model extends CI_Model {
 	//We will have to pass month aurgumet in prod models
 	private function prod_mfr_submission_data_model($month) {
 		$this->benchmark->mark('prod_mfr_submission_data_model_start');
-		$this -> db -> cache_on();
+		$this->db_cache_on();
 		$mfr_submission_data = $this -> db -> get_where($this -> table_prefix . 'view_opening_funds_balance', array('closure_date' => $month)) -> result_array();
-		$this -> db -> cache_off();
+		$this->db_cache_off();
 		$this->benchmark->mark('prod_mfr_submission_data_model_end');
 		return $mfr_submission_data;
 	}
@@ -2130,7 +2138,7 @@ class Finance_model extends CI_Model {
 				$first_day_of_month = date('Y-m-01', strtotime($month));
 				$last_day_of_month = date('Y-m-t', strtotime($month));
 		
-				$this -> db -> cache_on();
+				$this->db_cache_on();
 		
 				$this -> db -> select_sum($amount_key);
 				$this -> db -> select(array('fcp_id', 'voucher_raised_date', 'clearance_state', 'clearance_date', 'voucher_type'));
@@ -2155,7 +2163,7 @@ class Finance_model extends CI_Model {
 		
 				$transaction_array[$vtype] = $this -> db -> get($this -> table_prefix . $table) -> result_array();
 		
-				$this -> db -> cache_off();	
+				$this->db_cache_off();
 			}
 		
 		
@@ -2322,7 +2330,7 @@ class Finance_model extends CI_Model {
 		$first_day_of_month = date('Y-m-01', strtotime($month));
 		$last_day_of_month = date('Y-m-t', strtotime($month));
 
-		$this -> db -> cache_on();
+		$this->db_cache_on();
 
 		$this -> db -> select_sum('voucher_body.cost');
 		$this -> db -> select(array('voucher_header.icpNo', 'voucher_header.vtype'));
@@ -2334,7 +2342,7 @@ class Finance_model extends CI_Model {
 
 		$total_pc_or_chqs = $this -> db -> get("voucher_header") -> result_array();
 
-		$this -> db -> cache_off();
+		$this->db_cache_off();
 		$this->benchmark->mark('calculate_pc_chqs_totals_end');
 		return $total_pc_or_chqs;
 
@@ -2350,7 +2358,7 @@ class Finance_model extends CI_Model {
 
 		//select icpNo, tdate,chqstate,clrmonth from voucher_header where chqstate=0 limit 10
 
-		$this -> db -> cache_on();
+		$this->db_cache_on();
 
 		$this->db->select(array('icpNo'));
 		$this->db->select_sum('totals');
@@ -2363,7 +2371,7 @@ class Finance_model extends CI_Model {
 		
 		$count_of_cr_and_chq = $this -> db -> get("voucher_header") -> result_array();
 
-        $this -> db -> cache_off();
+       $this->db_cache_off();
 		$this->benchmark->mark('calculate_uncleared_cash_recieved_and_chqs_end');
 		return $count_of_cr_and_chq;
 
