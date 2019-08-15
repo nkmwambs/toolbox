@@ -102,38 +102,38 @@ class Finance_dashboard {
 	private function callback_pc_per_withdrawal_limit($fcp, $month){
 
 		$flag = "Yes";
-		
+
 		$pc_per_withdrawal_limit = isset($this->CI->finance_model->pc_limit_by_type['per_withdrawal'][$fcp])?$this->CI->finance_model->pc_limit_by_type['per_withdrawal'][$fcp]:"";
-		
+
 		if(is_array($pc_per_withdrawal_limit)){
-			$flag = $pc_per_withdrawal_limit['limit_compliance_flag'];	
+			$flag = $pc_per_withdrawal_limit['limit_compliance_flag'];
 		}
-		
+
 		return $flag;
 	}
 
 	private function callback_pc_per_expense_transaction_limit($fcp, $month = ""){
 
 		$flag = "Yes";
-		
+
 		$pc_per_withdrawal_limit = isset($this->CI->finance_model->pc_limit_by_type['per_transaction'][$fcp])?$this->CI->finance_model->pc_limit_by_type['per_transaction'][$fcp]:"";
-		
+
 		if(is_array($pc_per_withdrawal_limit)){
-			$flag = $pc_per_withdrawal_limit['limit_compliance_flag'];	
+			$flag = $pc_per_withdrawal_limit['limit_compliance_flag'];
 		}
-		
+
 		return $flag;
 	}
 
 	 function callback_pc_per_month_expense_limit($fcp, $month = ""){
 		$flag = "Yes";
-		
+
 		$pc_per_withdrawal_limit = isset($this->CI->finance_model->pc_limit_by_type['per_month'][$fcp])?$this->CI->finance_model->pc_limit_by_type['per_month'][$fcp]:"";
-		
+
 		if(is_array($pc_per_withdrawal_limit)){
-			$flag = $pc_per_withdrawal_limit['limit_compliance_flag'];	
+			$flag = $pc_per_withdrawal_limit['limit_compliance_flag'];
 		}
-		
+
 		return $flag;
 	}
 
@@ -198,7 +198,7 @@ class Finance_dashboard {
 			$uncleared_cash_recieved = $group[$fcp]['totals'];
 		}
 		//return number_format($uncleared_cash_recieved, 2);
-		
+
 		return $uncleared_cash_recieved>0?"No":"Yes";
 	}
 
@@ -219,17 +219,17 @@ class Finance_dashboard {
 	}
 
 	// private function callback_caculate_transactions_from_petty_cash($fcp, $month) {
-// 
+//
 		// //get the total transactions from Petty cash and bank
 		// $total_transactions_from_pc = floatval(str_replace(',', '', $this -> callback_total_for_pc($fcp, $month)));
-// 
+//
 		// $total_transactions_from_chq = floatval(str_replace(',', '', $this -> callback_total_for_chq($fcp, $month)));
-// 
+//
 		// //Compute denominater and percentage of petty cash transactions
 		// $compute_denominator = bcadd($total_transactions_from_pc, $total_transactions_from_chq, 2);
-// 
+//
 		// $compute_percentage = 0.0;
-// 
+//
 		// //Avoid divide by zero
 		// if ($total_transactions_from_pc > 0) {
 			// $compute_percentage = number_format((($total_transactions_from_pc / $compute_denominator) * 100), 2);
@@ -238,11 +238,11 @@ class Finance_dashboard {
 	// }
 
 	// private function callback_fcp_local_pc_guideline($fcp, $month) {
-// 
+//
 		// $fcp_local_pc_guideline = $this -> CI -> finance_model -> switch_environment($month, 'test_fcp_local_pc_guideline_data_model', 'prod_fcp_local_pc_guideline_data_model');
-// 
+//
 		// $group_data_by_fcp = $this -> group_data_by_fcp_id($fcp_local_pc_guideline);
-// 
+//
 		// $fcp_guideline_set_percentage = 0.00;
 		// if (isset($group_data_by_fcp[$fcp])) {
 			// $fcp_guideline_set_percentage = $group_data_by_fcp[$fcp]['pc_local_month_expense_limit'];
@@ -251,39 +251,39 @@ class Finance_dashboard {
 	// }
 
 	// private function callback_is_fcp_following_local_guideline($fcp, $month) {
-// 
+//
 		// $fcp_follows_local_guideline='No';
-// 
+//
 		// $fcp_follows_local_guideline_array=array();
-// 
+//
 		// $fcp_local_guidline_set=$this->callback_fcp_local_pc_guideline($fcp, $month);
-// 
+//
 		// $computed_percentage_of_pc_transaction=$this->callback_caculate_transactions_from_petty_cash($fcp, $month);
-// 
+//
 		// //$fcp_local_guidlines_followed = $this -> CI -> finance_model -> switch_environment($month, 'test_is_fcp_following_local_guideline_data_model', 'prod_is_fcp_following_local_guideline_data_model');
-// 
+//
 		// //Avoided to use prod_is_fcp_following_local_guideline_data_model
 		// //Source for data from projectsdatails to use it in the group_data_by_fcp_id function
-// 
+//
 		// $this -> CI->db -> cache_on();
 		// $fcp_local_guidlines_followed = $this ->CI->db -> select(array('icpNo')) -> get('projectsdetails') -> result_array();
-// 
+//
 		// $this -> CI->db -> cache_off();
-// 
+//
 		// foreach ($fcp_local_guidlines_followed as $fcp_local_guidline)
 		// {
 			// $fcp_follows_local_guideline_array[$fcp_local_guidline['icpNo']]['fcp_id'] = $fcp_local_guidline['icpNo'];
 		// }
 		// $group_data_by_fcp = $this -> group_data_by_fcp_id($fcp_follows_local_guideline_array);
-// 
+//
 		// //Compute if the FCP follows local guideline
 		// if (isset($group_data_by_fcp[$fcp])) {
-// 
+//
 			// if($computed_percentage_of_pc_transaction <= $fcp_local_guidline_set){
-// 
+//
 				// $fcp_follows_local_guideline='Yes';
 			// }
-// 
+//
 		// }
 		// //Return the 'Yes' or No concanating it with the computed percentage of pc transactions and append %
 		// return $fcp_follows_local_guideline. ' ( '.$computed_percentage_of_pc_transaction.'%)';
@@ -411,11 +411,11 @@ class Finance_dashboard {
 
 		$deposit_in_transit = str_replace(',', '', $this -> callback_deposit_in_transit($fcp, $month));
 
-		$compute_bank_reconcile = ($book_bank_balance + $outstanding_cheques) - $deposit_in_transit;
+		$compute_bank_reconcile = ($statement_balance + $deposit_in_transit) - $outstanding_cheques;
 
 		$yes_no_flag = 'No';
 
-		if (round($compute_bank_reconcile, 2) == round($book_bank_balance, 2) && $this -> callback_mfr_submitted($fcp, $month) == "Yes") {
+		if ((round($book_bank_balance,2) == round($compute_bank_reconcile,2)) && $this -> callback_mfr_submitted($fcp, $month) == "Yes") {
 			$yes_no_flag = 'Yes';
 		}
 
@@ -449,19 +449,19 @@ class Finance_dashboard {
 		} elseif ($this -> CI -> config -> item('environment') == 'prod') {
 			$fcps_array_with_risk = $this -> CI -> finance_model -> prod_fcps_with_risk_model();
 		}
-		
+
 		$parameters_array = $this -> CI -> finance_model -> switch_environment('', 'test_dashboard_parameters_model', 'prod_dashboard_parameters_model');
 
 		$this->CI->benchmark->mark('build_dashboard_array_switch_environ_end');
-		
+
 		$final_grid_array = array();
-		
+
 		$final_grid_array['fcps_with_risks'] = array();
 
 		$final_grid_array['parameters'] = array();
-		
+
 		$this->CI->benchmark->mark('build_dashboard_array_fcp_loop_start');
-		
+
 		foreach ($fcps_array_with_risk as $fcp_with_risk) {
 
 			$final_grid_array['fcps_with_risks'][$fcp_with_risk['fcp_id']]['risk'] = $fcp_with_risk['risk'];
@@ -472,14 +472,14 @@ class Finance_dashboard {
 					$this->CI->benchmark->mark($value['result_method'].'_start');
 						$final_grid_array['fcps_with_risks'][$fcp_with_risk['fcp_id']]['params'][$key] = call_user_func(array($this, $value['result_method']), $fcp_with_risk['fcp_id'], $dashboard_month, $vtype);
 					$this->CI->benchmark->mark($value['result_method'].'_end');
-					
+
 				}
 			}
 
 		}
 		$this->CI->benchmark->mark('build_dashboard_array_fcp_loop_end');
-		
-		$this->CI->benchmark->mark('build_dashboard_array_param_loop_start');	
+
+		$this->CI->benchmark->mark('build_dashboard_array_param_loop_start');
 		foreach ($parameters_array as $key => $value) {
 			if ($value['display_on_dashboard'] == 'yes') {
 				$final_grid_array['parameters'][$value['is_requested']][$key] = $value['dashboard_parameter_name'];
@@ -487,7 +487,7 @@ class Finance_dashboard {
 
 		}
 		$this->CI->benchmark->mark('build_dashboard_array_param_loop_end');
-		
+
 		$this->CI->benchmark->mark('build_dashboard_array_end');
 		return $final_grid_array;
 	}

@@ -13,13 +13,19 @@ class Finance_model extends CI_Model {
 
 	public $uncleared_transactions = array();
 
-	private $month = 0;
+	public $month = 0;
+
+  public $stamp = 0;
 
     function __construct() {
-        parent::__construct($month_arg = '');
+    parent::__construct();
 		$this->load->database();
 
-		$this->month = $month_arg!==""?$this->uri->segment(3,time()):time();
+    $this->stamp = $this->uri->segment(3);
+
+		$this->month = $this->uri->segment(3,time());
+
+    $this->month = !is_numeric($this->month)?time():$this->month;
 
 		//$this->pc_local_guide_line_data = $this->get_pc_local_guide_line_data(date("Y-m-01",$this->month));
 		$this->pc_limit_by_type = $this->prod_pc_limit_by_type_model(date("Y-m-01",$this->month));
@@ -2168,6 +2174,8 @@ class Finance_model extends CI_Model {
 
 				$this->db_cache_on();
 
+        $this->  db -> where(array('voucher_type'=>$vtype));
+        //$this->  db -> where(array('voucher_raised_date>='=>$first_day_of_month,'voucher_raised_date<='=>$last_day_of_month));
 				$this -> db -> select_sum($amount_key);
 				$this -> db -> select(array('fcp_id', 'voucher_raised_date', 'clearance_state', 'clearance_date', 'voucher_type'));
 				$this -> db -> group_by(array('voucher_type', 'fcp_id'));
