@@ -5,6 +5,7 @@ $mfr_submitted = $this->finance_model->mfr_submitted($this->session->center_id,d
 
 $oc=$this->finance_model->outstanding_cheques($param2,$this->session->center_id);
 
+
 ?>
 
 <div class="row">

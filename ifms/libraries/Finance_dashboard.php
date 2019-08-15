@@ -415,7 +415,7 @@ class Finance_dashboard {
 
 		$yes_no_flag = 'No';
 
-		if (round($compute_bank_reconcile, 2) == round($statement_balance, 2) && $this -> callback_mfr_submitted($fcp, $month) == "Yes") {
+		if (round($compute_bank_reconcile, 2) == round($book_bank_balance, 2) && $this -> callback_mfr_submitted($fcp, $month) == "Yes") {
 			$yes_no_flag = 'Yes';
 		}
 
